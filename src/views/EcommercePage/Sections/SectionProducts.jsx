@@ -966,7 +966,7 @@ class SectionProducts extends React.Component {
                 <GridItem md={4} sm={4}>
                   <Card plain product>
                     <CardHeader noShadow image>
-                      <a href="#pablo">
+                      <a href="/contact-us">
                         <img src={suit1} alt=".." />
                       </a>
                     </CardHeader>
