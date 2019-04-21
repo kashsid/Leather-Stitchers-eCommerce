@@ -2,6 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { createBrowserHistory } from "history";
 import { Router, Route, Switch } from "react-router";
+import axios from "axios";
+
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import logger from "redux-logger";
+import { takeEvery, put } from "redux-saga/effects";
+// Import saga middleware
+import createSagaMiddleware from "redux-saga";
 
 import "assets/scss/material-kit-pro-react.scss?v=1.3.0";
 
@@ -17,9 +25,9 @@ import LandingPage from "views/LandingPage/LandingPage.jsx";
 // import PresentationPage from "views/PresentationPage/PresentationPage.jsx";
 // import PricingPage from "views/PricingPage/PricingPage.jsx";
 // import ProfilePage from "views/ProfilePage/ProfilePage.jsx";
-// import ProductPage from "views/ProductPage/ProductPage.jsx";
+ import ProductPage from "views/ProductPage/ProductPage.jsx";
 // import SectionsPage from "views/SectionsPage/SectionsPage.jsx";
-// import ShoppingCartPage from "views/ShoppingCartPage/ShoppingCartPage.jsx";
+ import ShoppingCartPage from "views/ShoppingCartPage/ShoppingCartPage.jsx";
 // import SignupPage from "views/SignupPage/SignupPage.jsx";
 // import ErrorPage from "views/ErrorPage/ErrorPage.jsx";
 
@@ -37,11 +45,11 @@ ReactDOM.render(
       <Route path="/landing-page" component={LandingPage} />
       {/* <Route path="/login-page" component={LoginPage} />
       <Route path="/pricing" component={PricingPage} />
-      <Route path="/profile-page" component={ProfilePage} />
+      <Route path="/profile-page" component={ProfilePage} /> */}
       <Route path="/product-page" component={ProductPage} />
-      <Route path="/sections" component={SectionsPage} />
+      {/* <Route path="/sections" component={SectionsPage} /> */}
       <Route path="/shopping-cart-page" component={ShoppingCartPage} />
-      <Route path="/signup-page" component={SignupPage} />
+      {/* <Route path="/signup-page" component={SignupPage} />
       <Route path="/error-page" component={ErrorPage} />
       <Route path="/" component={PresentationPage} /> */}
     </Switch>

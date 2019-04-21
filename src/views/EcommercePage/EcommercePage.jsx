@@ -15,7 +15,7 @@ import Footer from "components/Footer/Footer.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import SectionLatestOffers from "views/EcommercePage/Sections/SectionLatestOffers.jsx";
 import SectionProducts from "views/EcommercePage/Sections/SectionProducts.jsx";
-import SectionBlog from "views/EcommercePage/Sections/SectionBlog.jsx";
+//import SectionBlog from "views/EcommercePage/Sections/SectionBlog.jsx";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import List from "@material-ui/core/List";
@@ -87,7 +87,7 @@ class EcommercePage extends React.Component {
           <SectionLatestOffers />
           <SectionProducts />
         </div>
-        <SectionBlog />
+       
         <div
           className={classNames(
             classes.subscribeLine,
