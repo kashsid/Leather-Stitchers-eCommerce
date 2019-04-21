@@ -1,4 +1,6 @@
-import React from "react";
+//import React from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // plugin that creates slider
@@ -48,7 +50,14 @@ class SectionProducts extends React.Component {
       priceRange: [101, 790]
     };
   }
+  // componentDidMount() {
+    
+  // }
   componentDidMount() {
+     const action = { type: "FETCH_PRODUCTS" };
+     this.props.dispatch(action);
+     
+     
     var slider = this.refs.slider1;
     var priceLow = this.refs.priceLow;
     var priceHigh = this.refs.priceHigh;
@@ -65,6 +74,8 @@ class SectionProducts extends React.Component {
         priceLow.innerHTML = currencyLow + Math.round(values[0]);
         priceHigh.innerHTML = currencyHigh + Math.round(values[1]);
       });
+
+     
   }
   handleToggle(value) {
     const { checked } = this.state;
@@ -1339,5 +1350,10 @@ class SectionProducts extends React.Component {
     );
   }
 }
-
-export default withStyles(styles)(SectionProducts);
+const mapReduxStateToProps = reduxState => ({
+    reduxState,
+})
+//export default withStyles(styles)(SectionProducts);
+export default withStyles(styles)(
+  connect(mapReduxStateToProps)(SectionProducts)
+);

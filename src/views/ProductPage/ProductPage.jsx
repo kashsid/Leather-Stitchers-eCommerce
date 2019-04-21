@@ -1,4 +1,6 @@
+
 import React from "react";
+//import { connect } from "react-redux";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // react component used to create nice image meadia player
@@ -51,6 +53,8 @@ class ProductPage extends React.Component {
       sizeSelect: "0"
     };
   }
+  
+
   handleSelect = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
@@ -61,9 +65,8 @@ class ProductPage extends React.Component {
   handleSubmit = () => {
     console.log(`in handleSubmit...`);
     this.props.history.push("/shopping-cart-page");
-    
-    }
-  
+  };
+
   render() {
     const { classes } = this.props;
     const images = [
@@ -96,7 +99,7 @@ class ProductPage extends React.Component {
             color: "rose"
           }}
         />
-        
+
         <Parallax
           image={require("assets/img/bg6.jpg")}
           filter="gray"
@@ -280,10 +283,8 @@ class ProductPage extends React.Component {
                     </GridItem>
                   </GridContainer>
                   <GridContainer className={classes.pullRight}>
-                    <Button round color="red"
-                      onClick={this.handleSubmit}>
+                    <Button round color="red" onClick={this.handleSubmit}>
                       Add to Cart &nbsp; <ShoppingCart />
-                      
                     </Button>
                   </GridContainer>
                 </GridItem>
@@ -539,5 +540,11 @@ class ProductPage extends React.Component {
     );
   }
 }
+// const mapReduxStateToProps = reduxState => ({
+//     reduxState,
+// })
+
 
 export default withStyles(productStyle)(ProductPage);
+//export default withStyles(productStyle)(connect(mapReduxStateToProps)(ProductPage));
+
