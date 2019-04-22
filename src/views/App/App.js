@@ -22,10 +22,10 @@ class App extends Component {
       <Router history={hist}>
       <>
     {/* <Switch> */}
-      {/* <Route path="/about-us" component={AboutUsPage} />
+      <Route path="/about-us" component={AboutUsPage} />
       <Route path="/blog-post" component={BlogPostPage} />
       <Route path="/blog-posts" component={BlogPostsPage} />
-      <Route path="/components" component={ComponentsPage} /> */}
+      <Route path="/components" component={ComponentsPage} />
       <Route exact path="/" component={ContactUsPage} />
       <Route exact path="/ecommerce-page" component={EcommercePage} />
       <Route path="/landing-page" component={LandingPage} />
