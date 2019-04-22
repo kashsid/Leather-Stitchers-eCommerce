@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // core components
@@ -37,16 +39,28 @@ import face8 from "assets/img/faces/card-profile2-square.jpg";
 import styles from "assets/jss/material-kit-pro-react/views/ecommerceStyle.jsx";
 
 class EcommercePage extends React.Component {
+  // setState ={
+  //   products:[],
+  // }
   componentDidMount() {
+    console.log("in eCommerce Did Mount");
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
+    //const action = { type: "FETCH_PRODUCTS" };
+    this.props.dispatch({ type: "FETCH_PRODUCTS" });
+    //console.log('in did mount again', this.props.products);
   }
+
+  
+  
   render() {
     const { classes } = this.props;
+    
+    
     return (
       <div>
         <Header
-          brand="Material Kit PRO React"
+          brand="Leather"
           links={<HeaderLinks dropdownHoverColor="info" />}
           fixed
           color="transparent"
@@ -72,7 +86,7 @@ class EcommercePage extends React.Component {
                 )}
               >
                 <div className={classes.brand}>
-                  <h1 className={classes.title}>Ecommerce Page!</h1>
+                  <h1 className={classes.title}>Leather Stitchers!</h1>
                   <h4>
                     Free global delivery for all products. Use coupon{" "}
                     <b>25summer</b> for an extra 25% Off
@@ -85,9 +99,23 @@ class EcommercePage extends React.Component {
 
         <div className={classNames(classes.main, classes.mainRaised)}>
           <SectionLatestOffers />
-          <SectionProducts />
+          {/* <Grid container spacing={8} direction="row" justify="flex-start">
+            {this.props.projects.map(project => (
+              <ProjectItem key={project.id} project={project} />
+            ))}
+          </Grid> */}
+          {/* {JSON.stringify(this.props.products)} */}
+
+          {this.props.products.map(products => (
+            <SectionProducts
+              key={products.product_id}
+              products={products}
+            />
+          ))}
+
+          {/* <SectionProducts/> */}
         </div>
-       
+
         <div
           className={classNames(
             classes.subscribeLine,
@@ -104,10 +132,12 @@ class EcommercePage extends React.Component {
                 className={classNames(classes.mlAuto, classes.mrAuto)}
               >
                 <div className={classes.textCenter}>
-                  <h3 className={classes.title}>Subscribe to our Newsletter</h3>
+                  <h3 className={classes.title}>
+                    Subscribe to our Newsletter
+                  </h3>
                   <p className={classes.description}>
-                    Join our newsletter and get news in your inbox every week!
-                    We hate spam too, so no worries about this.
+                    Join our newsletter and get news in your inbox every
+                    week! We hate spam too, so no worries about this.
                   </p>
                 </div>
                 <Card raised className={classes.card}>
@@ -157,7 +187,7 @@ class EcommercePage extends React.Component {
                 <List className={classes.list}>
                   <ListItem className={classes.inlineBlock}>
                     <a
-                      href="http://blog.creative-tim.com/"
+                      href="http://thefilmjackets.com/"
                       className={classes.block}
                     >
                       Blog
@@ -165,7 +195,7 @@ class EcommercePage extends React.Component {
                   </ListItem>
                   <ListItem className={classes.inlineBlock}>
                     <a
-                      href="https://www.creative-tim.com/presentation"
+                      href="thefilmjackets.com/presentation"
                       className={classes.block}
                     >
                       Presentation
@@ -191,7 +221,7 @@ class EcommercePage extends React.Component {
                   </ListItem>
                   <ListItem className={classes.inlineBlock}>
                     <a
-                      href="https://www.creative-tim.com/contact-us"
+                      href="thefilmjackets.com/contact-us"
                       className={classes.block}
                     >
                       Contact us
@@ -201,11 +231,8 @@ class EcommercePage extends React.Component {
               </div>
               <div className={classes.right}>
                 Copyright &copy; {1900 + new Date().getYear()}{" "}
-                <a
-                  href="https://www.creative-tim.com"
-                  className={classes.aClasses}
-                >
-                  Creative Tim
+                <a href="thefilmjackets.com" className={classes.aClasses}>
+                  Leather Stitchers
                 </a>{" "}
                 All Rights Reserved.
               </div>
@@ -215,14 +242,10 @@ class EcommercePage extends React.Component {
           <GridContainer>
             <GridItem xs={12} sm={4} md={4}>
               <h5>About Us</h5>
+              <p>Leather Stitchers . </p>
               <p>
-                Creative Tim is a startup that creates design tools that make
-                the web development process faster and easier.{" "}
-              </p>
-              <p>
-                We love the web and care deeply for how users interact with a
-                digital product. We power businesses and individuals to create
-                better looking web projects around the world.{" "}
+                We power businesses and individuals to create better looking
+                web projects around the world.{" "}
               </p>
             </GridItem>
             <GridItem xs={12} sm={4} md={4}>
@@ -230,11 +253,15 @@ class EcommercePage extends React.Component {
               <div className={classes.socialFeed}>
                 <div>
                   <i className="fab fa-twitter" />
-                  <p>How to handle ethical disagreements with your clients.</p>
+                  <p>
+                    How to handle ethical disagreements with your clients.
+                  </p>
                 </div>
                 <div>
                   <i className="fab fa-twitter" />
-                  <p>The tangible benefits of designing at 1x pixel density.</p>
+                  <p>
+                    The tangible benefits of designing at 1x pixel density.
+                  </p>
                 </div>
                 <div>
                   <i className="fab fa-facebook-square" />
@@ -328,5 +355,11 @@ class EcommercePage extends React.Component {
     );
   }
 }
+const mapReduxStateToProps = reduxState => {
+  return reduxState;
+};
 
-export default withStyles(styles)(EcommercePage);
+//export default withStyles(styles)(SectionProducts);
+export default withStyles(styles)(connect(mapReduxStateToProps)(EcommercePage)
+);
+//export default withStyles(styles)(EcommercePage);

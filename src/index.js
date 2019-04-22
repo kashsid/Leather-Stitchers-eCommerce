@@ -6,16 +6,17 @@ import { Router, Route, Switch } from "react-router";
 import axios from "axios";
 
 
-
+import { takeEvery, put } from "redux-saga/effects";
+// Import saga middleware
 import createSagaMiddleware from "redux-saga";
 import logger from "redux-logger";
 
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
-import { takeEvery, put } from "redux-saga/effects";
+//import { takeEvery, put } from "redux-saga/effects";
 // Import saga middleware
-import rootReducer from './redux/reducers'; // imports ./redux/reducers/index.js
-import rootSaga from './redux/sagas'; // imports ./redux/sagas/index.js
+//import rootReducer from './redux/reducers'; // imports ./redux/reducers/index.js
+//import rootSaga from './redux/sagas'; // imports ./redux/sagas/index.js
 import "assets/scss/material-kit-pro-react.scss?v=1.3.0";
 
 // pages for this product
@@ -35,21 +36,60 @@ import "assets/scss/material-kit-pro-react.scss?v=1.3.0";
  //import ShoppingCartPage from "views/ShoppingCartPage/ShoppingCartPage.jsx";
 // import SignupPage from "views/SignupPage/SignupPage.jsx";
 // import ErrorPage from "views/ErrorPage/ErrorPage.jsx";
-const sagaMiddleware = createSagaMiddleware();
+
 // var hist = createBrowserHistory();
 
-const middlewareList =
-  process.env.NODE_ENV === "development"
-    ? [sagaMiddleware, logger]
-    : [sagaMiddleware];
+// const middlewareList =
+//   process.env.NODE_ENV === "development"
+//     ? [sagaMiddleware, logger]
+//     : [sagaMiddleware];
+// const store = createStore(() => {
+//   rootReducer,
+//   applyMiddleware(...middlewareList),
+// });
+
+// USING OLD STRUCTURE*********
+function* rootSaga() {
+  yield takeEvery("FETCH_PRODUCTS", fetchProducts);
+  
+}
+function* fetchProducts() {
+  try {
+    const products = yield axios.get("/ecommerce-page");
+    console.log('infetch products');
+    yield put({ type: "SET_PRODUCTS", payload: products.data });
+    console.log('the data is ',products.data);
+    
+  } catch (err) {
+    console.log(`couldn't fetch projects`, err);
+  }
+}
+const sagaMiddleware = createSagaMiddleware();
+const products = (state = [], action) => {
+  console.log("inside reducer", action.type);
+  switch (action.type) {
+    case "SET_PRODUCTS":
+      console.log("Alright");
+      return action.payload;
+
+    default:
+      return state;
+  }
+};
 
 const store = createStore(
-  // tells the saga middleware to use the rootReducer
-  // rootSaga contains all of our other reducers
-  rootReducer,
-  // adds all middleware to our project including saga and logger
-  applyMiddleware(...middlewareList)
+  
+  combineReducers({
+    products
+
+  }),
+  // Add sagaMiddleware to our store
+  applyMiddleware(sagaMiddleware, logger)
 );
+
+
+
+
 
 // tells the saga middleware to use the rootSaga
 // rootSaga contains all of our other sagas

@@ -490,7 +490,7 @@ class ProductPage extends React.Component {
                 <List className={classes.list}>
                   <ListItem className={classes.inlineBlock}>
                     <a
-                      // href="https://www.creative-tim.com/"
+                      // href="thefiljackets.com/"
                       className={classes.block}
                     >
                       Creative Tim
@@ -498,7 +498,7 @@ class ProductPage extends React.Component {
                   </ListItem>
                   <ListItem className={classes.inlineBlock}>
                     <a
-                      // href="https://www.creative-tim.com/presentation"
+                      // href="thefiljackets.com/presentation"
                       className={classes.block}
                     >
                       About us
@@ -514,7 +514,7 @@ class ProductPage extends React.Component {
                   </ListItem>
                   <ListItem className={classes.inlineBlock}>
                     <a
-                      // href="https://www.creative-tim.com/license"
+                      // href="thefiljackets.com/license"
                       className={classes.block}
                     >
                       Licenses
@@ -526,7 +526,7 @@ class ProductPage extends React.Component {
                 &copy; {1900 + new Date().getYear()} , made with{" "}
                 <Favorite className={classes.icon} /> by{" "}
                 <a
-                  // href="https://www.creative-tim.com"
+                  // href="thefiljackets.com"
                   className={classes.aClasses}
                 >
                   Creative Tim

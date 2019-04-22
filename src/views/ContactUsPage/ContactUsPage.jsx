@@ -114,7 +114,7 @@ class ContactUsPage extends React.Component {
     return (
       <div>
         <Header
-          brand="Material Kit PRO React"
+          brand="Leather Stitchers"
           links={<HeaderLinks dropdownHoverColor="dark" />}
           fixed
           color="dark"
@@ -193,8 +193,8 @@ class ContactUsPage extends React.Component {
                     title="Find us at the office"
                     description={
                       <p>
-                        Bld Mihail Kogalniceanu, nr. 8, <br /> 7652 Bucharest,{" "}
-                        <br /> Romania
+                        17967 Hydra CT, <br /> Lakeville MN 55044,{" "}
+                        <br /> USA
                       </p>
                     }
                     icon={PinDrop}
@@ -205,7 +205,7 @@ class ContactUsPage extends React.Component {
                     title="Give us a ring"
                     description={
                       <p>
-                        Michael Jordan <br /> +40 762 321 762 <br /> Mon - Fri,
+                        Michael Jordan <br /> +1 555-555-5555 <br /> Mon - Fri,
                         8:00-22:00
                       </p>
                     }
@@ -217,8 +217,8 @@ class ContactUsPage extends React.Component {
                     title="Legal Information"
                     description={
                       <p>
-                        Creative Tim Ltd. <br /> VAT · EN2341241 <br /> IBAN ·
-                        EN8732ENGB2300099123 <br /> Bank · Great Britain Bank
+                        Leather Stitchers <br /> VAT · 2341241 <br /> IBAN ·
+                        EN83 <br /> Bank · Wells Fargo
                       </p>
                     }
                     icon={BusinessCenter}
@@ -229,22 +229,22 @@ class ContactUsPage extends React.Component {
             </div>
           </div>
         </div>
-        <Footer
+        {/* <Footer
           content={
             <div>
               <div className={classes.left}>
                 <List className={classes.list}>
                   <ListItem className={classes.inlineBlock}>
                     <a
-                      href="https://www.creative-tim.com/"
+                      href="https://www.thefilmjackets.com"
                       className={classes.block}
                     >
-                      Creative Tim
+                      Leather Stitchers
                     </a>
                   </ListItem>
                   <ListItem className={classes.inlineBlock}>
                     <a
-                      href="https://www.creative-tim.com/presentation"
+                      href="https://www.thefilmjackets.com"
                       className={classes.block}
                     >
                       About us
@@ -252,7 +252,7 @@ class ContactUsPage extends React.Component {
                   </ListItem>
                   <ListItem className={classes.inlineBlock}>
                     <a
-                      href="//blog.creative-tim.com/"
+                      href="//thefilmjackets.com/"
                       className={classes.block}
                     >
                       Blog
@@ -271,12 +271,12 @@ class ContactUsPage extends React.Component {
               <div className={classes.right}>
                 &copy; {1900 + new Date().getYear()} , made with{" "}
                 <Favorite className={classes.icon} /> by{" "}
-                <a href="https://www.creative-tim.com">Creative Tim</a> for a
-                better web.
+                <a href="https://www.creative-tim.com">Leather Stitchers</a> for a
+                better fit.
               </div>
             </div>
           }
-        />
+        /> */}
       </div>
     );
   }

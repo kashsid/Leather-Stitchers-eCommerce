@@ -4,20 +4,23 @@ const pool = require("../modules/pool");
 
 // will return data from project and tags table and join by id to get every project's tag"
 router.get("/", (req, res) => {
-    pool
-        .query(
-            `SELECT * from products`
-        )
-        .then(result => {
-            products = result.rows;
-            console.log(products);
+  pool
+    .query(
+      `SELECT "products"."product_id","products"."product_description", "product_price", "product_qty", "product_short_attr",  "collection"."collection_id", "collection"."collection_name"  FROM "products"
+    JOIN "collection" ON "collection"."collection_id"="products"."collection_id"
+    ORDER BY "products"."product_id" DESC;
+`
+    )
+    .then(result => {
+      products = result.rows;
+      //console.log(products);
 
-            res.send(products);
-        })
-        .catch(error => {
-            console.log("errors with products select", error);
-            res.sendStatus(500);
-        });
+      res.send(products);
+    })
+    .catch(error => {
+      console.log("errors with products select", error);
+      res.sendStatus(500);
+    });
 });
 
 // will receive new project data and insert into the database on "projects" table .

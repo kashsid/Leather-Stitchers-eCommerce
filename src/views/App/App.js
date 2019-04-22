@@ -17,6 +17,8 @@ class App extends Component {
   // Renders the entire app on the DOM
   render() {
     return (
+        
+        
       <Router history={hist}>
       <>
     {/* <Switch> */}

@@ -16,6 +16,7 @@ import Button from "components/CustomButtons/Button.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
 
+
 import landingPageStyle from "assets/jss/material-kit-pro-react/views/landingPageStyle.jsx";
 
 // Sections for this page
@@ -36,7 +37,7 @@ class LandingPage extends React.Component {
       <div>
         <Header
           color="transparent"
-          brand="Material Kit PRO React"
+          brand="Leather Stitchers"
           links={<HeaderLinks dropdownHoverColor="info" />}
           fixed
           changeColorOnScroll={{
@@ -50,7 +51,7 @@ class LandingPage extends React.Component {
           
             <GridContainer>
               <GridItem xs={12} sm={6} md={6}>
-                <h1 className={classes.title}>Your Story Starts With Us.</h1>
+                <h1 className={classes.title}>Your Style Starts With Us.</h1>
                 <h4>
                   Finding your personal fashion style is about getting to know 
                   yourself. It's about being connected with the very essence of 
@@ -64,6 +65,7 @@ class LandingPage extends React.Component {
         </Parallax>
         <div className={classNames(classes.main, classes.mainRaised)}>
           <div className={classes.container}>
+          
             <SectionProduct />
             <SectionSimilarStories/>
             {/* <SectionTeam /> */}
