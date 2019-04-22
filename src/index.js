@@ -1,18 +1,30 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./views/App/App"
-import { createBrowserHistory } from "history";
-import { Router, Route, Switch } from "react-router";
-import axios from "axios";
-
-
-import { takeEvery, put } from "redux-saga/effects";
-// Import saga middleware
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
 import createSagaMiddleware from "redux-saga";
 import logger from "redux-logger";
 
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import { Provider } from "react-redux";
+import rootReducer from "./redux/reducers"; // imports ./redux/reducers/index.js
+import rootSaga from "./redux/sagas"; // imports ./redux/sagas/index.js
+
+import App from "./views/App/App";
+
+// import React from "react";
+// import ReactDOM from "react-dom";
+// import App from "./views/App/App"
+// import { createBrowserHistory } from "history";
+// import { Router, Route, Switch } from "react-router";
+// import axios from "axios";
+
+
+// import { takeEvery, put } from "redux-saga/effects";
+// Import saga middleware
+// import createSagaMiddleware from "redux-saga";
+// import logger from "redux-logger";
+
+// import { createStore, combineReducers, applyMiddleware } from "redux";
+// import { Provider } from "react-redux";
 //import { takeEvery, put } from "redux-saga/effects";
 // Import saga middleware
 //import rootReducer from './redux/reducers'; // imports ./redux/reducers/index.js
@@ -49,43 +61,43 @@ import "assets/scss/material-kit-pro-react.scss?v=1.3.0";
 // });
 
 // USING OLD STRUCTURE*********
-function* rootSaga() {
-  yield takeEvery("FETCH_PRODUCTS", fetchProducts);
+// function* rootSaga() {
+//   yield takeEvery("FETCH_PRODUCTS", fetchProducts);
   
-}
-function* fetchProducts() {
-  try {
-    const products = yield axios.get("/ecommerce-page");
-    console.log('infetch products');
-    yield put({ type: "SET_PRODUCTS", payload: products.data });
-    console.log('the data is ',products.data);
+// }
+// function* fetchProducts() {
+//   try {
+//     const products = yield axios.get("/ecommerce-page");
+//     console.log('infetch products');
+//     yield put({ type: "SET_PRODUCTS", payload: products.data });
+//     console.log('the data is ',products.data);
     
-  } catch (err) {
-    console.log(`couldn't fetch projects`, err);
-  }
-}
-const sagaMiddleware = createSagaMiddleware();
-const products = (state = [], action) => {
-  console.log("inside reducer", action.type);
-  switch (action.type) {
-    case "SET_PRODUCTS":
-      console.log("Alright");
-      return action.payload;
+//   } catch (err) {
+//     console.log(`couldn't fetch projects`, err);
+//   }
+// }
+// const sagaMiddleware = createSagaMiddleware();
+// const products = (state = [], action) => {
+//   console.log("inside reducer", action.type);
+//   switch (action.type) {
+//     case "SET_PRODUCTS":
+//       console.log("Alright");
+//       return action.payload;
 
-    default:
-      return state;
-  }
-};
+//     default:
+//       return state;
+//   }
+// };
 
-const store = createStore(
+// const store = createStore(
   
-  combineReducers({
-    products
+//   combineReducers({
+//     products
 
-  }),
-  // Add sagaMiddleware to our store
-  applyMiddleware(sagaMiddleware, logger)
-);
+//   }),
+//   // Add sagaMiddleware to our store
+//   applyMiddleware(sagaMiddleware, logger)
+// );
 
 
 
@@ -93,9 +105,9 @@ const store = createStore(
 
 // tells the saga middleware to use the rootSaga
 // rootSaga contains all of our other sagas
-sagaMiddleware.run(rootSaga);
+//sagaMiddleware.run(rootSaga);
 
-ReactDOM.render(
+//ReactDOM.render(
   // <Router history={hist}>
   //   <Switch>
   //     {/* <Route path="/about-us" component={AboutUsPage} />
@@ -116,10 +128,39 @@ ReactDOM.render(
   //     <Route path="/" component={PresentationPage} /> */}
   //   </Switch>
   // </Router>,
-   <Provider store={store}>
-   <App/>
-  </Provider>,
-  document.getElementById('root'),
-);
+  // <Provider store={store}>
+//     <Provider >
+//    <App/>
+//   </Provider>,
+//   document.getElementById('root'),
+// );
 //   document.getElementById("root")
 // );
+const sagaMiddleware = createSagaMiddleware();
+
+// this line creates an array of all of redux middleware you want to use
+// we don't want a whole ton of console logs in our production code
+// logger will only be added to your project if your in development mode
+const middlewareList =
+  process.env.NODE_ENV === "development"
+    ? [sagaMiddleware, logger]
+    : [sagaMiddleware];
+
+const store = createStore(
+  // tells the saga middleware to use the rootReducer
+  // rootSaga contains all of our other reducers
+  rootReducer,
+  // adds all middleware to our project including saga and logger
+  applyMiddleware(...middlewareList)
+);
+
+// tells the saga middleware to use the rootSaga
+// rootSaga contains all of our other sagas
+sagaMiddleware.run(rootSaga);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
