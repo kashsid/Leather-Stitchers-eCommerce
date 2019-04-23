@@ -1,23 +1,23 @@
 //import React from "react";
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 // nodejs library that concatenates classes
-import classNames from "classnames";
+
 // plugin that creates slider
 //import nouislider from "nouislider";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-import Checkbox from "@material-ui/core/Checkbox";
+
 import Tooltip from "@material-ui/core/Tooltip";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+//import FormControlLabel from "@material-ui/core/FormControlLabel";
 // @material-ui icons
 import Favorite from "@material-ui/icons/Favorite";
-import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
-import Cached from "@material-ui/icons/Cached";
-import Subject from "@material-ui/icons/Subject";
-import Check from "@material-ui/icons/Check";
+// import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
+// import Cached from "@material-ui/icons/Cached";
+// import Subject from "@material-ui/icons/Subject";
+// import Check from "@material-ui/icons/Check";
 // core components
-import Accordion from "components/Accordion/Accordion.jsx";
+//import Accordion from "components/Accordion/Accordion.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import Card from "components/Card/Card.jsx";
@@ -25,19 +25,19 @@ import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
 import Button from "components/CustomButtons/Button.jsx";
-import Clearfix from "components/Clearfix/Clearfix.jsx";
+//import Clearfix from "components/Clearfix/Clearfix.jsx";
 
 import suit1 from "assets/img/examples/Movie_collection_1.jpg";
-import suit2 from "assets/img/examples/suit-2.jpg";
-import suit3 from "assets/img/examples/suit-3.jpg";
-import suit4 from "assets/img/examples/suit-4.jpg";
-import suit5 from "assets/img/examples/suit-5.jpg";
-import suit6 from "assets/img/examples/suit-6.jpg";
-import color1 from "assets/img/examples/color1.jpg";
-import color3 from "assets/img/examples/color3.jpg";
-import color2 from "assets/img/examples/color2.jpg";
-import dg3 from "assets/img/dg3.jpg";
-import dg1 from "assets/img/dg1.jpg";
+// import suit2 from "assets/img/examples/suit-2.jpg";
+// import suit3 from "assets/img/examples/suit-3.jpg";
+// import suit4 from "assets/img/examples/suit-4.jpg";
+// import suit5 from "assets/img/examples/suit-5.jpg";
+// import suit6 from "assets/img/examples/suit-6.jpg";
+// import color1 from "assets/img/examples/color1.jpg";
+// import color3 from "assets/img/examples/color3.jpg";
+// import color2 from "assets/img/examples/color2.jpg";
+// import dg3 from "assets/img/dg3.jpg";
+// import dg1 from "assets/img/dg1.jpg";
 
 import styles from "assets/jss/material-kit-pro-react/views/ecommerceSections/productsStyle.jsx";
 

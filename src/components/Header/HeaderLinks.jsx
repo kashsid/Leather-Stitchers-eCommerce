@@ -244,13 +244,13 @@ function HeaderLinks({ ...props }) {
       </ListItem>
       <ListItem className={classes.listItem}>
         <Button
-          href="https://www.creative-tim.com/product/material-kit-pro-react"
+          href="https://www.thefilmjackets.com"
           color={window.innerWidth < 960 ? "info" : "white"}
           target="_blank"
           className={classes.navButton}
           round
         >
-          <ShoppingCart className={classes.icons} /> buy now
+          <ShoppingCart className={classes.icons} /> Log Out
         </Button>
       </ListItem>
     </List>

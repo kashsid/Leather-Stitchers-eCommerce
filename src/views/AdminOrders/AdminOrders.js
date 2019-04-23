@@ -23,7 +23,6 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 // import HeaderLinks from "components/Header/HeaderLinks.jsx";
 // import SectionPills from "./SectionPills.jsx";
 
-
 // defined custom table to be used with Material UI
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -50,70 +49,78 @@ const styles = theme => ({
   }
 });
 
-class AdminDashboard extends Component {
+class AdminOrders extends Component {
   state = {
     open: false,
     selectedId: ""
   };
-  // send fetch dispatch to redux which will return all items from 'Products' table on database
+  // send fetch dispatch to redux which will return all items from 'Orders' table on database
   componentDidMount = () => {
-    this.props.dispatch({ type: "FETCH_PRODUCTS" });
+    this.props.dispatch({ type: "FETCH_ORDERS" });
   };
-  // Handle delete button click action to delete the selected products from table
-  handleDeleteClick = id => () => {
-    console.log("delete click for id", id);
-    this.setState({
-      open: true,
-      selectedId: id
-    });
-  };
-  //shows confirmation message before deleting the product from database
-  deleteDialog = () => {
-    return (
-      <Dialog
-        open={this.state.open}
-        onClose={this.handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{"Please Confirm"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Are you sure you want to delete this product from the database?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={this.handleDeleteConfirm("disagree")}
-            color="primary"
-          >
-            Disagree
-          </Button>
-          <Button
-            onClick={this.handleDeleteConfirm("agree")}
-            color="primary"
-            autoFocus
-          >
-            Agree
-          </Button>
-        </DialogActions>
-      </Dialog>
-    );
-  };
+  // Handle delete button click action to delete the selected Orders from table
+  // handleDeleteClick = id => () => {
+  //   console.log("delete click for id", id);
+  //   this.setState({
+  //     open: true,
+  //     selectedId: id
+  //   });
+  // };
+  // //shows confirmation message before deleting the product from database
+  // deleteDialog = () => {
+  //   return (
+  //     <Dialog
+  //       open={this.state.open}
+  //       onClose={this.handleClose}
+  //       aria-labelledby="alert-dialog-title"
+  //       aria-describedby="alert-dialog-description"
+  //     >
+  //       <DialogTitle id="alert-dialog-title">{"Please Confirm"}</DialogTitle>
+  //       <DialogContent>
+  //         <DialogContentText id="alert-dialog-description">
+  //           Are you sure you want to delete this product from the database?
+  //         </DialogContentText>
+  //       </DialogContent>
+  //       <DialogActions>
+  //         <Button
+  //           onClick={this.handleDeleteConfirm("disagree")}
+  //           color="primary"
+  //         >
+  //           Disagree
+  //         </Button>
+  //         <Button
+  //           onClick={this.handleDeleteConfirm("agree")}
+  //           color="primary"
+  //           autoFocus
+  //         >
+  //           Agree
+  //         </Button>
+  //       </DialogActions>
+  //     </Dialog>
+  //   );
+  // };
 
-  handleDeleteConfirm = confirmation => () => {
-    if (confirmation === "agree") {
-      console.log("clicked agree");
-      this.props.dispatch({
-        type: "DELETE_PROJECT",
-        payload: this.state.selectedId
-      });
-    }
-    this.setState({
-      open: false,
-      selectedId: ""
-    });
-  };
+  // handleDeleteConfirm = confirmation => () => {
+  //   if (confirmation === "agree") {
+  //     console.log("clicked agree");
+  //     this.props.dispatch({
+  //       type: "DELETE_PROJECT",
+  //       payload: this.state.selectedId
+  //     });
+  //   }
+  //   this.setState({
+  //     open: false,
+  //     selectedId: ""
+  //   });
+  // };
+
+  // "order_id" serial NOT NULL,
+	// "order_total" money NOT NULL,
+	// "order_comments" varchar,
+	// "order_tax" money,
+	// "customer_id" int NOT NULL,
+	// "shipping_method_id" int NOT NULL,
+
 
   render() {
     const { classes } = this.props;
@@ -156,20 +163,24 @@ class AdminDashboard extends Component {
           <Table className={classes.table}>
             <TableHead>
               <TableRow>
-                <CustomTableCell>Product Name</CustomTableCell>
-                <CustomTableCell align="right" />
-
-                <CustomTableCell>Product Quantity</CustomTableCell>
+                <CustomTableCell>Order Id</CustomTableCell>
                 <CustomTableCell align="center" />
 
-                <CustomTableCell>Product Price</CustomTableCell>
+                <CustomTableCell>Order Date</CustomTableCell>
+                <CustomTableCell align="center" />
+
+                <CustomTableCell>Customer Name</CustomTableCell>
+                <CustomTableCell align="left" />
+                <CustomTableCell>Customer Comments</CustomTableCell>
+                <CustomTableCell align="left" />
+                <CustomTableCell>Shipping Method</CustomTableCell>
                 <CustomTableCell align="left" />
               </TableRow>
             </TableHead>
             {/* {JSON.stringify(this.props)} */}
 
             <TableBody>
-              {this.props.products.map(row => (
+              {this.props.Orders.map(row => (
                 <TableRow key={row.id}>
                   <CustomTableCell component="th" scope="row">
                     {row.product_short_attr}
@@ -207,5 +218,6 @@ const mapReduxStateToProps = reduxState => {
 };
 
 export default withStyles(styles)(
-  connect(mapReduxStateToProps)(AdminDashboard)
+  connect(mapReduxStateToProps)(AdminOrders)
 );
+

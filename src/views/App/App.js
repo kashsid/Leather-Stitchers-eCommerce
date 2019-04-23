@@ -15,13 +15,13 @@ import { connect } from "react-redux";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 
-import ContactUsPage from "views/ContactUsPage/ContactUsPage.jsx";
+//import ContactUsPage from "views/ContactUsPage/ContactUsPage.jsx";
 import EcommercePage from "views/EcommercePage/EcommercePage.jsx";
 import LandingPage from "views/LandingPage/LandingPage.jsx";
-import LoginPage from "views/LoginPage/LoginPage"
+//import LoginPage from "views/LoginPage/LoginPage"
  import ProductPage from "views/ProductPage/ProductPage.jsx";
  import ShoppingCartPage from "views/ShoppingCartPage/ShoppingCartPage.jsx";
- import AdminDashboard from  "views/AdminDashboard/AdminDashboard.js";
+ import Admin from  "views/Admin/Admin.js";
 
 
 // var hist = createBrowserHistory();
@@ -39,7 +39,7 @@ class App extends Component {
           <Switch>
             <Redirect exact from="/" to="/home" />
             {/* <ProtectedRoute exact path="/home" component={LandingPage} /> */}
-            <ProtectedRoute exact path="/home" component={AdminDashboard} />
+            <ProtectedRoute exact path="/home" component={Admin} />
             {/* <ProtectedRoute exact path="/home" component={UserPage} /> */}
             {/* <Route path="/about-us" component={AboutUsPage} />
       <Route path="/blog-post" component={BlogPostPage} />
