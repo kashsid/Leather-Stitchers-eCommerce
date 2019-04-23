@@ -1,4 +1,6 @@
-const products = (state = [], action) => {
+const productsReducer = (state = [], action) => {
+  console.log('this is product reducer');
+  
   switch (action.type) {
     case "SET_PRODUCTS":
       console.log('yayh',action.payload);
@@ -7,3 +9,4 @@ const products = (state = [], action) => {
       return state;
   }
 };
+export default productsReducer;

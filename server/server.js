@@ -25,7 +25,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 /** ---------- ROUTES ---------- **/
 app.use("/api/user", userRouter);
-app.use("/ecommerce-page", productRouter);
+//app.use("/ecommerce-page", productRouter);
+app.use("/products", productRouter);
 //app.use("/collections", collectionRouter);
 
 // Serve static files

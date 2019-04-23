@@ -103,6 +103,10 @@ const signupPageStyle = theme => ({
       color: whiteColor + "  !important"
     }
   },
+  textfield: {
+    width: 300,
+    margin: 100
+  },
   icon: {
     width: "18px",
     height: "18px",

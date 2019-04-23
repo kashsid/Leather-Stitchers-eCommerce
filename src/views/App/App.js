@@ -21,6 +21,7 @@ import LandingPage from "views/LandingPage/LandingPage.jsx";
 import LoginPage from "views/LoginPage/LoginPage"
  import ProductPage from "views/ProductPage/ProductPage.jsx";
  import ShoppingCartPage from "views/ShoppingCartPage/ShoppingCartPage.jsx";
+ import AdminDashboard from  "views/AdminDashboard/AdminDashboard.js";
 
 
 // var hist = createBrowserHistory();
@@ -37,6 +38,8 @@ class App extends Component {
         <>
           <Switch>
             <Redirect exact from="/" to="/home" />
+            {/* <ProtectedRoute exact path="/home" component={LandingPage} /> */}
+            <ProtectedRoute exact path="/home" component={AdminDashboard} />
             {/* <ProtectedRoute exact path="/home" component={UserPage} /> */}
             {/* <Route path="/about-us" component={AboutUsPage} />
       <Route path="/blog-post" component={BlogPostPage} />
@@ -45,7 +48,7 @@ class App extends Component {
             {/* <Route exact path="/" component={ContactUsPage} /> */}
             <Route exact path="/ecommerce-page" component={EcommercePage} />
             <Route path="/landing-page" component={LandingPage} />
-            <Route path="/" component={LoginPage} />
+            {/* <Route path="/" component={LoginPage} /> */}
             {/* <Route path="/pricing" component={PricingPage} />
       <Route path="/profile-page" component={ProfilePage} /> */}
             <Route path="/product-page" component={ProductPage} />

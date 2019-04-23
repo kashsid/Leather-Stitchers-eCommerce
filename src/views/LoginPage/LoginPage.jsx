@@ -37,8 +37,8 @@ class LoginPage extends Component {
 
   login = event => {
     event.preventDefault();
-    console.log('in login',this.state.username,this.state.password);
-    
+    console.log("in login", this.state.username, this.state.password);
+   
     if (this.state.username && this.state.password) {
       this.props.dispatch({
         type: "LOGIN",
@@ -46,7 +46,6 @@ class LoginPage extends Component {
           username: this.state.username,
           password: this.state.password
         }
-        
       });
     } else {
       this.props.dispatch({ type: "LOGIN_INPUT_ERROR" });
@@ -64,6 +63,7 @@ class LoginPage extends Component {
   }
   render() {
     const { classes } = this.props;
+    const value = this.state;
     return (
       <div>
         {this.props.errors.loginMessage && (
@@ -87,7 +87,7 @@ class LoginPage extends Component {
         >
           <div className={classes.container}>
             <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={4}>
+              <GridItem xs={16} sm={16} md={4}>
                 <Card>
                   <form className={classes.form}>
                     <CardHeader
@@ -153,17 +153,16 @@ class LoginPage extends Component {
                       <TextField
                         id="username"
                         name="username"
-                        
-                        value={this.state.username}
                         onChange={this.handleInputChangeFor("username")}
+                        //value={this.state.username}
                         formControlProps={{
                           fullWidth: true
                         }}
                         inputProps={{
                           placeholder: "User Name...",
-                          width:300,
+                          width: 300,
                           type: "text",
-                          
+
                           startAdornment: (
                             <InputAdornment position="start">
                               <Email className={classes.inputIconsColor} />
@@ -264,7 +263,7 @@ class LoginPage extends Component {
 // if you wanted you could write this code like this:
 // const mapStateToProps = ({errors}) => ({ errors });
 const mapStateToProps = state => ({
-  errors: state.errors,
+  errors: state.errors
 });
 
 export default withStyles(loginPageStyle)(connect(mapStateToProps)(LoginPage));
