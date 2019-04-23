@@ -6,20 +6,22 @@ const pool = require("../modules/pool");
 router.get("/", (req, res) => {
   pool
     .query(
-      `Select "Orders"."order_id", "Orders"."order_date","customer"."customer_first_name",
+      `Select "orders"."order_id", "orders"."order_date","customer"."customer_first_name",
       "customer"."customer_last_name","orders"."order_comments","shipping_methods"."shipping_method_desc"
-        from "Orders" Join "customer" ON "customer"."customer_id" = "orders"."customer_id"
+        from "orders" Join "customer" ON "customer"."customer_id" = "orders"."customer_id"
 Join "shipping_methods" On "orders"."shipping_method_id" = "shipping_methods"."shipping_method_id";
 `
     )
     .then(result => {
       orders = result.rows;
-      //console.log(products);
+      console.log(orders);
 
-      res.send(products);
+      res.send(orders);
     })
     .catch(error => {
       console.log("errors with orders select", error);
       res.sendStatus(500);
     });
 });
+module.exports = router;
+

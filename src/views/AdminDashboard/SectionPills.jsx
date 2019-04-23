@@ -30,7 +30,7 @@ function SectionPills({ ...props }) {
               },
               {
                 tabButton: "Orders",
-                tabContent: <AdminOrders/>
+                tabContent: ""
               },
               {
                 tabButton: "Collections",
@@ -46,7 +46,7 @@ function SectionPills({ ...props }) {
               }
             ]}
           />
-          {/* <div className={classes.tabSpace} /> */}
+          <div className={classes.tabSpace} />
         </GridItem>
       </GridContainer>
       {/* <GridContainer>

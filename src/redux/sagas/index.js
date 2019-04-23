@@ -4,6 +4,8 @@ import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
 import productsSaga from './productsSaga';
 import ordersSaga from "./ordersSaga";
+import collectionsSaga from "./collectionsSaga";
+
 
 
 // rootSaga is the primary saga.
@@ -20,5 +22,6 @@ export default function* rootSaga() {
     userSaga(),
     productsSaga(),
     ordersSaga(),
+    collectionsSaga(),
   ]);
 }

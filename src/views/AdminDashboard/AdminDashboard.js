@@ -16,12 +16,12 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-// import GridContainer from "components/Grid/GridContainer.jsx";
-// import GridItem from "components/Grid/GridItem.jsx";
-// import Parallax from "components/Parallax/Parallax.jsx";
-// import Header from "components/Header/Header.jsx";
-// import HeaderLinks from "components/Header/HeaderLinks.jsx";
-// import SectionPills from "./SectionPills.jsx";
+import GridContainer from "components/Grid/GridContainer.jsx";
+import GridItem from "components/Grid/GridItem.jsx";
+import Parallax from "components/Parallax/Parallax.jsx";
+import Header from "components/Header/Header.jsx";
+import HeaderLinks from "components/Header/HeaderLinks.jsx";
+import SectionPills from "./SectionPills.jsx";
 
 
 // defined custom table to be used with Material UI
@@ -129,8 +129,8 @@ class AdminDashboard extends Component {
             height: 700,
             color: "info"
           }}
-        /> */}
-        {/* <Parallax
+        />
+        <Parallax
           image={require("assets/img/bg10.jpg")}
           filter="dark"
           small
@@ -175,10 +175,12 @@ class AdminDashboard extends Component {
                     {row.product_short_attr}
                   </CustomTableCell>
                   <CustomTableCell align="right" />
+
                   <CustomTableCell component="th" scope="row">
                     {row.product_qty}
                   </CustomTableCell>
                   <CustomTableCell align="center" />
+
                   <CustomTableCell component="th" scope="row">
                     {row.product_price}
                   </CustomTableCell>

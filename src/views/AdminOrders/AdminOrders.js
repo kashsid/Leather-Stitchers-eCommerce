@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 // Material UI imports
 import { withStyles } from "@material-ui/core/styles";
+import moment from "moment";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -58,6 +59,19 @@ class AdminOrders extends Component {
   componentDidMount = () => {
     this.props.dispatch({ type: "FETCH_ORDERS" });
   };
+
+  // formatDate = () => {
+  //   const date = this.props.orders.order_date;
+  //   console.log('this is ', date)
+  //   return (
+  //     new Date(date).getMonth() +
+  //     1 +
+  //     "/" +
+  //     new Date(date).getDate() +
+  //     "/" +
+  //     new Date(date).getFullYear()
+  //   );
+  // };
   // Handle delete button click action to delete the selected Orders from table
   // handleDeleteClick = id => () => {
   //   console.log("delete click for id", id);
@@ -114,14 +128,6 @@ class AdminOrders extends Component {
   //   });
   // };
 
-  // "order_id" serial NOT NULL,
-	// "order_total" money NOT NULL,
-	// "order_comments" varchar,
-	// "order_tax" money,
-	// "customer_id" int NOT NULL,
-	// "shipping_method_id" int NOT NULL,
-
-
   render() {
     const { classes } = this.props;
 
@@ -177,26 +183,39 @@ class AdminOrders extends Component {
                 <CustomTableCell align="left" />
               </TableRow>
             </TableHead>
-            {/* {JSON.stringify(this.props)} */}
+            {/* {JSON.stringify(this.props.orders)} */}
 
             <TableBody>
-              {this.props.Orders.map(row => (
+              {this.props.orders.map(row => (
                 <TableRow key={row.id}>
                   <CustomTableCell component="th" scope="row">
-                    {row.product_short_attr}
+                    {row.order_id}
                   </CustomTableCell>
                   <CustomTableCell align="right" />
+
                   <CustomTableCell component="th" scope="row">
-                    {row.product_qty}
+                    {moment(row.order_date).format("MMM DD, YYYY")}
                   </CustomTableCell>
                   <CustomTableCell align="center" />
+
                   <CustomTableCell component="th" scope="row">
-                    {row.product_price}
+                    {row.customer_first_name + " " + row.customer_last_name}
                   </CustomTableCell>
-                  <CustomTableCell style={{ width: "10%" }} align="right">
+                  <CustomTableCell align="left"/>
+
+                  <CustomTableCell component="th" scope="row">
+                    {row.order_comments}
+                  </CustomTableCell>
+                  <CustomTableCell align="left"/>
+
+                <CustomTableCell component="th" scope="row">
+                    {row.shipping_method_desc}
+                  </CustomTableCell>
+                  <CustomTableCell align="left">
+
                     <IconButton
                       className={classes.iconHover}
-                      onClick={this.handleDeleteClick(row.id)}
+                      // onClick={this.handleDeleteClick(row.id)}
                       aria-label="Delete"
                     >
                       <DeleteIcon />
@@ -207,7 +226,7 @@ class AdminOrders extends Component {
             </TableBody>
           </Table>
         </Paper>
-        {this.deleteDialog()}
+        {/* {this.deleteDialog()} */}
       </>
     );
   }
@@ -217,7 +236,4 @@ const mapReduxStateToProps = reduxState => {
   return reduxState;
 };
 
-export default withStyles(styles)(
-  connect(mapReduxStateToProps)(AdminOrders)
-);
-
+export default withStyles(styles)(connect(mapReduxStateToProps)(AdminOrders));

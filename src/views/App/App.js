@@ -21,7 +21,12 @@ import LandingPage from "views/LandingPage/LandingPage.jsx";
 //import LoginPage from "views/LoginPage/LoginPage"
  import ProductPage from "views/ProductPage/ProductPage.jsx";
  import ShoppingCartPage from "views/ShoppingCartPage/ShoppingCartPage.jsx";
- import Admin from  "views/Admin/Admin.js";
+ //import Admin from  "views/Admin/Admin.js";
+  import AdminDashboard from "../AdminDashboard/AdminDashboard.js";
+    import AdminOrders from "views/AdminOrders/AdminOrders.js";
+import { Admin } from "../Admin/Admin";
+
+
 
 
 // var hist = createBrowserHistory();
