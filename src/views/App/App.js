@@ -53,11 +53,11 @@ class App extends Component {
       <Route path="/components" component={ComponentsPage} /> */}
             {/* <Route exact path="/" component={ContactUsPage} /> */}
             <Route exact path="/catalog" component={EcommercePage} />
-            <Route path="/landing-page" component={LandingPage} />
+            <Route exact path="/landing-page" component={LandingPage} />
             {/* <Route path="/" component={LoginPage} /> */}
             {/* <Route path="/pricing" component={PricingPage} />
       <Route path="/profile-page" component={ProfilePage} /> */}
-            <Route path="/product" component={ProductPage} />
+            <Route path="/products" component={ProductPage} />
             {/* <Route path="/sections" component={SectionsPage} /> */}
             <Route
               path="/shopping-cart-page"

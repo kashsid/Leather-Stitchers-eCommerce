@@ -1,6 +1,7 @@
 //import React from "react";
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 // nodejs library that concatenates classes
 
 // plugin that creates slider
@@ -91,13 +92,16 @@ class SectionProducts extends React.Component {
         >
           <Card plain product>
             <CardHeader image plain>
-              <a href="/contact-us">
+              {/* <a href="www.thefilmjackets.com"> */}
+              {/* <img src={suit1} alt=".." /> */}
+              <Link className={classes.link} to="/products">
                 <img src={suit1} alt=".." />
-              </a>
+              </Link>
+              {/* </a> */}
             </CardHeader>
 
             <CardBody plain>
-              <a href="#pablo">
+              <a href="/products">
                 <h4 className={classes.cardTitle}>
                   {this.props.products.product_short_attr}
                 </h4>
