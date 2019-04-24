@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 
 // nodejs library that concatenates classes
 import classNames from "classnames";
+import Grid from "@material-ui/core/Grid";
+
 // core components
 import Header from "components/Header/Header.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
@@ -46,21 +48,17 @@ class EcommercePage extends React.Component {
     console.log("in eCommerce Did Mount");
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
-    //const action = { type: "FETCH_PRODUCTS" };
+
     this.props.dispatch({ type: "FETCH_PRODUCTS" });
-    //console.log('in did mount again', this.props.products);
   }
 
-  
-  
   render() {
     const { classes } = this.props;
-    
-    
+
     return (
       <div>
         <Header
-          brand="Leather"
+          brand="Leather Stitchers"
           links={<HeaderLinks dropdownHoverColor="info" />}
           fixed
           color="transparent"
@@ -75,7 +73,7 @@ class EcommercePage extends React.Component {
           small
         >
           <div className={classes.container}>
-            <GridContainer>
+            <Grid>
               <GridItem
                 md={8}
                 sm={8}
@@ -89,32 +87,31 @@ class EcommercePage extends React.Component {
                   <h1 className={classes.title}>Leather Stitchers!</h1>
                   <h4>
                     Free global delivery for all products. Use coupon{" "}
-                    <b>25summer</b> for an extra 25% Off
+                    <b>25summer</b> for an extra <b>25%</b> Off
                   </h4>
                 </div>
               </GridItem>
-            </GridContainer>
+            </Grid>
           </div>
         </Parallax>
 
-        <div className={classNames(classes.main, classes.mainRaised)}>
-          <SectionLatestOffers />
-          {/* <Grid container spacing={8} direction="row" justify="flex-start">
-            {this.props.projects.map(project => (
-              <ProjectItem key={project.id} project={project} />
-            ))}
-          </Grid> */}
-          {/* {JSON.stringify(this.props.products)} */}
-
-          {this.props.products.map(products => (
-            <SectionProducts
-              key={products.product_id}
-              products={products}
-            />
-          ))}
-
-          {/* <SectionProducts/> */}
+        {/* <div className={classNames(classes.main, classes.mainRaised)}> */}
+        <div className={classes.section}>
+          <div className={classes.container}>
+            <SectionLatestOffers />
+            <GridContainer>
+              {this.props.products.map(products => (
+                <SectionProducts
+                  key={products.product_id}
+                  products={products}
+                />
+              ))}
+            </GridContainer>
+          </div>
         </div>
+
+        {JSON.stringify(this.props.products)}
+        <Grid spacing={3} direction={"row"} />
 
         <div
           className={classNames(
@@ -132,12 +129,10 @@ class EcommercePage extends React.Component {
                 className={classNames(classes.mlAuto, classes.mrAuto)}
               >
                 <div className={classes.textCenter}>
-                  <h3 className={classes.title}>
-                    Subscribe to our Newsletter
-                  </h3>
+                  <h3 className={classes.title}>Subscribe to our Newsletter</h3>
                   <p className={classes.description}>
-                    Join our newsletter and get news in your inbox every
-                    week! We hate spam too, so no worries about this.
+                    Join our newsletter and get news in your inbox every week!
+                    We hate spam too, so no worries about this.
                   </p>
                 </div>
                 <Card raised className={classes.card}>
@@ -244,8 +239,8 @@ class EcommercePage extends React.Component {
               <h5>About Us</h5>
               <p>Leather Stitchers . </p>
               <p>
-                We power businesses and individuals to create better looking
-                web projects around the world.{" "}
+                We power businesses and individuals to create better looking web
+                projects around the world.{" "}
               </p>
             </GridItem>
             <GridItem xs={12} sm={4} md={4}>
@@ -253,15 +248,11 @@ class EcommercePage extends React.Component {
               <div className={classes.socialFeed}>
                 <div>
                   <i className="fab fa-twitter" />
-                  <p>
-                    How to handle ethical disagreements with your clients.
-                  </p>
+                  <p>How to handle ethical disagreements with your clients.</p>
                 </div>
                 <div>
                   <i className="fab fa-twitter" />
-                  <p>
-                    The tangible benefits of designing at 1x pixel density.
-                  </p>
+                  <p>The tangible benefits of designing at 1x pixel density.</p>
                 </div>
                 <div>
                   <i className="fab fa-facebook-square" />
@@ -360,6 +351,5 @@ const mapReduxStateToProps = reduxState => {
 };
 
 //export default withStyles(styles)(SectionProducts);
-export default withStyles(styles)(connect(mapReduxStateToProps)(EcommercePage)
-);
+export default withStyles(styles)(connect(mapReduxStateToProps)(EcommercePage));
 //export default withStyles(styles)(EcommercePage);

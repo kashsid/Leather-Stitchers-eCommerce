@@ -14,6 +14,8 @@ import Icon from "@material-ui/core/Icon";
 
 // @material-ui/icons
 import Apps from "@material-ui/icons/Apps";
+import Style from "@material-ui/icons/Style";
+
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
 import ViewDay from "@material-ui/icons/ViewDay";
 import Dns from "@material-ui/icons/Dns";
@@ -93,28 +95,27 @@ function HeaderLinks({ ...props }) {
           noLiPadding
           navDropdown
           hoverColor={dropdownHoverColor}
-          buttonText="Components"
+          buttonText="Product Catalog"
           buttonProps={{
             className: classes.navLink,
             color: "transparent"
           }}
-          buttonIcon={Apps}
+          buttonIcon={Style}
           dropdownList={[
-            <Link to="/" className={classes.dropdownLink}>
-              <LineStyle className={classes.dropdownIcons} /> Presentation
-              Page
+            <Link to="/catalog" className={classes.dropdownLink}>
+              <LineStyle className={classes.dropdownIcons} /> Biker Jackets Collection
             </Link>,
             <Link to="/components" className={classes.dropdownLink}>
               <Layers className={classes.dropdownIcons} />
-              All components
+              Movie Jackets Collection
             </Link>,
             <a
-              href="https://demos.creative-tim.com/material-kit-pro-react/#/documentation/tutorial"
-              target="_blank"
+              // href="https://demos.creative-tim.com/material-kit-pro-react/#/documentation/tutorial"
+              // target="_blank"
               className={classes.dropdownLink}
             >
               <Icon className={classes.dropdownIcons}>content_paste</Icon>
-              Documentation
+              Fashion Jackets Collection 
             </a>
           ]}
         />

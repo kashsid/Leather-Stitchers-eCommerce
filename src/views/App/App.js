@@ -25,6 +25,7 @@ import LandingPage from "views/LandingPage/LandingPage.jsx";
   import AdminDashboard from "../AdminDashboard/AdminDashboard.js";
     import AdminOrders from "views/AdminOrders/AdminOrders.js";
 import { Admin } from "../Admin/Admin";
+//import example from "views/EcommercePage/images"
 
 
 
@@ -51,12 +52,12 @@ class App extends Component {
       <Route path="/blog-posts" component={BlogPostsPage} />
       <Route path="/components" component={ComponentsPage} /> */}
             {/* <Route exact path="/" component={ContactUsPage} /> */}
-            <Route exact path="/ecommerce-page" component={EcommercePage} />
+            <Route exact path="/catalog" component={EcommercePage} />
             <Route path="/landing-page" component={LandingPage} />
             {/* <Route path="/" component={LoginPage} /> */}
             {/* <Route path="/pricing" component={PricingPage} />
       <Route path="/profile-page" component={ProfilePage} /> */}
-            <Route path="/product-page" component={ProductPage} />
+            <Route path="/product" component={ProductPage} />
             {/* <Route path="/sections" component={SectionsPage} /> */}
             <Route
               path="/shopping-cart-page"

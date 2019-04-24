@@ -21,6 +21,8 @@ import Favorite from "@material-ui/icons/Favorite";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import Card from "components/Card/Card.jsx";
+import Grid from "@material-ui/core/Grid";
+
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
@@ -40,6 +42,7 @@ import suit1 from "assets/img/examples/Movie_collection_1.jpg";
 // import dg1 from "assets/img/dg1.jpg";
 
 import styles from "assets/jss/material-kit-pro-react/views/ecommerceSections/productsStyle.jsx";
+//import styles from "assets/jss/material-kit-pro-react/views/ecommerceSections/latestOffersStyle.jsx";
 
 class SectionProducts extends React.Component {
   constructor(props) {
@@ -76,58 +79,63 @@ class SectionProducts extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div className={classes.section}>
-        <div className={classes.container}>
-          <GridContainer>
-          <GridItem md={8} sm={8}>
-            <GridContainer>
-              {/* This area  */}
-              <GridItem md={4} sm={4}>
-                <Card plain product>
-                  <CardHeader noShadow image>
-                    <a href="/contact-us">
-                      <img src={suit1} alt=".." />
-                    </a>
-                  </CardHeader>
-                  <CardBody plain>
-                    <a href="#pablo">
-                      <h4 className={classes.cardTitle}>
-                        {this.props.products.product_short_attr}
-                      </h4>
-                    </a>
-                    <p className={classes.description}>
-                      {this.props.products.product_description}
-                    </p>
-                  </CardBody>
-                  <CardFooter plain className={classes.justifyContentBetween}>
-                    <div className={classes.priceContainer}>
-                      <span className={classes.price}>
-                        {this.props.products.product_price}
-                      </span>
-                    </div>
-                    <Tooltip
-                      id="tooltip-top"
-                      title="Saved to Wishlist"
-                      placement="left"
-                      classes={{ tooltip: classes.tooltip }}
-                    >
-                      <Button
-                        justIcon
-                        simple
-                        color="rose"
-                        className={classes.pullRight}
-                      >
-                        <Favorite />
-                      </Button>
-                    </Tooltip>
-                  </CardFooter>
-                </Card>
-              </GridItem>
-            </GridContainer>
-          </GridItem>
-         </GridContainer>
-        </div>
-      </div>
+      <>
+        {/* <div className={classes.section}>
+       <div className={classes.container}> */}
+
+        <GridItem
+          md={4}
+          sm={4}
+          // className={classes.section}
+          // className={classes.container}
+        >
+          <Card plain product>
+            <CardHeader image plain>
+              <a href="/contact-us">
+                <img src={suit1} alt=".." />
+              </a>
+            </CardHeader>
+
+            <CardBody plain>
+              <a href="#pablo">
+                <h4 className={classes.cardTitle}>
+                  {this.props.products.product_short_attr}
+                </h4>
+              </a>
+              <p className={classes.description}>
+                {this.props.products.product_description}
+              </p>
+            </CardBody>
+            <CardFooter plain className={classes.justifyContentBetween}>
+              <div className={classes.priceContainer}>
+                <span className={classes.price}>
+                  {this.props.products.product_price}
+                </span>
+              </div>
+              <Tooltip
+                id="tooltip-top"
+                title="Saved to Wishlist"
+                placement="left"
+                classes={{ tooltip: classes.tooltip }}
+              >
+                <Button
+                  justIcon
+                  simple
+                  color="rose"
+                  className={classes.pullRight}
+                >
+                  <Favorite />
+                </Button>
+              </Tooltip>
+            </CardFooter>
+          </Card>
+        </GridItem>
+        {/* </Grid> */}
+        {/* </GridItem>
+          </Grid> */}
+        {/* </div>
+      </div> */}
+      </>
     );
   }
 }
