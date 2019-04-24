@@ -5,6 +5,7 @@ import userSaga from './userSaga';
 import productsSaga from './productsSaga';
 import ordersSaga from "./ordersSaga";
 import collectionsSaga from "./collectionsSaga";
+import selectedProductSaga from "./eCommerceSaga";
 
 
 
@@ -23,5 +24,7 @@ export default function* rootSaga() {
     productsSaga(),
     ordersSaga(),
     collectionsSaga(),
+    selectedProductSaga(),
+    
   ]);
 }

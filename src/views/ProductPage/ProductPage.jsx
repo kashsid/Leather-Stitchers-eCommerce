@@ -91,7 +91,7 @@ class ProductPage extends React.Component {
       <div className={classes.productPage}>
         <Header
           brand="Leather Stitchers"
-          links={<HeaderLinks dropdownHoverColor="gray" />}
+          links={<HeaderLinks dropdownHoverColor="primary" />}
           fixed
           color="transparent"
           changeColorOnScroll={{
@@ -102,7 +102,7 @@ class ProductPage extends React.Component {
 
         <Parallax
           image={require("assets/img/bg6.jpg")}
-          filter="gray"
+          filter="primary"
           className={classes.pageHeader}
         >
           <div className={classes.container}>
@@ -132,7 +132,7 @@ class ProductPage extends React.Component {
                   <h3 className={classes.mainPrice}>$335</h3>
                   <Accordion
                     active={0}
-                    activeColor="gray"
+                    activeColor="primary"
                     collapses={[
                       {
                         title: "Description",
@@ -217,7 +217,7 @@ class ProductPage extends React.Component {
                             }}
                             value="1"
                           >
-                            Gray
+                            primary
                           </MenuItem>
                           <MenuItem
                             classes={{
@@ -283,7 +283,7 @@ class ProductPage extends React.Component {
                     </GridItem>
                   </GridContainer>
                   <GridContainer className={classes.pullRight}>
-                    <Button round color="red" onClick={this.handleSubmit}>
+                    <Button round color="primary" onClick={this.handleSubmit}>
                       Add to Cart &nbsp; <ShoppingCart />
                     </Button>
                   </GridContainer>
@@ -315,7 +315,7 @@ class ProductPage extends React.Component {
                     title="Popular Item"
                     description="Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough."
                     icon={Favorite}
-                    iconColor="gray"
+                    iconColor="primary"
                     vertical
                   />
                 </GridItem>
@@ -359,7 +359,7 @@ class ProductPage extends React.Component {
                           placement="top"
                           classes={{ tooltip: classes.tooltip }}
                         >
-                          <Button justIcon color="gray" simple>
+                          <Button justIcon color="primary" simple>
                             <Favorite />
                           </Button>
                         </Tooltip>
@@ -429,7 +429,7 @@ class ProductPage extends React.Component {
                           placement="top"
                           classes={{ tooltip: classes.tooltip }}
                         >
-                          <Button justIcon color="gray" simple>
+                          <Button justIcon color="primary" simple>
                             <Favorite />
                           </Button>
                         </Tooltip>

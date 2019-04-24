@@ -23,6 +23,29 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/selected/:id", (req, res) => {
+    console.log('in selected route',req.params.id);
+    pool
+      .query(
+        `Select "products"."product_id","products"."product_description",
+        "products"."product_short_attr","products"."product_price","product_images"."image_path"
+         FROM "products" 
+        JOIN "product_images" ON "product_images"."product_id"= "products"."product_id"  
+        where "products"."product_id" IN ($1);`,
+        [req.params.id]
+      )
+      .then(result => {
+        selectedproduct = result.rows;
+        console.log('in router selected',selectedproduct);
+
+        res.send(selectedproduct);
+      })
+      .catch(error => {
+        console.log("errors with selected product query", error);
+        res.sendStatus(500);
+      });
+});
+
 // will receive new project data and insert into the database on "projects" table .
 // router.post("/", (req, res) => {
 //     console.log("project POST route was hit", req.body);

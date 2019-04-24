@@ -44,8 +44,19 @@ import suit1 from "assets/img/examples/Movie_collection_1.jpg";
 
 import styles from "assets/jss/material-kit-pro-react/views/ecommerceSections/productsStyle.jsx";
 //import styles from "assets/jss/material-kit-pro-react/views/ecommerceSections/latestOffersStyle.jsx";
+const state = {
+  selectedId: ""
+};
+const productInfo = {
+  feeling: "",
+  understanding: "",
+  support: "",
+  comments: ""
+};
 
 class SectionProducts extends React.Component {
+
+  
   constructor(props) {
     super(props);
 
@@ -54,12 +65,22 @@ class SectionProducts extends React.Component {
       priceRange: [101, 790]
     };
   }
- 
+
   componentDidMount() {
     //const action = { type: "FETCH_PRODUCTS" };
     //this.props.dispatch(action);
-
+    
   }
+  handleImageClick = id => () => {
+    console.log("image clicked for id", id);
+    this.setState({
+     selectedId: id
+    });
+    this.props.dispatch({
+      type: "FETCH_PRODUCT",
+      payload: this.props.products.product_id
+    });
+  };
   handleToggle(value) {
     const { checked } = this.state;
     const currentIndex = checked.indexOf(value);
@@ -92,20 +113,25 @@ class SectionProducts extends React.Component {
         >
           <Card plain product>
             <CardHeader image plain>
-              {/* <a href="www.thefilmjackets.com"> */}
-              {/* <img src={suit1} alt=".." /> */}
-              <Link className={classes.link} to="/products">
-                <img src={suit1} alt=".." />
+              {/* <img
+                src={suit1}
+                onClick={this.handleImageClick(
+                  this.props.products.product_id
+                )}
+              /> */}
+              <Link className={classes.link} 
+              onClick={this.handleImageClick(this.props.products.product_id)} 
+              to="/products">
+              <img src={suit1} alt=".." />
               </Link>
-              {/* </a> */}
             </CardHeader>
 
             <CardBody plain>
-              <a href="/products">
+              <Link className={classes.link} to="/products">
                 <h4 className={classes.cardTitle}>
                   {this.props.products.product_short_attr}
                 </h4>
-              </a>
+              </Link>
               <p className={classes.description}>
                 {this.props.products.product_description}
               </p>

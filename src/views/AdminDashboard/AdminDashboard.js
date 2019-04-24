@@ -105,7 +105,7 @@ class AdminDashboard extends Component {
     if (confirmation === "agree") {
       console.log("clicked agree");
       this.props.dispatch({
-        type: "DELETE_PROJECT",
+        type: "DELETE_PRODUCT",
         payload: this.state.selectedId
       });
     }

@@ -6,6 +6,7 @@ import products from './productsReducer';
 import orders from "./ordersReducer";
 import confirmation from './confirmationReducer';
 import collections from "./collectionsReducer";
+import eCommerce from "./eCommerceReducer";
 
 
 // rootReducer is the primary reducer for our entire project
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
   products, // will have  products
   orders, // will have  orders
   collections,
-  confirmation
+  confirmation,
+  eCommerce
 });
 
 export default rootReducer;
