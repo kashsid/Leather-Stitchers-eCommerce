@@ -1,5 +1,6 @@
 /* eslint-disable */
-import React from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // react components for routing our app without refresh
@@ -100,7 +101,8 @@ function HeaderLinks({ ...props }) {
           buttonIcon={Apps}
           dropdownList={[
             <Link to="/" className={classes.dropdownLink}>
-              <LineStyle className={classes.dropdownIcons} /> Presentation Page
+              <LineStyle className={classes.dropdownIcons} /> Presentation
+              Page
             </Link>,
             <Link to="/components" className={classes.dropdownLink}>
               <Layers className={classes.dropdownIcons} />
@@ -222,7 +224,8 @@ function HeaderLinks({ ...props }) {
               <AttachMoney className={classes.dropdownIcons} /> Pricing Page
             </Link>,
             <Link to="/shopping-cart-page" className={classes.dropdownLink}>
-              <ShoppingBasket className={classes.dropdownIcons} /> Shopping Cart
+              <ShoppingBasket className={classes.dropdownIcons} /> Shopping
+              Cart
             </Link>,
             <Link to="/ecommerce-page" className={classes.dropdownLink}>
               <Store className={classes.dropdownIcons} /> Ecommerce Page
@@ -244,11 +247,12 @@ function HeaderLinks({ ...props }) {
       </ListItem>
       <ListItem className={classes.listItem}>
         <Button
-          href="https://www.thefilmjackets.com"
+          href="/home"
           color={window.innerWidth < 960 ? "info" : "white"}
           target="_blank"
           className={classes.navButton}
           round
+          //onClick={() => props.dispatch({ type: "LOGOUT" })}
         >
           <ShoppingCart className={classes.icons} /> Log Out
         </Button>

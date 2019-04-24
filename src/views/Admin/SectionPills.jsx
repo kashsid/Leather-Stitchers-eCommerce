@@ -8,17 +8,32 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import NavPills from "components/NavPills/NavPills.jsx";
-
+import Header from "components/Header/Header.jsx";
+import HeaderLinks from "components/Header/HeaderLinks.jsx";
 
 import sectionPillsStyle from "assets/jss/material-kit-pro-react/views/blogPostsSections/sectionPillsStyle.jsx";
 import AdminDashboard from "../AdminDashboard/AdminDashboard";
 import AdminOrders from "../AdminOrders/AdminOrders";
+import AdminCollections from "../AdminCollections/AdminCollections";
+import AddProduct from "../AddProduct/AddProduct";
+
 
 
 function SectionPills({ ...props }) {
   const { classes } = props;
   return (
-    <div className={classes.section}>
+   <>
+      <Header
+        brand="Leather Stitchers---ADMIN PORTAL"
+        links={<HeaderLinks dropdownHoverColor="info" />}
+        fixed
+        color="transparent"
+        changeColorOnScroll={{
+          height: 700,
+          color: "info"
+        }}
+      />
+       <div className={classes.section}>
       <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={8} className={classes.textCenter}>
           <NavPills
@@ -26,24 +41,25 @@ function SectionPills({ ...props }) {
             tabs={[
               {
                 tabButton: "Products",
-                tabContent: <AdminDashboard/>
+                tabContent: <AdminDashboard />
               },
               {
                 tabButton: "Orders",
-                tabContent: <AdminOrders/>
+                tabContent: <AdminOrders />
               },
               {
                 tabButton: "Collections",
-                tabContent: ""
+                tabContent: <AdminCollections />
               },
+              // FOR STRETCH MODE*********************
               {
                 tabButton: "Customers",
-                tabContent: ""
+                tabContent: <AddProduct/>
               },
-              {
-                tabButton: "Business",
-                tabContent: ""
-              }
+              // {
+              //   tabButton: "Business",
+              //   tabContent: ""
+              // }
             ]}
           />
           {/* <div className={classes.tabSpace} /> */}
@@ -134,6 +150,7 @@ function SectionPills({ ...props }) {
         </GridItem>
       </GridContainer> */}
     </div>
+    </>
   );
 }
 

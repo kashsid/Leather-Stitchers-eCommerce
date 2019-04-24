@@ -10,8 +10,18 @@ function* fetchCollections() {
     console.log(`couldn't fetch collection`, err);
   }
 }
+
+function* featureCollection(action) {
+  try {
+    yield axios.put("/collections/" + action.payload);
+    yield put({ type: "FETCH_COLLECTIONS" });
+  } catch (err) {
+    console.log(`couldn't feature Collection`, err);
+  }
+}
 function* collectionsSaga() {
   yield takeEvery("FETCH_COLLECTIONS", fetchCollections);
+  yield takeEvery("FEATURE_COLLECTION", featureCollection);
 }
 
 export default collectionsSaga;

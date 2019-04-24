@@ -11,6 +11,8 @@ const passport = require("./strategies/user.strategy");
 const userRouter = require("./routes/user.router");
 const productRouter = require("./routes/product.router");
 const ordersRouter = require("./routes/orders.router");
+const collectionsRouter = require("./routes/collections.router");
+
 
 //const collectionRouter = require("./routes/collection.router");
 
@@ -30,6 +32,8 @@ app.use("/api/user", userRouter);
 //app.use("/ecommerce-page", productRouter);
 app.use("/products", productRouter);
 app.use("/orders", ordersRouter);
+app.use("/collections", collectionsRouter);
+
 
 //app.use("/collections", collectionRouter);
 
