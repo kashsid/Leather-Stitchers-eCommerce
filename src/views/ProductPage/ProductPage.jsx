@@ -1,5 +1,7 @@
 
-import React from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+
 //import { connect } from "react-redux";
 // nodejs library that concatenates classes
 import classNames from "classnames";
@@ -45,15 +47,38 @@ import product2 from "assets/img/examples/product2.jpg";
 import product3 from "assets/img/examples/product3.jpg";
 import product4 from "assets/img/examples/product4.jpg";
 
-class ProductPage extends React.Component {
+const imageArray=[];
+
+class ProductPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       colorSelect: "0",
-      sizeSelect: "0"
+      sizeSelect: "0",
+      title: ""
     };
   }
-  
+  /// Rachel Code
+  // percentageCalc = () => {
+  //      let needsWater = [];
+  //      let plantList = this.props.reduxState.plantListReducer
+  //      console.log(`plantList variable`, plantList.length);
+
+
+  //      plantList.map( plant => {
+  //          if (plant.status === false){
+  //              needsWater.push(plant)
+  //          }
+  //      })
+  //      console.log(`needs water`, needsWater.length);
+  //      let watered = plantList.length - needsWater.length
+  //      let percent = (watered / plantList.length) * 100 ;
+  //      console.log(`watered is`, percent);
+
+  //      return Math.round(percent);
+  //  }
+
+ // handleImages
 
   handleSelect = event => {
     this.setState({ [event.target.name]: event.target.value });
@@ -61,34 +86,70 @@ class ProductPage extends React.Component {
   componentDidMount() {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
+    this.props.dispatch({
+      type: "FETCH_PRODUCT",
+      payload: this.props.match.params.product_id
+    });
+
+    this.props.dispatch({
+      type: "FETCH_IMAGES",
+      payload: this.props.match.params.product_id
+    });
+    
   }
   handleSubmit = () => {
     console.log(`in handleSubmit...`);
     this.props.history.push("/shopping-cart-page");
   };
 
+
+
   render() {
+    //const selected= this.props.eCommerce
     const { classes } = this.props;
-    const images = [
-      {
-        original: product3,
-        thumbnail: product3
-      },
-      {
-        original: product4,
-        thumbnail: product4
-      },
-      {
-        original: product1,
-        thumbnail: product1
-      },
-      {
-        original: product2,
-        thumbnail: product2
+    
+
+    const images = this.props.prodImage.map((jacket) => {
+      return{
+        original: jacket.image_path,
+        thumbnail: jacket.image_path
       }
-    ];
+      })
+    
+      // {
+      //   original: this.props.prodImage.map(images => images.image_path),
+      //   thumbnail: this.props.prodImage.map(images => images.image_path)
+      // },
+      // {
+      //   original: product1,
+      //   thumbnail: product1
+      // },
+      // {
+      //   original: product2,
+      //   thumbnail: product2
+      // }
+   
+    
+      //  {this.props.prodImage.map((jacket, index) => {
+      //               return (
+      //                  key={index}>
+      //                 images.push(jacket.image_path)
+                      
+                      
+      //               );
+                    
+      //             })} 
+    
+    //const images=[this.props.prodImage]
+    
+    
+    console.log("selected images array", this.props.prodImage);
+    
     return (
       <div className={classes.productPage}>
+        {/* {this.props.selectedProd.map(
+          product => product.product_description
+        )} */}
         <Header
           brand="Leather Stitchers"
           links={<HeaderLinks dropdownHoverColor="primary" />}
@@ -118,18 +179,56 @@ class ProductPage extends React.Component {
         <div className={classNames(classes.section, classes.sectionGray)}>
           <div className={classes.container}>
             <div className={classNames(classes.main, classes.mainRaised)}>
+              {/* {JSON.stringify(product)} */}
+
+              {/* {JSON.stringify(this.props.prodImage.map(
+                    images => images.image_path
+                  ))} */}
+              {/* {JSON.stringify(this.props.prodImage)}
+              {JSON.stringify(images.original)} */}
+
               <GridContainer>
                 <GridItem md={6} sm={6}>
+                  {/* {this.props.prodImage.map((jacket, index) => {
+                    return (
+                      <div key={index}>
+                        <ImageGallery
+                          showFullscreenButton={true}
+                          showPlayButton={false}
+                          startIndex={0}
+                          items={jacket.image_path}
+                        />
+                      </div>
+                    );
+                  })} */}
                   <ImageGallery
                     showFullscreenButton={false}
                     showPlayButton={false}
-                    startIndex={3}
+                    startIndex={0}
                     items={images}
                   />
+                  {/* {this.props.prodImage.map(images => (
+                  ))} */}
+                  {/* {this.props.products.map(products => (
+                    <SectionProducts
+                      key={products.product_id}
+                      products={products}
+                    />
+                  ))} */}
                 </GridItem>
+
                 <GridItem md={6} sm={6}>
-                  <h2 className={classes.title}>Becky Silk Blazer</h2>
-                  <h3 className={classes.mainPrice}>$335</h3>
+                  <h2 className={classes.title} />
+                  {this.props.selectedProd.map(
+                    product => product.product_short_attr
+                  )}
+                  {/* {this.props.eCommerce}</h2> */}
+                  <h3 className={classes.mainPrice}>
+                    {this.props.selectedProd.map(
+                      product => product.product_price
+                    )}
+                    {/* {selected.product_price} */}
+                  </h3>
                   <Accordion
                     active={0}
                     activeColor="primary"
@@ -138,12 +237,10 @@ class ProductPage extends React.Component {
                         title: "Description",
                         content: (
                           <p>
-                            Eres' daring 'Grigri Fortune' swimsuit has the fit
-                            and coverage of a bikini in a one-piece silhouette.
-                            This fuchsia style is crafted from the label's
-                            sculpting peau douce fabric and has flattering
-                            cutouts through the torso and back. Wear yours with
-                            mirrored sunglasses on vacation.
+                            {this.props.selectedProd.map(
+                              product => product.product_description
+                            )}
+                            .
                           </p>
                         )
                       },
@@ -152,12 +249,12 @@ class ProductPage extends React.Component {
                         content: (
                           <p>
                             An infusion of West Coast cool and New York
-                            attitude, Rebecca Minkoff is synonymous with It girl
-                            style. Minkoff burst on the fashion scene with her
-                            best-selling 'Morning After Bag' and later expanded
-                            her offering with the Rebecca Minkoff Collection - a
-                            range of luxe city staples with a \"downtown
-                            romantic\" theme.
+                            attitude, Rebecca Minkoff is synonymous with It
+                            girl style. Minkoff burst on the fashion scene
+                            with her best-selling 'Morning After Bag' and
+                            later expanded her offering with the Rebecca
+                            Minkoff Collection - a range of luxe city
+                            staples with a \"downtown romantic\" theme.
                           </p>
                         )
                       },
@@ -170,7 +267,8 @@ class ProductPage extends React.Component {
                             </li>
                             <li>
                               Notch lapels, functioning buttoned cuffs, two
-                              front flap pockets, single vent, internal pocket
+                              front flap pockets, single vent, internal
+                              pocket
                             </li>
                             <li>Two button fastening</li>
                             <li>84% cotton, 14% nylon, 2% elastane</li>
@@ -181,7 +279,7 @@ class ProductPage extends React.Component {
                     ]}
                   />
                   <GridContainer className={classes.pickSize}>
-                    <GridItem md={6} sm={6}>
+                    {/* <GridItem md={6} sm={6}>
                       <label>Select color</label>
                       <FormControl
                         fullWidth
@@ -230,7 +328,7 @@ class ProductPage extends React.Component {
                           </MenuItem>
                         </Select>
                       </FormControl>
-                    </GridItem>
+                    </GridItem> */}
                     <GridItem md={6} sm={6}>
                       <label>Select size</label>
                       <FormControl
@@ -283,14 +381,20 @@ class ProductPage extends React.Component {
                     </GridItem>
                   </GridContainer>
                   <GridContainer className={classes.pullRight}>
-                    <Button round color="primary" onClick={this.handleSubmit}>
+                    <Button
+                      round
+                      color="primary"
+                      onClick={this.handleSubmit}
+                    >
                       Add to Cart &nbsp; <ShoppingCart />
                     </Button>
                   </GridContainer>
                 </GridItem>
               </GridContainer>
             </div>
-            <div className={classNames(classes.features, classes.textCenter)}>
+            <div
+              className={classNames(classes.features, classes.textCenter)}
+            >
               <GridContainer>
                 <GridItem md={4} sm={4}>
                   <InfoArea
@@ -329,9 +433,7 @@ class ProductPage extends React.Component {
                 <GridItem sm={6} md={3}>
                   <Card product>
                     <CardHeader image>
-                      <a href="#pablo">
-                        <img src={cardProduct1} alt="cardProduct" />
-                      </a>
+                      <a href="#pablo" />
                     </CardHeader>
                     <CardBody>
                       <h6
@@ -344,8 +446,8 @@ class ProductPage extends React.Component {
                       </h6>
                       <h4 className={classes.cardTitle}>Dolce & Gabbana</h4>
                       <div className={classes.cardDescription}>
-                        Dolce & Gabbana's 'Greta' tote has been crafted in Italy
-                        from hard-wearing red textured-leather.
+                        Dolce & Gabbana's 'Greta' tote has been crafted in
+                        Italy from hard-wearing red textured-leather.
                       </div>
                     </CardBody>
                     <CardFooter className={classes.justifyContentBetween}>
@@ -378,8 +480,8 @@ class ProductPage extends React.Component {
                       <h6 className={classes.cardCategory}>Popular</h6>
                       <h4 className={classes.cardTitle}>Balmain</h4>
                       <div className={classes.cardDescription}>
-                        Balmain's mid-rise skinny jeans are cut with stretch to
-                        ensure they retain their second-skin fit but move
+                        Balmain's mid-rise skinny jeans are cut with stretch
+                        to ensure they retain their second-skin fit but move
                         comfortably.
                       </div>
                     </CardBody>
@@ -413,9 +515,9 @@ class ProductPage extends React.Component {
                       <h6 className={classes.cardCategory}>Popular</h6>
                       <h4 className={classes.cardTitle}>Balenciaga</h4>
                       <div className={classes.cardDescription}>
-                        Balenciaga's black textured-leather wallet is finished
-                        with the label's iconic 'Giant' studs. This is where you
-                        can...
+                        Balenciaga's black textured-leather wallet is
+                        finished with the label's iconic 'Giant' studs. This
+                        is where you can...
                       </div>
                     </CardBody>
                     <CardFooter className={classes.justifyContentBetween}>
@@ -455,8 +557,8 @@ class ProductPage extends React.Component {
                       </h6>
                       <h4 className={classes.cardTitle}>Dolce & Gabbana</h4>
                       <div className={classes.cardDescription}>
-                        Dolce & Gabbana's 'Greta' tote has been crafted in Italy
-                        from hard-wearing red textured-leather.
+                        Dolce & Gabbana's 'Greta' tote has been crafted in
+                        Italy from hard-wearing red textured-leather.
                       </div>
                     </CardBody>
                     <CardFooter className={classes.justifyContentBetween}>
@@ -540,11 +642,11 @@ class ProductPage extends React.Component {
     );
   }
 }
-// const mapReduxStateToProps = reduxState => ({
-//     reduxState,
-// })
+const mapReduxStateToProps = reduxState => {
+  return reduxState;
+};
 
-
-export default withStyles(productStyle)(ProductPage);
-//export default withStyles(productStyle)(connect(mapReduxStateToProps)(ProductPage));
-
+// export default withStyles(connect(mapReduxStateToProps)
+// (productStyle)(ProductPage));
+export default withStyles(productStyle)(connect(mapReduxStateToProps)(ProductPage));
+//export default withStyles(productStyle)(ProductPage);

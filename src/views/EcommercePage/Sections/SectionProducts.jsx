@@ -47,12 +47,7 @@ import styles from "assets/jss/material-kit-pro-react/views/ecommerceSections/pr
 const state = {
   selectedId: ""
 };
-const productInfo = {
-  feeling: "",
-  understanding: "",
-  support: "",
-  comments: ""
-};
+
 
 class SectionProducts extends React.Component {
 
@@ -73,13 +68,16 @@ class SectionProducts extends React.Component {
   }
   handleImageClick = id => () => {
     console.log("image clicked for id", id);
-    this.setState({
-     selectedId: id
-    });
-    this.props.dispatch({
-      type: "FETCH_PRODUCT",
-      payload: this.props.products.product_id
-    });
+    // this.setState({
+    //  selectedId: id
+    // });
+    // this.props.dispatch({
+    //   type: "FETCH_PRODUCT",
+    //   payload: this.props.products.product_id
+      
+    // });
+    // this.props.history.push("/products");
+
   };
   handleToggle(value) {
     const { checked } = this.state;
@@ -119,19 +117,24 @@ class SectionProducts extends React.Component {
                   this.props.products.product_id
                 )}
               /> */}
-              <Link className={classes.link} 
-              onClick={this.handleImageClick(this.props.products.product_id)} 
-              to="/products">
-              <img src={suit1} alt=".." />
+              <Link
+                className={classes.link}
+                // onClick=
+                // {this.handleImageClick(
+                //   this.props.products.product_id
+                // )}
+                to={"/product/" + this.props.products.product_id}
+              >
+                <img src={suit1} alt=".." />
               </Link>
             </CardHeader>
 
             <CardBody plain>
-              <Link className={classes.link} to="/products">
-                <h4 className={classes.cardTitle}>
-                  {this.props.products.product_short_attr}
-                </h4>
-              </Link>
+              <Link className={classes.link} to="/product"> 
+              <h4 className={classes.cardTitle}>
+                {this.props.products.product_short_attr}
+              </h4>
+               </Link> 
               <p className={classes.description}>
                 {this.props.products.product_description}
               </p>

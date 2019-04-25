@@ -6,7 +6,8 @@ import products from './productsReducer';
 import orders from "./ordersReducer";
 import confirmation from './confirmationReducer';
 import collections from "./collectionsReducer";
-import eCommerce from "./eCommerceReducer";
+import selectedProd from "./eCommerceReducer";
+import prodImage from "./productImageReducer";
 
 
 // rootReducer is the primary reducer for our entire project
@@ -23,7 +24,8 @@ const rootReducer = combineReducers({
   orders, // will have  orders
   collections,
   confirmation,
-  eCommerce
+  selectedProd,
+  prodImage
 });
 
 export default rootReducer;

@@ -7,7 +7,6 @@ const eCommerceReducer = (state =[], action) => {
     case "SET_PRODUCT":
       console.log("selected", action.payload);
       return action.payload;
-
     default:
       return state;
   }

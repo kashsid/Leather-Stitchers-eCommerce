@@ -8,9 +8,8 @@ router.get("/:id", (req, res) => {
   pool
     .query(
       `Select "products"."product_id","products"."product_description",
-        "products"."product_short_attr","products"."product_price","product_images"."image_path"
+        "products"."product_short_attr","products"."product_price"
          FROM "products" 
-        JOIN "product_images" ON "product_images"."product_id"= "products"."product_id"  
         where "products"."product_id" IN ($1);`,
       [req.params.id]
     )
@@ -22,6 +21,25 @@ router.get("/:id", (req, res) => {
     })
     .catch(error => {
       console.log("errors with selected product query", error);
+      res.sendStatus(500);
+    });
+});
+
+
+router.get("/:id", (req, res) => {
+  console.log("in images route", req.params.id);
+  pool
+    .query(`Select * from product_images where product_id IN ($1);`, [
+      req.params.id
+    ])
+    .then(result => {
+      selectedImages = result.rows;
+      console.log("in router selected", selectedImages);
+
+      res.send(selectedImages);
+    })
+    .catch(error => {
+      console.log("errors with selected product iamges query", error);
       res.sendStatus(500);
     });
 });
