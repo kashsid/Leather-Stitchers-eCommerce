@@ -20,12 +20,17 @@ import EcommercePage from "views/EcommercePage/EcommercePage.jsx";
 import LandingPage from "views/LandingPage/LandingPage.jsx";
 //import LoginPage from "views/LoginPage/LoginPage"
  import ProductPage from "views/ProductPage/ProductPage.jsx";
+  import ErrorPage from "views/ErrorPage/ErrorPage.jsx";
+import CheckOutPage from "views/CheckOutPage/CheckOutPage.jsx"
  import ShoppingCartPage from "views/ShoppingCartPage/ShoppingCartPage.jsx";
  //import Admin from  "views/Admin/Admin.js";
   import AdminDashboard from "../AdminDashboard/AdminDashboard.js";
     import AdminOrders from "views/AdminOrders/AdminOrders.js";
 import { Admin } from "../Admin/Admin";
+import Payment from"../Payment/Payment";
 //import example from "views/EcommercePage/images"
+ //import test from "views/ShoppingCartPage/test.jsx";
+
 
 
 
@@ -54,20 +59,20 @@ class App extends Component {
             {/* <Route exact path="/" component={ContactUsPage} /> */}
             <Route exact path="/catalog" component={EcommercePage} />
             <Route exact path="/landing-page" component={LandingPage} />
+            <Route path="/error-page" component={ErrorPage} />
             {/* <Route path="/" component={LoginPage} /> */}
             {/* <Route path="/pricing" component={PricingPage} />
       <Route path="/profile-page" component={ProfilePage} /> */}
             <Route path="/product/:product_id" component={ProductPage} />
             {/* <Route path="/sections" component={SectionsPage} /> */}
-            <Route
-              path="/shopping-cart-page"
-              component={ShoppingCartPage}
-            />
+            <Route path="/shopping-cart" component={ShoppingCartPage} />
+            <Route path="/checkout" component={CheckOutPage} />
+            <Route path="/payment" component={Payment} />
+
             {/* <Route path="/signup-page" component={SignupPage} />
       <Route path="/error-page" component={ErrorPage} />
       <Route path="/" component={PresentationPage} /> */}
-
-            <Route render={() => <h1>404</h1>} />
+            <Route render={ErrorPage} />
           </Switch>
         </>
       </Router>

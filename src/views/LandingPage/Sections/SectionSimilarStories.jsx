@@ -48,18 +48,18 @@ function SectionSimilarStories({ ...props }) {
                   </CardHeader>
                   <CardBody>
                     <Info>
-                      <h6>ENTERPRISE</h6>
+                      <h6>Biker Jackets</h6>
                     </Info>
                     <h4 className={classes.cardTitle}>
                       <a href="#pablo">
-                        Autodesk looks to future of 3D printing with Project
-                        Escher
+                        Get ready and hit the road this summer with Cafe Racer
+                        Leather Jacket
                       </a>
                     </h4>
                     <p className={classes.description}>
                       Like so many organizations these days, Autodesk is a
-                      company in transition. It was until recently a traditional
-                      boxed software company selling licenses.
+                      company in transition. It was until recently a
+                      traditional boxed software company selling licenses.
                       <a href="#pablo"> Read More </a>
                     </p>
                   </CardBody>
@@ -81,17 +81,18 @@ function SectionSimilarStories({ ...props }) {
                   </CardHeader>
                   <CardBody>
                     <Success>
-                      <h6>STARTUPS</h6>
+                      <h6>Fashion Jackets</h6>
                     </Success>
                     <h4 className={classes.cardTitle}>
                       <a href="#pablo">
-                        Lyft launching cross-platform service this week
+                        Leather Stitchers launching new summer collection in
+                        May!
                       </a>
                     </h4>
                     <p className={classes.description}>
                       Like so many organizations these days, Autodesk is a
-                      company in transition. It was until recently a traditional
-                      boxed software company selling licenses.
+                      company in transition. It was until recently a
+                      traditional boxed software company selling licenses.
                       <a href="#pablo"> Read More </a>
                     </p>
                   </CardBody>
@@ -114,18 +115,18 @@ function SectionSimilarStories({ ...props }) {
                   <CardBody>
                     <Danger>
                       <h6>
-                        <TrendingUp /> ENTERPRISE
+                        <TrendingUp /> Movie Jackets
                       </h6>
                     </Danger>
                     <h4 className={classes.cardTitle}>
                       <a href="#pablo">
-                        6 insights into the French Fashion landscape
+                        6 insights into the Marvel Fashion landscape
                       </a>
                     </h4>
                     <p className={classes.description}>
                       Like so many organizations these days, Autodesk is a
-                      company in transition. It was until recently a traditional
-                      boxed software company selling licenses.
+                      company in transition. It was until recently a
+                      traditional boxed software company selling licenses.
                       <a href="#pablo"> Read More </a>
                     </p>
                   </CardBody>

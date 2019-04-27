@@ -151,10 +151,12 @@ class LoginPage extends Component {
                       <TextField
                         id="username"
                         name="username"
+                      
                         onChange={this.handleInputChangeFor("username")}
                         //value={this.state.username}
                         formControlProps={{
                           fullWidth: true
+                          
                         }}
                         inputProps={{
                           placeholder: "User Name...",

@@ -53,7 +53,7 @@ function SectionPills({ ...props }) {
               },
               // FOR STRETCH MODE*********************
               {
-                tabButton: "Customers",
+                tabButton: "Add Product",
                 tabContent: <AddProduct/>
               },
               // {

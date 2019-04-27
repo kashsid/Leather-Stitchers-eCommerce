@@ -40,7 +40,7 @@ const SectionLatestOffers = props => {
                 />
               </CardHeader>
               <CardBody className={classes.textCenter} plain>
-                <h4 className={classes.cardTitle}>Gucci</h4>
+                <h4 className={classes.cardTitle}></h4>
                 <p className={classes.cardDescription}>
                   The structured shoulders and sleek detailing ensure a sharp
                   silhouette. Team it with a silk pocket square and leather
@@ -51,11 +51,11 @@ const SectionLatestOffers = props => {
                 <div className={classes.priceContainer}>
                   <span className={classNames(classes.price, classes.priceOld)}>
                     {" "}
-                    €1,430
+                    $499.00
                   </span>
                   <span className={classNames(classes.price, classes.priceNew)}>
                     {" "}
-                    €743
+                    $400.00
                   </span>
                 </div>
                 <div className={classNames(classes.stats, classes.mlAuto)}>
@@ -85,7 +85,7 @@ const SectionLatestOffers = props => {
                 />
               </CardHeader>
               <CardBody className={classes.textCenter} plain>
-                <h4 className={classes.cardTitle}>Dolce & Gabbana</h4>
+                <h4 className={classes.cardTitle}></h4>
                 <p className={classes.cardDescription}>
                   The structured shoulders and sleek detailing ensure a sharp
                   silhouette. Team it with a silk pocket square and leather
@@ -96,11 +96,11 @@ const SectionLatestOffers = props => {
                 <div className={classes.priceContainer}>
                   <span className={classNames(classes.price, classes.priceOld)}>
                     {" "}
-                    €1,430
+                    $530
                   </span>
                   <span className={classNames(classes.price, classes.priceNew)}>
                     {" "}
-                    €743
+                    $400
                   </span>
                 </div>
                 <div className={classNames(classes.stats, classes.mlAuto)}>
@@ -130,7 +130,7 @@ const SectionLatestOffers = props => {
                 />
               </CardHeader>
               <CardBody className={classes.textCenter} plain>
-                <h4 className={classes.cardTitle}>Dolce & Gabbana</h4>
+                <h4 className={classes.cardTitle}></h4>
                 <p className={classes.cardDescription}>
                   The structured shoulders and sleek detailing ensure a sharp
                   silhouette. Team it with a silk pocket square and leather
@@ -141,11 +141,11 @@ const SectionLatestOffers = props => {
                 <div className={classes.priceContainer}>
                   <span className={classNames(classes.price, classes.priceOld)}>
                     {" "}
-                    €1,430
+                    $530
                   </span>
                   <span className={classNames(classes.price, classes.priceNew)}>
                     {" "}
-                    €743
+                    $430
                   </span>
                 </div>
                 <div className={classNames(classes.stats, classes.mlAuto)}>

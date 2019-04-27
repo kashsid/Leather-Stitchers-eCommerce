@@ -110,7 +110,7 @@ class EcommercePage extends React.Component {
           </div>
         </div>
 
-        {JSON.stringify(this.props.products)}
+        {/* {JSON.stringify(this.props.products)} */}
         <Grid spacing={3} direction={"row"} />
 
         <div

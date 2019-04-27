@@ -68,15 +68,15 @@ class SectionProducts extends React.Component {
   }
   handleImageClick = id => () => {
     console.log("image clicked for id", id);
-    // this.setState({
-    //  selectedId: id
-    // });
-    // this.props.dispatch({
-    //   type: "FETCH_PRODUCT",
-    //   payload: this.props.products.product_id
+    this.setState({
+     selectedId: id
+    });
+    this.props.dispatch({
+      type: "FETCH_PRODUCT",
+      payload: this.props.products.product_id
       
-    // });
-    // this.props.history.push("/products");
+    });
+    this.props.history.push("/products");
 
   };
   handleToggle(value) {

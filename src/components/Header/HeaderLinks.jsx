@@ -103,9 +103,10 @@ function HeaderLinks({ ...props }) {
           buttonIcon={Style}
           dropdownList={[
             <Link to="/catalog" className={classes.dropdownLink}>
-              <LineStyle className={classes.dropdownIcons} /> Biker Jackets Collection
+              <LineStyle className={classes.dropdownIcons} /> Biker Jackets
+              Collection
             </Link>,
-            <Link to="/components" className={classes.dropdownLink}>
+            <Link to="/catalog" className={classes.dropdownLink}>
               <Layers className={classes.dropdownIcons} />
               Movie Jackets Collection
             </Link>,
@@ -115,7 +116,7 @@ function HeaderLinks({ ...props }) {
               className={classes.dropdownLink}
             >
               <Icon className={classes.dropdownIcons}>content_paste</Icon>
-              Fashion Jackets Collection 
+              Fashion Jackets Collection
             </a>
           ]}
         />
@@ -125,7 +126,7 @@ function HeaderLinks({ ...props }) {
           noLiPadding
           navDropdown
           hoverColor={dropdownHoverColor}
-          buttonText="Sections"
+          buttonText="Leather Stitchers"
           buttonProps={{
             className: classes.navLink,
             color: "transparent"
@@ -133,56 +134,56 @@ function HeaderLinks({ ...props }) {
           buttonIcon={ViewDay}
           dropdownList={[
             <Link
-              to="/sections#headers"
+              to="/landing-page"
               className={classes.dropdownLink}
               onClick={e => smoothScroll(e, "headers")}
             >
-              <Dns className={classes.dropdownIcons} /> Headers
+              <Dns className={classes.dropdownIcons} /> About Us
             </Link>,
             <Link
-              to="/sections#features"
+              to="/error-page"
               className={classes.dropdownLink}
               onClick={e => smoothScroll(e, "features")}
             >
-              <Build className={classes.dropdownIcons} /> Features
+              <Build className={classes.dropdownIcons} /> Customer Care
             </Link>,
             <Link
-              to="/sections#blogs"
+              to="/error-page"
               className={classes.dropdownLink}
               onClick={e => smoothScroll(e, "blogs")}
             >
               <ListIcon className={classes.dropdownIcons} /> Blogs
             </Link>,
             <Link
-              to="/sections#teams"
+              to="/error-page"
               className={classes.dropdownLink}
               onClick={e => smoothScroll(e, "teams")}
             >
               <People className={classes.dropdownIcons} /> Teams
             </Link>,
             <Link
-              to="/sections#projects"
+              to="/error-page"
               className={classes.dropdownLink}
               onClick={e => smoothScroll(e, "projects")}
             >
-              <Assignment className={classes.dropdownIcons} /> Projects
+              <Assignment className={classes.dropdownIcons} /> Clients
             </Link>,
             <Link
-              to="/sections#pricing"
+              to="/error-page"
               className={classes.dropdownLink}
               onClick={e => smoothScroll(e, "pricing")}
             >
               <MonetizationOn className={classes.dropdownIcons} /> Pricing
             </Link>,
             <Link
-              to="/sections#testimonials"
+              to="/error-page"
               className={classes.dropdownLink}
               onClick={e => smoothScroll(e, "testimonials")}
             >
               <Chat className={classes.dropdownIcons} /> Testimonials
             </Link>,
             <Link
-              to="/sections#contacts"
+              to="/contacts"
               className={classes.dropdownLink}
               onClick={e => smoothScroll(e, "contacts")}
             >
@@ -196,7 +197,7 @@ function HeaderLinks({ ...props }) {
           noLiPadding
           navDropdown
           hoverColor={dropdownHoverColor}
-          buttonText="Examples"
+          buttonText=""
           buttonProps={{
             className: classes.navLink,
             color: "transparent"
@@ -218,31 +219,31 @@ function HeaderLinks({ ...props }) {
             <Link to="/landing-page" className={classes.dropdownLink}>
               <ViewDay className={classes.dropdownIcons} /> Landing Page
             </Link>,
-            <Link to="/login-page" className={classes.dropdownLink}>
+            <Link to="/" className={classes.dropdownLink}>
               <Fingerprint className={classes.dropdownIcons} /> Login Page
             </Link>,
-            <Link to="/pricing" className={classes.dropdownLink}>
-              <AttachMoney className={classes.dropdownIcons} /> Pricing Page
-            </Link>,
-            <Link to="/shopping-cart-page" className={classes.dropdownLink}>
-              <ShoppingBasket className={classes.dropdownIcons} /> Shopping
-              Cart
-            </Link>,
-            <Link to="/ecommerce-page" className={classes.dropdownLink}>
-              <Store className={classes.dropdownIcons} /> Ecommerce Page
-            </Link>,
-            <Link to="/product-page" className={classes.dropdownLink}>
-              <ShoppingCart className={classes.dropdownIcons} /> Product Page
-            </Link>,
-            <Link to="/profile-page" className={classes.dropdownLink}>
-              <AccountCircle className={classes.dropdownIcons} /> Profile Page
-            </Link>,
-            <Link to="/signup-page" className={classes.dropdownLink}>
-              <PersonAdd className={classes.dropdownIcons} /> Signup Page
-            </Link>,
-            <Link to="/error-page" className={classes.dropdownLink}>
-              <Error className={classes.dropdownIcons} /> Error Page
-            </Link>
+            // <Link to="/pricing" className={classes.dropdownLink}>
+            //   <AttachMoney className={classes.dropdownIcons} /> Pricing Page
+            // </Link>,
+            // <Link to="/shopping-cart-page" className={classes.dropdownLink}>
+            //   <ShoppingBasket className={classes.dropdownIcons} /> Shopping
+            //   Cart
+            // </Link>,
+            // <Link to="/ecommerce-page" className={classes.dropdownLink}>
+            //   <Store className={classes.dropdownIcons} /> Ecommerce Page
+            // </Link>,
+            // <Link to="/product-page" className={classes.dropdownLink}>
+            //   <ShoppingCart className={classes.dropdownIcons} /> Product Page
+            // </Link>,
+            // <Link to="/profile-page" className={classes.dropdownLink}>
+            //   <AccountCircle className={classes.dropdownIcons} /> Profile Page
+            // </Link>,
+            // <Link to="/signup-page" className={classes.dropdownLink}>
+            //   <PersonAdd className={classes.dropdownIcons} /> Signup Page
+            // </Link>,
+            // <Link to="/error-page" className={classes.dropdownLink}>
+            //   <Error className={classes.dropdownIcons} /> Error Page
+            // </Link>
           ]}
         />
       </ListItem>

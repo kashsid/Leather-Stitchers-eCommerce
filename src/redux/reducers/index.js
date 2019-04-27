@@ -8,6 +8,7 @@ import confirmation from './confirmationReducer';
 import collections from "./collectionsReducer";
 import selectedProd from "./eCommerceReducer";
 import prodImage from "./productImageReducer";
+import cart from "./cartReducer";
 
 
 // rootReducer is the primary reducer for our entire project
@@ -25,7 +26,8 @@ const rootReducer = combineReducers({
   collections,
   confirmation,
   selectedProd,
-  prodImage
+  prodImage,
+  cart
 });
 
 export default rootReducer;

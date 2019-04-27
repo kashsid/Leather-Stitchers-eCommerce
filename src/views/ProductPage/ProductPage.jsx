@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
@@ -12,8 +11,8 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-//import List from "@material-ui/core/List";
-//import ListItem from "@material-ui/core/ListItem";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
 // @material-ui/icons
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
 import LocalShipping from "@material-ui/icons/LocalShipping";
@@ -25,7 +24,7 @@ import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
-//import Footer from "components/Footer/Footer.jsx";
+import Footer from "components/Footer/Footer.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import Accordion from "components/Accordion/Accordion.jsx";
 import InfoArea from "components/InfoArea/InfoArea.jsx";
@@ -46,39 +45,30 @@ import product1 from "assets/img/examples/product1.jpg";
 import product2 from "assets/img/examples/product2.jpg";
 import product3 from "assets/img/examples/product3.jpg";
 import product4 from "assets/img/examples/product4.jpg";
+import cartReducer from "../../redux/reducers/cartReducer";
+import ShoppingCartPage from "../ShoppingCartPage/ShoppingCartPage";
 
-const imageArray=[];
-
+const emptyCart = {
+  prodTitle: "",
+  prodPrice: "",
+  ProdSize: "",
+  prodImage: ""
+};
+let i = 0;
 class ProductPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       colorSelect: "0",
       sizeSelect: "0",
-      title: ""
+      title: "",
+      openBottom: false
     };
   }
-  /// Rachel Code
-  // percentageCalc = () => {
-  //      let needsWater = [];
-  //      let plantList = this.props.reduxState.plantListReducer
-  //      console.log(`plantList variable`, plantList.length);
 
-
-  //      plantList.map( plant => {
-  //          if (plant.status === false){
-  //              needsWater.push(plant)
-  //          }
-  //      })
-  //      console.log(`needs water`, needsWater.length);
-  //      let watered = plantList.length - needsWater.length
-  //      let percent = (watered / plantList.length) * 100 ;
-  //      console.log(`watered is`, percent);
-
-  //      return Math.round(percent);
-  //  }
-
- // handleImages
+  state = {
+    newCart: emptyCart
+  };
 
   handleSelect = event => {
     this.setState({ [event.target.name]: event.target.value });
@@ -95,56 +85,35 @@ class ProductPage extends Component {
       type: "FETCH_IMAGES",
       payload: this.props.match.params.product_id
     });
-    
   }
   handleSubmit = () => {
     console.log(`in handleSubmit...`);
     this.props.history.push("/shopping-cart-page");
   };
+  addToCart = event => {
+    console.log("Add to CART", this.props.selectedProd);
+    const action = { type: "ADD_CART", payload: this.props.selectedProd[0] };
+    this.props.dispatch(action);
+    i = i + 1;
+  };
 
-
+  handleNext = () => {
+     this.props.history.push("/shopping-cart");
+  };
 
   render() {
     //const selected= this.props.eCommerce
     const { classes } = this.props;
-    
 
-    const images = this.props.prodImage.map((jacket) => {
-      return{
+    const images = this.props.prodImage.map(jacket => {
+      return {
         original: jacket.image_path,
         thumbnail: jacket.image_path
-      }
-      })
-    
-      // {
-      //   original: this.props.prodImage.map(images => images.image_path),
-      //   thumbnail: this.props.prodImage.map(images => images.image_path)
-      // },
-      // {
-      //   original: product1,
-      //   thumbnail: product1
-      // },
-      // {
-      //   original: product2,
-      //   thumbnail: product2
-      // }
-   
-    
-      //  {this.props.prodImage.map((jacket, index) => {
-      //               return (
-      //                  key={index}>
-      //                 images.push(jacket.image_path)
-                      
-                      
-      //               );
-                    
-      //             })} 
-    
-    //const images=[this.props.prodImage]
-    
-    
+      };
+    });
+
     console.log("selected images array", this.props.prodImage);
-    
+
     return (
       <div className={classes.productPage}>
         {/* {this.props.selectedProd.map(
@@ -169,8 +138,13 @@ class ProductPage extends Component {
           <div className={classes.container}>
             <GridContainer className={classes.titleRow}>
               <GridItem md={4} className={classes.mlAuto}>
-                <Button color="white" className={classes.floatRight}>
-                  <ShoppingCart /> 0 items
+                <Button
+                  onClick={this.handleNext}
+                  color="white"
+                  className={classes.floatRight}
+                >
+                  <ShoppingCart />
+                  {i} ITEMS
                 </Button>
               </GridItem>
             </GridContainer>
@@ -179,7 +153,7 @@ class ProductPage extends Component {
         <div className={classNames(classes.section, classes.sectionGray)}>
           <div className={classes.container}>
             <div className={classNames(classes.main, classes.mainRaised)}>
-              {/* {JSON.stringify(product)} */}
+              {JSON.stringify(this.props.cart)}
 
               {/* {JSON.stringify(this.props.prodImage.map(
                     images => images.image_path
@@ -207,14 +181,6 @@ class ProductPage extends Component {
                     startIndex={0}
                     items={images}
                   />
-                  {/* {this.props.prodImage.map(images => (
-                  ))} */}
-                  {/* {this.props.products.map(products => (
-                    <SectionProducts
-                      key={products.product_id}
-                      products={products}
-                    />
-                  ))} */}
                 </GridItem>
 
                 <GridItem md={6} sm={6}>
@@ -249,12 +215,12 @@ class ProductPage extends Component {
                         content: (
                           <p>
                             An infusion of West Coast cool and New York
-                            attitude, Rebecca Minkoff is synonymous with It
-                            girl style. Minkoff burst on the fashion scene
-                            with her best-selling 'Morning After Bag' and
-                            later expanded her offering with the Rebecca
-                            Minkoff Collection - a range of luxe city
-                            staples with a \"downtown romantic\" theme.
+                            attitude, Rebecca Minkoff is synonymous with It girl
+                            style. Minkoff burst on the fashion scene with her
+                            best-selling 'Morning After Bag' and later expanded
+                            her offering with the Rebecca Minkoff Collection - a
+                            range of luxe city staples with a \"downtown
+                            romantic\" theme.
                           </p>
                         )
                       },
@@ -267,8 +233,7 @@ class ProductPage extends Component {
                             </li>
                             <li>
                               Notch lapels, functioning buttoned cuffs, two
-                              front flap pockets, single vent, internal
-                              pocket
+                              front flap pockets, single vent, internal pocket
                             </li>
                             <li>Two button fastening</li>
                             <li>84% cotton, 14% nylon, 2% elastane</li>
@@ -384,7 +349,8 @@ class ProductPage extends Component {
                     <Button
                       round
                       color="primary"
-                      onClick={this.handleSubmit}
+                      value={this.props.selectedProd}
+                      onClick={this.addToCart}
                     >
                       Add to Cart &nbsp; <ShoppingCart />
                     </Button>
@@ -392,9 +358,7 @@ class ProductPage extends Component {
                 </GridItem>
               </GridContainer>
             </div>
-            <div
-              className={classNames(classes.features, classes.textCenter)}
-            >
+            <div className={classNames(classes.features, classes.textCenter)}>
               <GridContainer>
                 <GridItem md={4} sm={4}>
                   <InfoArea
@@ -446,8 +410,8 @@ class ProductPage extends Component {
                       </h6>
                       <h4 className={classes.cardTitle}>Dolce & Gabbana</h4>
                       <div className={classes.cardDescription}>
-                        Dolce & Gabbana's 'Greta' tote has been crafted in
-                        Italy from hard-wearing red textured-leather.
+                        Dolce & Gabbana's 'Greta' tote has been crafted in Italy
+                        from hard-wearing red textured-leather.
                       </div>
                     </CardBody>
                     <CardFooter className={classes.justifyContentBetween}>
@@ -480,8 +444,8 @@ class ProductPage extends Component {
                       <h6 className={classes.cardCategory}>Popular</h6>
                       <h4 className={classes.cardTitle}>Balmain</h4>
                       <div className={classes.cardDescription}>
-                        Balmain's mid-rise skinny jeans are cut with stretch
-                        to ensure they retain their second-skin fit but move
+                        Balmain's mid-rise skinny jeans are cut with stretch to
+                        ensure they retain their second-skin fit but move
                         comfortably.
                       </div>
                     </CardBody>
@@ -515,9 +479,9 @@ class ProductPage extends Component {
                       <h6 className={classes.cardCategory}>Popular</h6>
                       <h4 className={classes.cardTitle}>Balenciaga</h4>
                       <div className={classes.cardDescription}>
-                        Balenciaga's black textured-leather wallet is
-                        finished with the label's iconic 'Giant' studs. This
-                        is where you can...
+                        Balenciaga's black textured-leather wallet is finished
+                        with the label's iconic 'Giant' studs. This is where you
+                        can...
                       </div>
                     </CardBody>
                     <CardFooter className={classes.justifyContentBetween}>
@@ -557,8 +521,8 @@ class ProductPage extends Component {
                       </h6>
                       <h4 className={classes.cardTitle}>Dolce & Gabbana</h4>
                       <div className={classes.cardDescription}>
-                        Dolce & Gabbana's 'Greta' tote has been crafted in
-                        Italy from hard-wearing red textured-leather.
+                        Dolce & Gabbana's 'Greta' tote has been crafted in Italy
+                        from hard-wearing red textured-leather.
                       </div>
                     </CardBody>
                     <CardFooter className={classes.justifyContentBetween}>
@@ -584,29 +548,28 @@ class ProductPage extends Component {
             </div>
           </div>
         </div>
-        {/* <Footer
-          // theme="dark"
+        <Footer
           content={
             <div>
               <div className={classes.left}>
                 <List className={classes.list}>
                   <ListItem className={classes.inlineBlock}>
                     <a
-                      // href="thefiljackets.com/"
+                      href="https://www.thefilmjackets.com/"
                       className={classes.block}
                     >
-                      Creative Tim
+                      Leather Stitchers
                     </a>
                   </ListItem>
                   <ListItem className={classes.inlineBlock}>
                     <a
-                      // href="thefiljackets.com/presentation"
+                      href="https://www.thefilmjackets.com//collections/biker-collection"
                       className={classes.block}
                     >
                       About us
                     </a>
                   </ListItem>
-                  <ListItem className={classes.inlineBlock}>
+                  {/* <ListItem className={classes.inlineBlock}>
                     <a
                       href="//blog.creative-tim.com/"
                       className={classes.block}
@@ -616,28 +579,23 @@ class ProductPage extends Component {
                   </ListItem>
                   <ListItem className={classes.inlineBlock}>
                     <a
-                      // href="thefiljackets.com/license"
+                      href="https://www.creative-tim.com/license"
                       className={classes.block}
                     >
                       Licenses
                     </a>
-                  </ListItem>
+                  </ListItem> */}
                 </List>
               </div>
               <div className={classes.right}>
                 &copy; {1900 + new Date().getYear()} , made with{" "}
                 <Favorite className={classes.icon} /> by{" "}
-                <a
-                  // href="thefiljackets.com"
-                  className={classes.aClasses}
-                >
-                  Creative Tim
-                </a>{" "}
-                for a better web.
+                <a href="https://www.thefilmjackets.com">Kash</a> for a full
+                stack project.
               </div>
             </div>
           }
-        /> */}
+        />
       </div>
     );
   }
@@ -648,5 +606,7 @@ const mapReduxStateToProps = reduxState => {
 
 // export default withStyles(connect(mapReduxStateToProps)
 // (productStyle)(ProductPage));
-export default withStyles(productStyle)(connect(mapReduxStateToProps)(ProductPage));
+export default withStyles(productStyle)(
+  connect(mapReduxStateToProps)(ProductPage)
+);
 //export default withStyles(productStyle)(ProductPage);

@@ -36,6 +36,7 @@ app.use("/orders", ordersRouter);
 app.use("/collections", collectionsRouter);
 app.use("/product", ecommerceRouter);
 app.use("/images", imagesRouter);
+app.use("/cart",ecommerceRouter);
 
 
 //app.use("/collections", collectionRouter);
