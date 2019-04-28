@@ -60,11 +60,11 @@ class AdminCollections extends Component {
     this.props.dispatch({ type: "FETCH_COLLECTIONS" });
   };
   // Handle delete button click action to delete the selected products from table
-    handleFeaturedClick = id => () => {
-      console.log("featured click for id", id);
+    handleFeaturedClick = collection_id => () => {
+      console.log("featured click for id", collection_id);
       this.setState({
         open: true,
-        selectedId: id
+        selectedId: collection_id
       });
     };
   //shows confirmation message before deleting the product from database
@@ -185,14 +185,14 @@ class AdminCollections extends Component {
                     {row.product_price}
                   </CustomTableCell> */}
                   <CustomTableCell style={{ width: "10%" }} align="right">
-                    <IconButton
+                    {/* <IconButton
                       className={classes.iconHover}
-                      onClick={this.handleFeaturedClick(row.id)}
+                      onClick={this.handleFeaturedClick(row.collection_id)}
                       aria-label="Featured"
                     >
                       <i class="material-icons md-24">check_box</i>
-                      {/* <DeleteIcon /> */}
-                    </IconButton>
+                      
+                    </IconButton> */}
                   </CustomTableCell>
                 </TableRow>
               ))}

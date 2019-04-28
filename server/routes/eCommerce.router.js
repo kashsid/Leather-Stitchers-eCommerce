@@ -44,5 +44,30 @@ router.get("/:id", (req, res) => {
     });
 });
 
+router.post("/", (req, res) => {
+  console.log("project POST route was hit", req.body);
+  pool
+    .query(
+      `INSERT INTO "products" (product_description, product_price, product_short_attr
+        , product_qty, collection_id) 
+      VALUES ($1,$2, $3, $4, $5);`,
+      [
+        req.body.description,
+
+        req.body.price,
+        req.body.shortAttr,
+        req.body.quantity,
+        req.body.selectedCollection
+      ]
+    )
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch(error => {
+      console.log("errors with feedback insert", error);
+      res.sendStatus(500);
+    });
+});
+
 module.exports = router;
 

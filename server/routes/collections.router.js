@@ -20,29 +20,25 @@ router.get("/", (req, res) => {
 });
 
 
-// router.put("/:id", (req, res) => {
-//     console.log(req.params.id);
-//     let feature= req.body.
-// if (direction === "up") {
-//   // use rank-1, so it get's closer to the awesome rank of 1
-//   sqlText = `UPDATE songs SET rank=rank-1 WHERE id=$1`;
-// } else if (direction == "down") {
-//   sqlText = `UPDATE songs SET rank=rank+1 WHERE id=$1`;
-// } else {
-//   // If we don't get an expected direction, send back bad status
-//   res.sendStatus(500);
-//   return; // Do it now, don't run code below
-// }
+router.put("/:id", (req, res) => {
+  let collectionId = req.params.id;
+  let collectionData = req.body;
+  console.log(`Updating collection id=${collectionId} with feature`, collectionData);
+  let sqlText = `UPDATE "collections" SET "collection_feature_flg"=$1 WHERE "id"=$2;`;
+  pool
+    .query(sqlText, [collectionData.feature, collectionId])
+    .then(result => {
+      res.sendStatus(200);
+    })
+    .catch(error => {
+      console.log(
+        `Failed to update collection with id=${songId}, 
+          setting featured collection to ${songData.rank}.`,
+        error
+      );
+      res.sendStatus(500);
+    });
+});
 
-//     pool
-//         .query(`DELETE FROM "projects" WHERE "id" IN ($1);`, [req.params.id])
-//         .then(() => {
-//             res.sendStatus(204);
-//         })
-//         .catch(error => {
-//             console.log("errors with project delete query", error);
-//             res.sendStatus(500);
-//         });
-// });
 
 module.exports = router;

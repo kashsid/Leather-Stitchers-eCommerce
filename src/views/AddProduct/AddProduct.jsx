@@ -39,23 +39,24 @@ const styles = theme => ({
 });
 
 class AddProduct extends Component {
-//   "product_id" serial NOT NULL,
-// 	"product_description" TEXT NOT NULL,
-// 	"product_price" money NOT NULL,
-// 	"product_short_attr" varchar(200),
-// 	"collection_id" bigint NOT NULL,
-// 	"product_qty" int NOT NULL,
+  //   "product_id" serial NOT NULL,
+  // 	"product_description" TEXT NOT NULL,
+  // 	"product_price" money NOT NULL,
+  // 	"product_short_attr" varchar(200),
+  // 	"collection_id" bigint NOT NULL,
+  // 	"product_qty" int NOT NULL,
   state = {
-    description: "",
-    price: 0,
     shortAttr: "",
-    quantity: "",
-    selectedCollection:""
+    description: "",
+    selectedCollection: "",
+    price: 0,
+
+    quantity: ""
   };
 
   // send fetch dispatch to redux which will return all items from 'tags' table on database
   componentDidMount = () => {
-    this.props.dispatch({ type: "FETCH_PRODUCTS" });
+    this.props.dispatch({ type: "FETCH_COLLECTIONS" });
   };
 
   // handles on inputs on form and sets state
@@ -64,17 +65,21 @@ class AddProduct extends Component {
       ...this.state,
       [property]: event.target.value
     });
+    console.log("in handle change", event.target.value);
   };
 
   // handles form submit button, sends post dispatch to redux with payload of all selected form inputs + clears form
   handleSubmit = () => {
+    console.log("in handle submit",this.state);
+
     this.props.dispatch({ type: "POST_PRODUCT", payload: this.state });
     this.setState({
-      description: "",
-      price: 0,
       shortAttr: "",
-      quantity: "",
-      selectedCollection: ""
+      description: "",
+      selectedCollection: "",
+      price: 0,
+
+      quantity: ""
     });
   };
 
@@ -131,12 +136,12 @@ class AddProduct extends Component {
                 label="* Product Title"
                 fullWidth
                 className={classNames(classes.textField)}
-                onChange={this.handleChange("title")}
+                onChange={this.handleChange("shortAttr")}
                 name="title"
                 type="text"
                 margin="normal"
                 value={this.state.product_short_attr}
-                validators={["required"]}
+                //validators={["required"]}
                 errorMessages={["this field is required"]}
                 variant="outlined"
               />
@@ -154,36 +159,39 @@ class AddProduct extends Component {
                 type="text"
                 margin="normal"
                 value={this.state.product_description}
-                validators={["required"]}
+                //validators={["required"]}
                 errorMessages={["this field is required"]}
                 variant="outlined"
               />
             </Grid>
 
-            
             <Grid item xs={6} sm={4}>
               <TextValidator
-                id="selectedcollection"
+                id="collection"
                 select
                 fullWidth
                 label="* Select Collection"
                 className={classes.textField}
-                value={this.state.selectedTag}
-                onChange={this.handleChange("selectedcollection")}
+                value={this.state.selectedCollection}
+                onChange={this.handleChange("selectedCollection")}
                 SelectProps={{
                   MenuProps: {
                     className: classes.menu
                   }
                 }}
-                validators={["required"]}
+               // validators={["required"]}
                 errorMessages={["this field is required"]}
                 margin="normal"
                 variant="outlined"
               >
-                {/* {this.props.collections.map(option => (
-                  <MenuItem key={option.id} value={option.id}>
-                    {option.name}
-                  </MenuItem> */}
+                {this.props.collections.map(option => (
+                  <MenuItem
+                    key={option.collection_id}
+                    value={option.collection_id}
+                  >
+                    {option.collection_name}
+                  </MenuItem>
+                ))}
               </TextValidator>
             </Grid>
             <Grid item xs={12} sm={5}>
@@ -197,7 +205,7 @@ class AddProduct extends Component {
                 type="text"
                 margin="normal"
                 value={this.state.product_price}
-                validators={["required"]}
+               // validators={["required"]}
                 errorMessages={["this field is required"]}
                 variant="outlined"
               />
@@ -208,12 +216,12 @@ class AddProduct extends Component {
                 label="* Quantity"
                 fullWidth
                 className={classNames(classes.textField)}
-                onChange={this.handleChange("qty")}
+                onChange={this.handleChange("quantity")}
                 name="qty"
                 type="text"
                 margin="normal"
                 value={this.state.product_qty}
-                validators={["required"]}
+               // validators={["required"]}
                 errorMessages={["this field is required"]}
                 variant="outlined"
               />
@@ -248,7 +256,7 @@ class AddProduct extends Component {
             vertical: "bottom",
             horizontal: "left"
           }}
-          open={this.props.confirmPost.open}
+          open={this.props.confirmationReducer.open}
           autoHideDuration={6000}
           onClose={this.handleClose}
           ContentProps={{

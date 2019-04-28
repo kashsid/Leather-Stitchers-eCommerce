@@ -20,7 +20,8 @@ import Button from "components/CustomButtons/Button.jsx";
 import Card from "components/Card/Card.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
-//import CustomInput from "components/CustomInput/CustomInput.jsx";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import CustomInput from "components/CustomInput/CustomInput.jsx";
 
 import loginPageStyle from "assets/jss/material-kit-pro-react/views/loginPageStyle.jsx";
 
@@ -36,7 +37,7 @@ class LoginPage extends Component {
   login = event => {
     event.preventDefault();
     console.log("in login", this.state.username, this.state.password);
-   
+
     if (this.state.username && this.state.password) {
       this.props.dispatch({
         type: "LOGIN",
@@ -51,17 +52,24 @@ class LoginPage extends Component {
   }; // end login
 
   handleInputChangeFor = propertyName => event => {
+    console.log('in handle change',event.target.value);
+    
     this.setState({
       [propertyName]: event.target.value
     });
   };
+  // handleInputChangeFor = username => event => {
+  //   this.setState({
+  //     username: event.target.value
+  //   });
+  // };
   componentDidMount() {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
   }
   render() {
     const { classes } = this.props;
-    
+
     return (
       <div>
         {this.props.errors.loginMessage && (
@@ -85,7 +93,7 @@ class LoginPage extends Component {
         >
           <div className={classes.container}>
             <GridContainer justify="center">
-              <GridItem xs={16} sm={16} md={4}>
+              <GridItem xs={10} sm={10} md={6}>
                 <Card>
                   <form className={classes.form}>
                     <CardHeader
@@ -121,11 +129,11 @@ class LoginPage extends Component {
                         </Button> */}
                       </div>
                     </CardHeader>
-                    {/* <p
+                    <p
                       className={`${classes.description} ${classes.textCenter}`}
                     >
-                      Or Be Classical
-                    </p> */}
+                      Enter your user name and password.
+                    </p>
                     <CardBody signup>
                       {/* <CustomInput
                         id="first"
@@ -150,26 +158,24 @@ class LoginPage extends Component {
                       /> */}
                       <TextField
                         id="username"
-                        name="username"
-                      
+                       Value={this.state.username}
                         onChange={this.handleInputChangeFor("username")}
-                        //value={this.state.username}
                         formControlProps={{
                           fullWidth: true
-                          
                         }}
                         inputProps={{
-                          placeholder: "User Name...",
-                          width: 300,
-                          type: "text",
-
+                          placeholder: "User name..",
+                          type: "Text",
                           startAdornment: (
                             <InputAdornment position="start">
-                              <Email className={classes.inputIconsColor} />
+                              <Icon className={classes.inputIconsColor}>
+                                lock_utline
+                              </Icon>
                             </InputAdornment>
                           )
                         }}
                       />
+                      {/* {JSON.stringify(CustomInput.name.value)} */}
                       <TextField
                         id="password"
                         value={this.state.password}
@@ -205,6 +211,7 @@ class LoginPage extends Component {
               </GridItem>
             </GridContainer>
           </div>
+
           {/* <Footer
             className={classes.footer}
             content={

@@ -14,7 +14,7 @@ function* fetchProducts() {
 //end axios DELETE request to server and re-fetch all items from 'products' table on database
 function* deleteProduct(action) {
   try {
-    yield axios.delete("/product/" + action.payload);
+    yield axios.delete("/products/" + action.payload);
     yield put({ type: "FETCH_PRODUCTS" });
   } catch (err) {
     console.log(`couldn't delete product`, err);

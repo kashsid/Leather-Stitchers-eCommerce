@@ -17,6 +17,7 @@ const signupPageStyle = theme => ({
   container: {
     ...container,
     zIndex: "4",
+   
     [theme.breakpoints.down("sm")]: {
       paddingBottom: "100px"
     }
@@ -46,7 +47,8 @@ const signupPageStyle = theme => ({
     }
   },
   form: {
-    margin: "0"
+    margin: "0",
+    height:"400px"
   },
   cardHeader: {
     width: "auto",

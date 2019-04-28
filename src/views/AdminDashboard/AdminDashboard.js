@@ -60,11 +60,11 @@ class AdminDashboard extends Component {
     this.props.dispatch({ type: "FETCH_PRODUCTS" });
   };
   // Handle delete button click action to delete the selected products from table
-  handleDeleteClick = id => () => {
-    console.log("delete click for id", id);
+  handleDeleteClick = product_id => () => {
+    console.log("delete click for id", product_id);
     this.setState({
       open: true,
-      selectedId: id
+      selectedId: product_id
     });
   };
   //shows confirmation message before deleting the product from database
@@ -104,6 +104,7 @@ class AdminDashboard extends Component {
   handleDeleteConfirm = confirmation => () => {
     if (confirmation === "agree") {
       console.log("clicked agree");
+      
       this.props.dispatch({
         type: "DELETE_PRODUCT",
         payload: this.state.selectedId
@@ -187,7 +188,7 @@ class AdminDashboard extends Component {
                   <CustomTableCell style={{ width: "10%" }} align="right">
                     <IconButton
                       className={classes.iconHover}
-                      onClick={this.handleDeleteClick(row.id)}
+                      onClick={this.handleDeleteClick(row.product_id)}
                       aria-label="Delete"
                     >
                       <DeleteIcon />
