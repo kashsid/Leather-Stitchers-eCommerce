@@ -11,12 +11,12 @@ import TableRow from "@material-ui/core/TableRow";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
+// import Button from "@material-ui/core/Button";
+// import Dialog from "@material-ui/core/Dialog";
+// import DialogActions from "@material-ui/core/DialogActions";
+// import DialogContent from "@material-ui/core/DialogContent";
+// import DialogContentText from "@material-ui/core/DialogContentText";
+// import DialogTitle from "@material-ui/core/DialogTitle";
 // import GridContainer from "components/Grid/GridContainer.jsx";
 // import GridItem from "components/Grid/GridItem.jsx";
 // import Parallax from "components/Parallax/Parallax.jsx";
@@ -60,111 +60,11 @@ class AdminOrders extends Component {
     this.props.dispatch({ type: "FETCH_ORDERS" });
   };
 
-  // formatDate = () => {
-  //   const date = this.props.orders.order_date;
-  //   console.log('this is ', date)
-  //   return (
-  //     new Date(date).getMonth() +
-  //     1 +
-  //     "/" +
-  //     new Date(date).getDate() +
-  //     "/" +
-  //     new Date(date).getFullYear()
-  //   );
-  // };
-  // Handle delete button click action to delete the selected Orders from table
-  // handleDeleteClick = id => () => {
-  //   console.log("delete click for id", id);
-  //   this.setState({
-  //     open: true,
-  //     selectedId: id
-  //   });
-  // };
-  // //shows confirmation message before deleting the product from database
-  // deleteDialog = () => {
-  //   return (
-  //     <Dialog
-  //       open={this.state.open}
-  //       onClose={this.handleClose}
-  //       aria-labelledby="alert-dialog-title"
-  //       aria-describedby="alert-dialog-description"
-  //     >
-  //       <DialogTitle id="alert-dialog-title">{"Please Confirm"}</DialogTitle>
-  //       <DialogContent>
-  //         <DialogContentText id="alert-dialog-description">
-  //           Are you sure you want to delete this product from the database?
-  //         </DialogContentText>
-  //       </DialogContent>
-  //       <DialogActions>
-  //         <Button
-  //           onClick={this.handleDeleteConfirm("disagree")}
-  //           color="primary"
-  //         >
-  //           Disagree
-  //         </Button>
-  //         <Button
-  //           onClick={this.handleDeleteConfirm("agree")}
-  //           color="primary"
-  //           autoFocus
-  //         >
-  //           Agree
-  //         </Button>
-  //       </DialogActions>
-  //     </Dialog>
-  //   );
-  // };
-
-  // handleDeleteConfirm = confirmation => () => {
-  //   if (confirmation === "agree") {
-  //     console.log("clicked agree");
-  //     this.props.dispatch({
-  //       type: "DELETE_PROJECT",
-  //       payload: this.state.selectedId
-  //     });
-  //   }
-  //   this.setState({
-  //     open: false,
-  //     selectedId: ""
-  //   });
-  // };
-
   render() {
     const { classes } = this.props;
 
     return (
       <>
-        {/* <Header
-          brand="Leather Stitchers---ADMIN PORTAL"
-          links={<HeaderLinks dropdownHoverColor="info" />}
-          fixed
-          color="transparent"
-          changeColorOnScroll={{
-            height: 700,
-            color: "info"
-          }}
-        /> */}
-        {/* <Parallax
-          image={require("assets/img/bg10.jpg")}
-          filter="dark"
-          small
-        >
-          <div className={classes.container}>
-            <GridContainer justify="center">
-              <GridItem
-                xs={12}
-                sm={12}
-                md={8}
-                className={classes.textCenter}
-              >
-                <h2 className={classes.title}>
-                 A Place for Entrepreneurs to Share and Discover New
-                  Stories 
-                </h2>
-              </GridItem>
-            </GridContainer>
-          </div>
-        </Parallax>
-        <SectionPills/> */}
         <Paper className={classes.root}>
           <Table className={classes.table}>
             <TableHead>
@@ -201,18 +101,17 @@ class AdminOrders extends Component {
                   <CustomTableCell component="th" scope="row">
                     {row.customer_first_name + " " + row.customer_last_name}
                   </CustomTableCell>
-                  <CustomTableCell align="left"/>
+                  <CustomTableCell align="left" />
 
                   <CustomTableCell component="th" scope="row">
                     {row.order_comments}
                   </CustomTableCell>
-                  <CustomTableCell align="left"/>
+                  <CustomTableCell align="left" />
 
-                <CustomTableCell component="th" scope="row">
+                  <CustomTableCell component="th" scope="row">
                     {row.shipping_method_desc}
                   </CustomTableCell>
                   <CustomTableCell align="left">
-
                     <IconButton
                       className={classes.iconHover}
                       // onClick={this.handleDeleteClick(row.id)}
@@ -226,7 +125,6 @@ class AdminOrders extends Component {
             </TableBody>
           </Table>
         </Paper>
-        {/* {this.deleteDialog()} */}
       </>
     );
   }

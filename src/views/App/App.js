@@ -28,6 +28,7 @@ import CheckOutPage from "views/CheckOutPage/CheckOutPage.jsx"
     import AdminOrders from "views/AdminOrders/AdminOrders.js";
 import { Admin } from "../Admin/Admin";
 import Payment from"../Payment/Payment";
+
 //import example from "views/EcommercePage/images"
  //import test from "views/ShoppingCartPage/test.jsx";
 
@@ -68,6 +69,7 @@ class App extends Component {
             <Route path="/shopping-cart" component={ShoppingCartPage} />
             <Route path="/checkout" component={CheckOutPage} />
             <Route path="/payment" component={Payment} />
+            <Route exact path="/products" component={AdminDashboard } />
 
             {/* <Route path="/signup-page" component={SignupPage} />
       <Route path="/error-page" component={ErrorPage} />

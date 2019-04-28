@@ -125,16 +125,17 @@ class SectionProducts extends React.Component {
                 // )}
                 to={"/product/" + this.props.products.product_id}
               >
-                <img src={suit1} alt=".." />
+                {/* <img src={suit1} alt=".." /> */}
+                <img src={this.props.products.product_image} alt=".." />
               </Link>
             </CardHeader>
 
             <CardBody plain>
-              <Link className={classes.link} to="/product"> 
-              <h4 className={classes.cardTitle}>
-                {this.props.products.product_short_attr}
-              </h4>
-               </Link> 
+              <Link className={classes.link} to="/product">
+                <h4 className={classes.cardTitle}>
+                  {this.props.products.product_short_attr}
+                </h4>
+              </Link>
               <p className={classes.description}>
                 {this.props.products.product_description}
               </p>

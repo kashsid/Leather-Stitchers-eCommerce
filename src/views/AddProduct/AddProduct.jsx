@@ -8,11 +8,13 @@ import DateFnsUtils from "@date-io/date-fns";
 import Button from "@material-ui/core/Button";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import ErrorIcon from "@material-ui/icons/Error";
+import ImageUpload from "components/CustomUpload/ImageUpload.jsx";
 import { MuiPickersUtilsProvider, DatePicker } from "material-ui-pickers";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import MenuItem from "@material-ui/core/MenuItem";
 import classNames from "classnames";
 import { Typography } from "@material-ui/core";
+import MediaCapture from "../Admin/MediaCapture";
 
 // Material UI Styles defined here
 const styles = theme => ({
@@ -39,19 +41,15 @@ const styles = theme => ({
 });
 
 class AddProduct extends Component {
-  //   "product_id" serial NOT NULL,
-  // 	"product_description" TEXT NOT NULL,
-  // 	"product_price" money NOT NULL,
-  // 	"product_short_attr" varchar(200),
-  // 	"collection_id" bigint NOT NULL,
-  // 	"product_qty" int NOT NULL,
+  
   state = {
     shortAttr: "",
     description: "",
     selectedCollection: "",
     price: 0,
 
-    quantity: ""
+    quantity: "",
+    file:""
   };
 
   // send fetch dispatch to redux which will return all items from 'tags' table on database
@@ -70,7 +68,7 @@ class AddProduct extends Component {
 
   // handles form submit button, sends post dispatch to redux with payload of all selected form inputs + clears form
   handleSubmit = () => {
-    console.log("in handle submit",this.state);
+    console.log("in handle submit", this.state);
 
     this.props.dispatch({ type: "POST_PRODUCT", payload: this.state });
     this.setState({
@@ -79,21 +77,24 @@ class AddProduct extends Component {
       selectedCollection: "",
       price: 0,
 
-      quantity: ""
+      quantity: "",
+      file:""
+
     });
   };
+  handleImageSubmit(e) {
+    e.preventDefault();
+    // this.state.file is the file/image uploaded
+    // in this function you can save the image (this.state.file) on form submit
+    // you have to call it yourself
 
-  // handles date select from date-picker
-  handleDateChange = date => {
-    this.setState({
-      selectedDate: date
-    });
-  };
-
+  }
   // determines which message will display on snackbar depending if post to database was successful
   alertMessage = () => {
     const { classes } = this.props;
-    if (this.props.confirmPost.status) {
+    console.log("inside alert Messages");
+
+    if (this.props.confirmation.status) {
       return (
         <span id="message-id" style={{ display: "flex", alignItems: "center" }}>
           <CheckCircleIcon className={classes.icon} />
@@ -132,17 +133,17 @@ class AddProduct extends Component {
           <Grid container spacing={8}>
             <Grid item xs={12} sm={5}>
               <TextValidator
-                id="title"
+                id="shortAttr"
                 label="* Product Title"
                 fullWidth
                 className={classNames(classes.textField)}
                 onChange={this.handleChange("shortAttr")}
-                name="title"
+                name="shortAttr"
                 type="text"
                 margin="normal"
-                value={this.state.product_short_attr}
-                //validators={["required"]}
-                errorMessages={["this field is required"]}
+                value={this.state.shortAttr}
+                validators={["required"]}
+                errorMessages={["this field was required"]}
                 variant="outlined"
               />
             </Grid>
@@ -158,8 +159,8 @@ class AddProduct extends Component {
                 name="description"
                 type="text"
                 margin="normal"
-                value={this.state.product_description}
-                //validators={["required"]}
+                value={this.state.description}
+                validators={["required"]}
                 errorMessages={["this field is required"]}
                 variant="outlined"
               />
@@ -179,7 +180,7 @@ class AddProduct extends Component {
                     className: classes.menu
                   }
                 }}
-               // validators={["required"]}
+                validators={["required"]}
                 errorMessages={["this field is required"]}
                 margin="normal"
                 variant="outlined"
@@ -202,26 +203,26 @@ class AddProduct extends Component {
                 className={classNames(classes.textField)}
                 onChange={this.handleChange("price")}
                 name="price"
-                type="text"
+                type="number"
                 margin="normal"
-                value={this.state.product_price}
-               // validators={["required"]}
+                value={this.state.price}
+                validators={["required"]}
                 errorMessages={["this field is required"]}
                 variant="outlined"
               />
             </Grid>
             <Grid item xs={12} sm={5}>
               <TextValidator
-                id="qty"
+                id="quantity"
                 label="* Quantity"
                 fullWidth
                 className={classNames(classes.textField)}
                 onChange={this.handleChange("quantity")}
-                name="qty"
+                name="quantity"
                 type="text"
                 margin="normal"
-                value={this.state.product_qty}
-               // validators={["required"]}
+                value={this.state.quantity}
+                validators={["required"]}
                 errorMessages={["this field is required"]}
                 variant="outlined"
               />
@@ -238,6 +239,7 @@ class AddProduct extends Component {
                 * required
               </h5>
             </Grid>
+
             <Grid item xs={8} sm={10}>
               <Button
                 type="submit"
@@ -250,20 +252,38 @@ class AddProduct extends Component {
               </Button>
             </Grid>
           </Grid>
+          <ImageUpload avatar />
+
+          <ImageUpload
+            id="image"
+            label="* Image"
+            fullWidth
+            className={classNames(classes.textField)}
+            onChange={this.handleChange("image")}
+            name="image"
+            type="file"
+            margin="normal"
+            value={this.state.file}
+            validators={["required"]}
+            errorMessages={["this field is required"]}
+            variant="outlined"
+          />
+          <MediaCapture/>
         </ValidatorForm>
-        {/* <Snackbar
+
+        <Snackbar
           anchorOrigin={{
             vertical: "bottom",
             horizontal: "left"
           }}
-          open={this.props.confirmationReducer.open}
+          open={this.props.confirmation.open}
           autoHideDuration={6000}
           onClose={this.handleClose}
           ContentProps={{
             "aria-describedby": "message-id"
           }}
           message={this.alertMessage()}
-        /> */}
+        />
       </>
     );
   }
@@ -272,6 +292,4 @@ const mapReduxStateToProps = reduxState => {
   return reduxState;
 };
 
-export default withStyles(styles)(
-  connect(mapReduxStateToProps)(AddProduct)
-);
+export default withStyles(styles)(connect(mapReduxStateToProps)(AddProduct));

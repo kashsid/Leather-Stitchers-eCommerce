@@ -64,12 +64,12 @@ class ContactUsPage extends React.Component {
   handleChange = name => event => {
     this.setState({ [name]: event.target.checked });
   };
-  handleNext = () => {
-    this.props.history.push("/payment");
-  };
-  handleBack = () => {
-    this.props.history.push("/payment");
-  };
+  // handleNext = () => {
+  //   this.props.history.push("/payment");
+  // };
+  // handleBack = () => {
+  //   this.props.history.push("/payment");
+  // };
   render() {
     const { classes } = this.props;
  const onSuccess = payment => {

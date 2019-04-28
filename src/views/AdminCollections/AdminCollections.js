@@ -120,38 +120,7 @@ class AdminCollections extends Component {
 
     return (
       <>
-        {/* <Header
-          brand="Leather Stitchers---ADMIN PORTAL"
-          links={<HeaderLinks dropdownHoverColor="info" />}
-          fixed
-          color="transparent"
-          changeColorOnScroll={{
-            height: 700,
-            color: "info"
-          }}
-        />
-        <Parallax
-          image={require("assets/img/bg10.jpg")}
-          filter="dark"
-          small
-        >
-          <div className={classes.container}>
-            <GridContainer justify="center">
-              <GridItem
-                xs={12}
-                sm={12}
-                md={8}
-                className={classes.textCenter}
-              >
-                <h2 className={classes.title}>
-                 A Place for Entrepreneurs to Share and Discover New
-                  Stories 
-                </h2>
-              </GridItem>
-            </GridContainer>
-          </div>
-        </Parallax>
-        <SectionPills/> */}
+        
         <Paper className={classes.root}>
           <Table className={classes.table}>
             <TableHead>
@@ -181,18 +150,9 @@ class AdminCollections extends Component {
                   </CustomTableCell>
                   <CustomTableCell align="center" />
 
-                  {/* <CustomTableCell component="th" scope="row">
-                    {row.product_price}
-                  </CustomTableCell> */}
+                 
                   <CustomTableCell style={{ width: "10%" }} align="right">
-                    {/* <IconButton
-                      className={classes.iconHover}
-                      onClick={this.handleFeaturedClick(row.collection_id)}
-                      aria-label="Featured"
-                    >
-                      <i class="material-icons md-24">check_box</i>
-                      
-                    </IconButton> */}
+                   
                   </CustomTableCell>
                 </TableRow>
               ))}

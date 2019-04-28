@@ -16,13 +16,12 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import GridContainer from "components/Grid/GridContainer.jsx";
-import GridItem from "components/Grid/GridItem.jsx";
-import Parallax from "components/Parallax/Parallax.jsx";
-import Header from "components/Header/Header.jsx";
-import HeaderLinks from "components/Header/HeaderLinks.jsx";
-import SectionPills from "./SectionPills.jsx";
-
+// import GridContainer from "components/Grid/GridContainer.jsx";
+// import GridItem from "components/Grid/GridItem.jsx";
+// import Parallax from "components/Parallax/Parallax.jsx";
+// import Header from "components/Header/Header.jsx";
+// import HeaderLinks from "components/Header/HeaderLinks.jsx";
+// import SectionPills from "./SectionPills.jsx";
 
 // defined custom table to be used with Material UI
 const CustomTableCell = withStyles(theme => ({
@@ -104,7 +103,7 @@ class AdminDashboard extends Component {
   handleDeleteConfirm = confirmation => () => {
     if (confirmation === "agree") {
       console.log("clicked agree");
-      
+
       this.props.dispatch({
         type: "DELETE_PRODUCT",
         payload: this.state.selectedId
@@ -121,38 +120,6 @@ class AdminDashboard extends Component {
 
     return (
       <>
-        {/* <Header
-          brand="Leather Stitchers---ADMIN PORTAL"
-          links={<HeaderLinks dropdownHoverColor="info" />}
-          fixed
-          color="transparent"
-          changeColorOnScroll={{
-            height: 700,
-            color: "info"
-          }}
-        />
-        <Parallax
-          image={require("assets/img/bg10.jpg")}
-          filter="dark"
-          small
-        >
-          <div className={classes.container}>
-            <GridContainer justify="center">
-              <GridItem
-                xs={12}
-                sm={12}
-                md={8}
-                className={classes.textCenter}
-              >
-                <h2 className={classes.title}>
-                 A Place for Entrepreneurs to Share and Discover New
-                  Stories 
-                </h2>
-              </GridItem>
-            </GridContainer>
-          </div>
-        </Parallax>
-        <SectionPills/> */}
         <Paper className={classes.root}>
           <Table className={classes.table}>
             <TableHead>

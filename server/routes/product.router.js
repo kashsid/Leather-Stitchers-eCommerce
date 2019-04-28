@@ -6,7 +6,7 @@ const pool = require("../modules/pool");
 router.get("/", (req, res) => {
   pool
     .query(
-      `SELECT "products"."product_id","products"."product_description", "product_price", "product_qty", "product_short_attr",  "collection"."collection_id", "collection"."collection_name"  FROM "products"
+      `SELECT "products"."product_id","products"."product_description", "product_price", "product_qty", "product_short_attr","product_image",  "collection"."collection_id", "collection"."collection_name"  FROM "products"
     JOIN "collection" ON "collection"."collection_id"="products"."collection_id"
     ORDER BY "products"."product_id" DESC;
 `

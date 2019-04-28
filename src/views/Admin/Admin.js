@@ -1,14 +1,15 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+//import { connect } from "react-redux";
 
 import { withStyles } from "@material-ui/core/styles";
-import GridContainer from "components/Grid/GridContainer.jsx";
-import GridItem from "components/Grid/GridItem.jsx";
+//import GridContainer from "components/Grid/GridContainer.jsx";
+//import GridItem from "components/Grid/GridItem.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
 import Header from "components/Header/Header";
 import HeaderLinks from "components/Header/HeaderLinks";
 import SectionPills from "./SectionPills.jsx";
-import AdminDashboard from "../AdminDashboard/AdminDashboard.js";
+//import AdminDashboard from "../AdminDashboard/AdminDashboard.js";
+//import MediaCapture from "./MediaCapture";
 
 const styles = theme => ({
   root: {
@@ -28,19 +29,28 @@ export class Admin extends Component {
     const { classes } = this.props;
     return (
       <>
-        
-       
+        <Header
+          brand="Leather Stitchers---ADMIN PORTAL"
+          links={<HeaderLinks dropdownHoverColor="info" />}
+          fixed
+          color="transparent"
+          changeColorOnScroll={{
+            height: 700,
+            color: "info"
+          }}
+        />
+        <Parallax
+          image={require("assets/img/bg10.jpg")}
+          filter="dark"
+          small
+        >
+          
+        </Parallax>
+
         <SectionPills />
-        
       </>
     );
   }
 }
-// const mapReduxStateToProps = reduxState => {
-//   return reduxState;
-// };
 
-// export default withStyles(styles)(
-//   connect(mapReduxStateToProps)(Admin)
-// );
 export default withStyles(styles)(Admin);

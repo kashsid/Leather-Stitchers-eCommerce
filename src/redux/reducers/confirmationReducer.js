@@ -1,5 +1,6 @@
 // Used to store confirmation boolean on POST to server/database
 const confirmationReducer = (state = false, action) => {
+  console.log('in confirmation reducer')
   switch (action.type) {
     case "CONFIRM_POST":
       return {

@@ -26,7 +26,7 @@ function* deleteProduct(action) {
 function* postProduct(action) {
   try {
     yield axios.post("/product", action.payload);
-    yield put({ type: "FETCH_PRODUCTS" });
+    // yield put({ type: "FETCH_PRODUCTS" });
     yield put({ type: "CONFIRM_POST", payload: true });
   } catch (err) {
     yield put({ type: "CONFIRM_POST", payload: false });
