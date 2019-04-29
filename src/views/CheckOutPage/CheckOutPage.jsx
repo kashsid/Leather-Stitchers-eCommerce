@@ -102,7 +102,7 @@ class ContactUsPage extends React.Component {
     return (
       <div>
         <Header
-          brand="Material Kit PRO React"
+          brand="Leather Stitchers"
           links={<HeaderLinks dropdownHoverColor="dark" />}
           fixed
           color="dark"

@@ -98,6 +98,13 @@ const styles = {
     fontWeight: "300",
     fontSize: "1.125em !important"
   },
+  tdNumberLarge: {
+    textAlign: "right",
+    minWidth: "150px",
+    fontWeight: "400",
+    marginRight: "33px",
+    fontSize: "1.125em !important"
+  },
   tdNumberSmall: {
     marginRight: "3px"
   },

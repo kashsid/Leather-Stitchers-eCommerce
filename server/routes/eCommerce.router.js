@@ -8,7 +8,7 @@ router.get("/:id", (req, res) => {
   pool
     .query(
       `Select "products"."product_id","products"."product_description",
-        "products"."product_short_attr","products"."product_price"
+        "products"."product_short_attr","products"."product_price","products"."product_image"
          FROM "products" 
         where "products"."product_id" IN ($1);`,
       [req.params.id]
@@ -49,7 +49,7 @@ router.post("/", (req, res) => {
   pool
     .query(
       `INSERT INTO "products" (product_description, product_price, product_short_attr
-        , product_qty, collection_id) 
+        , product_qty,collection_id) 
       VALUES ($1,$2, $3, $4, $5);`,
       [
         req.body.description,

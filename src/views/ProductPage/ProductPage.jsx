@@ -60,7 +60,7 @@ class ProductPage extends Component {
     super(props);
     this.state = {
       colorSelect: "0",
-      sizeSelect: "0",
+      sizeSelect: "Small",
       title: "",
       openBottom: false
     };
@@ -92,9 +92,12 @@ class ProductPage extends Component {
   };
   addToCart = event => {
     console.log("Add to CART", this.props.selectedProd);
+   
+    this.props.selectedProd[0].sizeSelect = this.state.sizeSelect;
+    console.log("selected PROD", this.props.selectedProd[0]);
     const action = { type: "ADD_CART", payload: this.props.selectedProd[0] };
     this.props.dispatch(action);
-    i = i + 1;
+    
   };
 
   handleNext = () => {
@@ -144,7 +147,7 @@ class ProductPage extends Component {
                   className={classes.floatRight}
                 >
                   <ShoppingCart />
-                  {i} ITEMS
+                  {this.props.cart.length} ITEMS
                 </Button>
               </GridItem>
             </GridContainer>
@@ -153,13 +156,7 @@ class ProductPage extends Component {
         <div className={classNames(classes.section, classes.sectionGray)}>
           <div className={classes.container}>
             <div className={classNames(classes.main, classes.mainRaised)}>
-              {JSON.stringify(this.props.cart)}
-
-              {/* {JSON.stringify(this.props.prodImage.map(
-                    images => images.image_path
-                  ))} */}
-              {/* {JSON.stringify(this.props.prodImage)}
-              {JSON.stringify(images.original)} */}
+              {/* {JSON.stringify(this.props.cart)} */}
 
               <GridContainer>
                 <GridItem md={6} sm={6}>
@@ -215,12 +212,12 @@ class ProductPage extends Component {
                         content: (
                           <p>
                             An infusion of West Coast cool and New York
-                            attitude, Rebecca Minkoff is synonymous with It girl
-                            style. Minkoff burst on the fashion scene with her
-                            best-selling 'Morning After Bag' and later expanded
-                            her offering with the Rebecca Minkoff Collection - a
-                            range of luxe city staples with a \"downtown
-                            romantic\" theme.
+                            attitude, Rebecca Minkoff is synonymous with It
+                            girl style. Minkoff burst on the fashion scene
+                            with her best-selling 'Morning After Bag' and
+                            later expanded her offering with the Rebecca
+                            Minkoff Collection - a range of luxe city
+                            staples with a \"downtown romantic\" theme.
                           </p>
                         )
                       },
@@ -233,7 +230,8 @@ class ProductPage extends Component {
                             </li>
                             <li>
                               Notch lapels, functioning buttoned cuffs, two
-                              front flap pockets, single vent, internal pocket
+                              front flap pockets, single vent, internal
+                              pocket
                             </li>
                             <li>Two button fastening</li>
                             <li>84% cotton, 14% nylon, 2% elastane</li>
@@ -319,7 +317,7 @@ class ProductPage extends Component {
                               root: classes.selectMenuItem,
                               selected: classes.selectMenuItemSelected
                             }}
-                            value="0"
+                            value="Small"
                           >
                             Small
                           </MenuItem>
@@ -328,7 +326,7 @@ class ProductPage extends Component {
                               root: classes.selectMenuItem,
                               selected: classes.selectMenuItemSelected
                             }}
-                            value="1"
+                            value="Medium"
                           >
                             Medium
                           </MenuItem>
@@ -337,7 +335,7 @@ class ProductPage extends Component {
                               root: classes.selectMenuItem,
                               selected: classes.selectMenuItemSelected
                             }}
-                            value="2"
+                            value="Large"
                           >
                             Large
                           </MenuItem>
@@ -358,7 +356,9 @@ class ProductPage extends Component {
                 </GridItem>
               </GridContainer>
             </div>
-            <div className={classNames(classes.features, classes.textCenter)}>
+            <div
+              className={classNames(classes.features, classes.textCenter)}
+            >
               <GridContainer>
                 <GridItem md={4} sm={4}>
                   <InfoArea
@@ -410,8 +410,8 @@ class ProductPage extends Component {
                       </h6>
                       <h4 className={classes.cardTitle}>Dolce & Gabbana</h4>
                       <div className={classes.cardDescription}>
-                        Dolce & Gabbana's 'Greta' tote has been crafted in Italy
-                        from hard-wearing red textured-leather.
+                        Dolce & Gabbana's 'Greta' tote has been crafted in
+                        Italy from hard-wearing red textured-leather.
                       </div>
                     </CardBody>
                     <CardFooter className={classes.justifyContentBetween}>
@@ -444,8 +444,8 @@ class ProductPage extends Component {
                       <h6 className={classes.cardCategory}>Popular</h6>
                       <h4 className={classes.cardTitle}>Balmain</h4>
                       <div className={classes.cardDescription}>
-                        Balmain's mid-rise skinny jeans are cut with stretch to
-                        ensure they retain their second-skin fit but move
+                        Balmain's mid-rise skinny jeans are cut with stretch
+                        to ensure they retain their second-skin fit but move
                         comfortably.
                       </div>
                     </CardBody>
@@ -479,9 +479,9 @@ class ProductPage extends Component {
                       <h6 className={classes.cardCategory}>Popular</h6>
                       <h4 className={classes.cardTitle}>Balenciaga</h4>
                       <div className={classes.cardDescription}>
-                        Balenciaga's black textured-leather wallet is finished
-                        with the label's iconic 'Giant' studs. This is where you
-                        can...
+                        Balenciaga's black textured-leather wallet is
+                        finished with the label's iconic 'Giant' studs. This
+                        is where you can...
                       </div>
                     </CardBody>
                     <CardFooter className={classes.justifyContentBetween}>
@@ -521,8 +521,8 @@ class ProductPage extends Component {
                       </h6>
                       <h4 className={classes.cardTitle}>Dolce & Gabbana</h4>
                       <div className={classes.cardDescription}>
-                        Dolce & Gabbana's 'Greta' tote has been crafted in Italy
-                        from hard-wearing red textured-leather.
+                        Dolce & Gabbana's 'Greta' tote has been crafted in
+                        Italy from hard-wearing red textured-leather.
                       </div>
                     </CardBody>
                     <CardFooter className={classes.justifyContentBetween}>

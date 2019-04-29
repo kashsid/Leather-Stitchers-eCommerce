@@ -40,6 +40,14 @@ class ShoppingCartPage extends React.Component {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
   }
+  removeProduct = (id) => {
+    console.log('yeah in remove prod',id);
+    const action = { type: "REMOVE_CART", payload: id};
+    this.props.dispatch(action);
+    
+      this.props.history.push("/shopping-cart");
+   
+  };
   handleNext = () => {
     this.props.history.push("/checkout");
   };
@@ -155,7 +163,7 @@ class ShoppingCartPage extends React.Component {
                       [
                         <div className={classes.imgContainer}>
                           <img
-                            src={product1}
+                            src={row.product_image}
                             alt="..."
                             className={classes.img}
                           />
@@ -171,10 +179,13 @@ class ShoppingCartPage extends React.Component {
                           {row.product_short_attr}
                           <small className={classes.tdNameSmall} />
                         </span>,
-                        // "Red",
-                        "M",
+
                         <span>
-                          <small className={classes.tdNumberSmall}>$</small>{" "}
+                          <small className={classes.tdNameSmall} />{" "}
+                          {row.sizeSelect}
+                        </span>,
+                        <span>
+                          <small className={classes.tdNumberSmall} />{" "}
                           {row.product_price}
                         </span>,
                         <span>
@@ -200,7 +211,7 @@ class ShoppingCartPage extends React.Component {
                         </span>,
                         <span>
                           <small className={classes.tdNumberSmall}>$</small>{" "}
-                          200
+                          {row.product_price}
                         </span>,
                         <Tooltip
                           id="close1"
@@ -208,7 +219,13 @@ class ShoppingCartPage extends React.Component {
                           placement="left"
                           classes={{ tooltip: classes.tooltip }}
                         >
-                          <Button link className={classes.actionButton}>
+                          <Button
+                            link
+                            className={classes.actionButton}
+                            onClick={() =>
+                              this.removeProduct(row.product_id)
+                            }
+                          >
                             <Close />
                           </Button>
                         </Tooltip>
@@ -255,10 +272,14 @@ class ShoppingCartPage extends React.Component {
                     customClassesForCells={[1, 2, 3, 4, 5, 6]}
                   />
                 ))}
-                <span>
-                  <small>$</small>300{" "}
-                </span>
-                <div>
+                <div align="right">
+                  <span>
+                    <large className={classes.tdNumberLarge}>
+                      {"Total amount :$100 "}
+                    </large>
+                  </span>
+                </div>
+                <div align="right">
                   <Button color="info" round onClick={this.handleNext}>
                     Complete Purchase <KeyboardArrowRight />
                   </Button>

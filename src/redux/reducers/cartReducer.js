@@ -1,3 +1,5 @@
+import { combineReducers } from "redux";
+
 const cartReducer = (state = [], action) => {
   console.log(`in cartReducer....`);
 
@@ -8,11 +10,14 @@ const cartReducer = (state = [], action) => {
   }
 
   if (action.type === "REMOVE_CART") {
-    console.log("in actiontype remove from cart");
+    console.log("in actiontype remove from cart",action.payload);
     for (let i = 0; i < state.length; i++) {
       console.log("yeah i am in loop");
-      if (state[i] === action.payload) {
+      if (
+        state[i].product_id === action.payload ) {
         state.splice(i, 1);
+        console.log("in if statement", state);
+
         return state;
       }
     }
@@ -25,16 +30,16 @@ const cartReducer = (state = [], action) => {
   return state;
 };
 
-const updateCartItems = (state = 0, action) => {
-  if (action.type === "ADD_CART") {
-    console.log(`Adding product...`);
+const updateTotal = (state = 0, action) => {
+  if (action.type === "ADD_PIZZA") {
+    console.log(`Adding pizza...`);
     console.log(`Total is:`, state);
 
-    return state = state+1;
+    return state + Number(action.payload.price);
   }
 
-  if (action.type === "REMOVE_CART") {
-    return state - Number(action.payload.product_qty);
+  if (action.type === "REMOVE_PIZZA") {
+    return state - Number(action.payload.price);
   }
 
   if (action.type === "EMPTY_CART") {
@@ -43,4 +48,7 @@ const updateCartItems = (state = 0, action) => {
 
   return state;
 };
+
+  
+  
 export default cartReducer;
