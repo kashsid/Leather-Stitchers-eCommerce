@@ -1,4 +1,4 @@
-import { combineReducers } from "redux";
+//import { combineReducers } from "redux";
 
 const cartReducer = (state = [], action) => {
   console.log(`in cartReducer....`);
@@ -30,24 +30,7 @@ const cartReducer = (state = [], action) => {
   return state;
 };
 
-const updateTotal = (state = 0, action) => {
-  if (action.type === "ADD_PIZZA") {
-    console.log(`Adding pizza...`);
-    console.log(`Total is:`, state);
 
-    return state + Number(action.payload.price);
-  }
-
-  if (action.type === "REMOVE_PIZZA") {
-    return state - Number(action.payload.price);
-  }
-
-  if (action.type === "EMPTY_CART") {
-    return (state = 0);
-  }
-
-  return state;
-};
 
   
   

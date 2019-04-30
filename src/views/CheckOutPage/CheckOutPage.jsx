@@ -43,61 +43,85 @@ import InfoArea from "components/InfoArea/InfoArea.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import Footer from "components/Footer/Footer.jsx";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
 import contactUsStyle from "assets/jss/material-kit-pro-react/views/contactUsStyle.jsx";
 import ShoppingCartPage from "../ShoppingCartPage/ShoppingCartPage";
 import  Test  from "../ShoppingCartPage/test";
+import { TextField } from "@material-ui/core/TextField";
 
 
 
 class ContactUsPage extends React.Component {
   state = {
-    checkedA: true
+    checkedA: true,
+    newOrder: {
+      firstname: "",
+      lastname: "",
+      email: "",
+      street: "",
+      city: "",
+      state: "",
+      zip: 0
+    }
   };
-
-  
 
   componentDidMount() {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
   }
   handleChange = name => event => {
+    console.log("in handle change customer", event.target.value, name);
     this.setState({ [name]: event.target.checked });
+    this.setState({
+      newOrder: {
+        ...this.state.newOrder,
+        [name]: event.target.value
+      }
+    });
+    console.log(`Current inputs:`, this.state.newOrder);
+  };
+  handleNext = () => {
+    // need to submit customer info to redux reducer
+    const action = { type: "ADD_CUSTOMER_INFO", payload: this.state.newOrder };
+    this.props.dispatch(action);
+
+    // route to Checkout
+    this.props.history.push("/payment");
   };
   // handleNext = () => {
   //   this.props.history.push("/payment");
   // };
-  // handleBack = () => {
-  //   this.props.history.push("/payment");
-  // };
+  handleBack = () => {
+    this.props.history.push("/shopping-cart");
+  };
   render() {
     const { classes } = this.props;
- const onSuccess = payment => {
-   console.log("The payment was succeeded!", payment);
-   this.props.history.push({
-     pathname: "/order-success",
-     state: {
-       payment: payment,
-      // items: cartItems,
-       orderTotal: 500,
-       //symbol: symbol
-     }
-   });
- };
+    const onSuccess = payment => {
+      console.log("The payment was succeeded!", payment);
+      this.props.history.push({
+        pathname: "/order-success",
+        state: {
+          payment: payment,
+          // items: cartItems,
+          orderTotal: 500
+          //symbol: symbol
+        }
+      });
+    };
 
- const onCancel = data => {
-   console.log("The payment was cancelled!", data);
-   
- };
+    const onCancel = data => {
+      console.log("The payment was cancelled!", data);
+    };
 
- const onError = err => {
-   console.log("Error!", err);
- };
+    const onError = err => {
+      console.log("Error!", err);
+    };
     const client = {
-      sandbox:
-        "AZ4S98zFa01vym7NVeo_qthZyOnBhtNvQDsjhaZSMH-2_Y9IAJFbSD3HPueErYqN8Sa8WYRbjP7wWtd_",
-      production:
-        "AZ4S98zFa01vym7NVeo_qthZyOnBhtNvQDsjhaZSMH-2_Y9IAJFbSD3HPueErYqN8Sa8WYRbjP7wWtd_"
+      //sandbox:
+      // "AZ4S98zFa01vym7NVeo_qthZyOnBhtNvQDsjhaZSMH-2_Y9IAJFbSD3HPueErYqN8Sa8WYRbjP7wWtd_",
+      // production:
+      // "AZ4S98zFa01vym7NVeo_qthZyOnBhtNvQDsjhaZSMH-2_Y9IAJFbSD3HPueErYqN8Sa8WYRbjP7wWtd_"
     };
     return (
       <div>
@@ -113,335 +137,236 @@ class ContactUsPage extends React.Component {
             <div className={classes.container}>
               <h2 className={classes.title}>Customer Information</h2>
               <h4 className={classes.title}>Billing Info:</h4>
-              <GridContainer>
-                <GridItem md={5} sm={2}>
-                  <p>
-                    You can contact us with anything related to our
-                    Products. We'll get in touch with you as soon as
-                    possible.
-                    <br />
-                    <br />
-                  </p>
-                  <form>
-                    <CustomInput
+              <ValidatorForm
+                ref="form"
+                onSubmit={this.handleSubmit}
+                onError={errors => console.log(errors)}
+              >
+                <GridContainer>
+                  <GridItem md={5} sm={1}>
+                    <p>
+                      You can contact us with anything related to our Products.
+                      We'll get in touch with you as soon as possible.
+                      <br />
+                      <br />
+                    </p>
+                    <form>
+                      {/* <CustomInput
                       labelText="Your First Name"
+                      name="name"
                       id="float"
+                      
                       formControlProps={{
                         fullWidth: true
                       }}
-                    />
-                    <CustomInput
-                      labelText="Your Last Name"
-                      id="float"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                    />
-                    <CustomInput
-                      labelText="Email address"
-                      id="float"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                    />
-                    <CustomInput
-                      labelText="Steert Address"
-                      id="float"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                    />
-                    <CustomInput
-                      labelText="City"
-                      id="float"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                    />
-                    <CustomInput
-                      labelText="State"
-                      id="float"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                    />
-                    <CustomInput
-                      labelText="Zip Code"
-                      id="float"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                    />
-                    <CustomInput
-                      labelText="Your message"
-                      id="float"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        multiline: true,
-                        rows: 6
-                      }}
-                    />
-                    <div className={classes.textCenter}>
-                      <Button
-                        color="primary"
-                        round
-                        onClick={this.handleNext}
-                      >
-                        Procced to Payment
-                      </Button>
-                    </div>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={this.state.checkedA}
-                          onChange={this.handleChange("checkedA")}
-                          value="checkedA"
-                          color="primary"
-                        />
-                      }
-                      label="My shipping address is same as billing address."
-                    />
+                    /> */}
+                      <TextValidator
+                        id="firstname"
+                        label="* First Name"
+                        fullWidth
+                        className={classNames(classes.textField)}
+                        onChange={this.handleChange("firstname")}
+                        name="firstname"
+                        type="text"
+                        margin="normal"
+                        value={this.state.customer_first_name}
+                        validators={["required"]}
+                        errorMessages={["this field was required"]}
+                        //variant="outlined"
+                      />
+                      <TextValidator
+                        id="flastname"
+                        label="* Last Name"
+                        fullWidth
+                        className={classNames(classes.textField)}
+                        onChange={this.handleChange("lastname")}
+                        name="lastname"
+                        type="text"
+                        margin="normal"
+                        value={this.state.customer_last_name}
+                        validators={["required"]}
+                        errorMessages={["this field was required"]}
+                        //variant="outlined"
+                      />
+                      <TextValidator
+                        id="email"
+                        label=" Email Address"
+                        fullWidth
+                        className={classNames(classes.textField)}
+                        onChange={this.handleChange("email")}
+                        name="email"
+                        type="email"
+                        margin="normal"
+                        value={this.state.customer_email}
+                        //validators={["required"]}
+                        errorMessages={["this field was required"]}
+                        //variant="outlined"
+                      />
+                      <TextValidator
+                        id="street"
+                        label="* Street Address"
+                        fullWidth
+                        className={classNames(classes.textField)}
+                        onChange={this.handleChange("street")}
+                        name="street"
+                        type="text"
+                        margin="normal"
+                        value={this.state.customer_address_street}
+                        validators={["required"]}
+                        errorMessages={["this field was required"]}
+                        //variant="outlined"
+                      />
+                      <TextValidator
+                        id="city"
+                        label="* City"
+                        fullWidth
+                        className={classNames(classes.textField)}
+                        onChange={this.handleChange("city")}
+                        name="city"
+                        type="text"
+                        margin="normal"
+                        value={this.state.customer_address_city}
+                        validators={["required"]}
+                        errorMessages={["this field was required"]}
+                        //variant="outlined"
+                      />
+                      <TextValidator
+                        id="state"
+                        label="* State"
+                        fullWidth
+                        className={classNames(classes.textField)}
+                        onChange={this.handleChange("state")}
+                        name="state"
+                        type="text"
+                        margin="normal"
+                        value={this.state.customer_address_state}
+                        validators={["required"]}
+                        errorMessages={["this field was required"]}
+                        //variant="outlined"
+                      />
+                      <TextValidator
+                        id="zip"
+                        label="* Zip Code"
+                        fullWidth
+                        className={classNames(classes.textField)}
+                        onChange={this.handleChange("zip")}
+                        name="zip"
+                        type="text"
+                        margin="normal"
+                        value={this.state.customer_address_zip}
+                        validators={["required"]}
+                        errorMessages={["this field was required"]}
+                        //variant="outlined"
+                      />
 
-                    <PaypalExpressBtn
-                      env={"sandbox"}
-                      client={client}
-                      currency={"USD"}
-                      total={"500"}
-                      onError={onError}
-                      onSuccess={onSuccess}
-                      onCancel={onCancel}
-                    />
-                  </form>
-                </GridItem>
-                <GridItem md={6} sm={4} className={classes.mlAuto}>
-                  {/* {JSON.stringify(this.props.cart)} */}
-
-                  <InfoArea
-                    className={classes.info}
-                    title="Your Cart"
-                    // description={
-                    //   <p>
-                    //     Bld Mihail Kogalniceanu, nr. 8, <br /> 7652 Bucharest,{" "}
-                    //     <br /> Romania
-                    //   </p>
-                    // }
-                    icon={PinDrop}
-                    iconColor="primary"
-                  />
-                  <Card plain>
-                    <CardBody plain>
-                      <h3 className={classes.cardTitle}>Shopping Cart</h3>
-                      {this.props.cart.map(row => (
-                        <Table
-                          key={row.id}
-                          // tableHead={[
-                          //   "",
-                          //   "PRODUCT",
-                          //   "SIZE",
-                          //   "PRICE",
-                          //   "QTY",
-                          //   "AMOUNT",
-                          //   ""
-                          // ]}
-                          //  tableData={[
-                          //   [
-                          //     <div className={classes.imgContainer}>
-                          //       <img src={product1} alt="..." className={classes.img} />
-                          //     </div>,
-                          //     <span>
-                          //       <a href="#jacket" className={classes.tdNameAnchor} />
-                          //       <br />
-                          //       <small className={classes.tdNameSmall}>
-                          //       {/* {this.props.cart.product_short_attr} */}
-                          //         {JSON.stringify(this.props.cart.product_short_attr)}
-                          //       </small>
-                          //     </span>,
-                          //     // "Red",
-                          //     "M",
-                          //     <span>
-                          //       <small className={classes.tdNumberSmall}>$</small> 549
-                          //     </span>,
-                          //     <span>
-                          //       1{` `}
-                          //       <div className={classes.buttonGroup}>
-                          //         <Button
-                          //           color="info"
-                          //           size="sm"
-                          //           round
-                          //           className={classes.firstButton}
-                          //         >
-                          //           <Remove />
-                          //         </Button>
-                          //         <Button
-                          //           color="info"
-                          //           size="sm"
-                          //           round
-                          //           className={classes.lastButton}
-                          //         >
-                          //           <Add />
-                          //         </Button>
-                          //       </div>
-                          //     </span>,
-                          //     <span>
-                          //       <small className={classes.tdNumberSmall}>$</small> 200
-                          //     </span>,
-                          //     <Tooltip
-                          //       id="close1"
-                          //       title="Remove item"
-                          //       placement="left"
-                          //       classes={{ tooltip: classes.tooltip }}
-                          //     >
-                          //       <Button link className={classes.actionButton}>
-                          //         <Close />
-                          //       </Button>
-                          //     </Tooltip>
-                          //   ],
-
-                          tableData={[
-                            [
-                              <span>
-                                <a
-                                  href="#jacket"
-                                  className={classes.tdNameAnchor}
-                                />
-                                <br />
-
-                                {row.product_short_attr}
-                                <small className={classes.tdNameSmall} />
-                              </span>,
-                              // "Red",
-                              "M",
-                              <span>
-                                <small className={classes.tdNumberSmall}>
-                                  $
-                                </small>{" "}
-                                {row.product_price}
-                              </span>,
-                              <span>
-                                1{` `}
-                                {/* <div className={classes.buttonGroup}>
-                            <Button
-                              color="info"
-                              size="sm"
-                              round
-                              className={classes.firstButton}
-                            >
-                              <Remove />
-                            </Button>
-                            <Button
-                              color="info"
-                              size="sm"
-                              round
-                              className={classes.lastButton}
-                            >
-                              <Add />
-                            </Button>
-                          </div> */}
-                              </span>,
-                              <span>
-                                <small className={classes.tdNumberSmall}>
-                                  $
-                                </small>{" "}
-                                200
-                              </span>
-                              // <Tooltip
-                              //   id="close1"
-                              //   title="Remove item"
-                              //   placement="left"
-                              //   classes={{ tooltip: classes.tooltip }}
-                              // >
-                              //   <Button
-                              //     link
-                              //     className={classes.actionButton}
-                              //   >
-                              //     <Close />
-                              //   </Button>
-                              // </Tooltip>
-                            ]
-
-                            // {
-                            //   purchase: true,
-                            //   colspan: "3",
-                            //   amount: (
-                            //     <span>
-                            //       <small>$</small>2,346
-                            //     </span>
-                            //   ),
-                            //   col: {
-                            //     colspan: 3,
-                            //     text: (
-                            //       <Button color="info" round>
-                            //         Complete Purchase <KeyboardArrowRight />
-                            //       </Button>
-                            //     )
-                            //   }
-                            // }
-                          ]}
-                          tableShopping
-                          customHeadCellClasses={[
-                            classes.textCenter,
-                            classes.description,
-                            classes.description,
-                            classes.textRight,
-                            classes.textRight,
-                            classes.textRight
-                          ]}
-                          customHeadClassesForCells={[0, 2, 3, 4, 5, 6]}
-                          customCellClasses={[
-                            classes.tdName,
-                            classes.customFont,
-                            classes.customFont,
-                            classes.tdNumber,
-                            classes.tdNumber +
-                              " " +
-                              classes.tdNumberAndButtonGroup,
-                            classes.tdNumber + " " + classes.textCenter
-                          ]}
-                          customClassesForCells={[1, 2, 3, 4, 5, 6]}
-                        />
-                      ))}
-                      <span>
-                        <small>$</small>300{" "}
-                      </span>
-                      <div>
-                        <Button
-                          color="info"
-                          round
-                          onClick={this.handleBack}
-                        >
-                          Go back to cart <KeyboardArrowLeft />
+                      <div className={classes.textCenter}>
+                        <Button color="primary" round onClick={this.handleNext}>
+                          Procced to Payment
                         </Button>
                       </div>
-                    </CardBody>
-                  </Card>
-                  {/* <InfoArea
-                    className={classes.info}
-                    title="Give us a ring"
-                    description={
-                      <p>
-                        Michael Jordan <br /> +40 762 321 762 <br /> Mon - Fri,
-                        8:00-22:00
-                      </p>
-                    }
-                    icon={Phone}
-                    iconColor="primary"
-                  />
-                  <InfoArea
-                    className={classes.info}
-                    title="Legal Information"
-                    description={
-                      <p>
-                        Creative Tim Ltd. <br /> VAT · EN2341241 <br /> IBAN ·
-                        EN8732ENGB2300099123 <br /> Bank · Great Britain Bank
-                      </p>
-                    }
-                    icon={BusinessCenter}
-                    iconColor="primary"
-                  /> */}
-                </GridItem>
-              </GridContainer>
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            checked={this.state.checkedA}
+                            onChange={this.handleChange("checkedA")}
+                            value="checkedA"
+                            color="primary"
+                          />
+                        }
+                        label="My shipping address is same as billing address."
+                      />
+
+                      <PaypalExpressBtn
+                        env={"sandbox"}
+                        client={client}
+                        currency={"USD"}
+                        total={"500"}
+                        onError={onError}
+                        onSuccess={onSuccess}
+                        onCancel={onCancel}
+                      />
+                    </form>
+                  </GridItem>
+                  <GridItem md={6} sm={4} className={classes.mlAuto}>
+                    {/* {JSON.stringify(this.props.cart)} */}
+
+                    <InfoArea
+                      className={classes.info}
+                      title="Your Cart"
+                      icon={PinDrop}
+                      iconColor="primary"
+                    />
+                    <Card plain>
+                      <CardBody plain>
+                        <h3 className={classes.cardTitle}>Shopping Cart</h3>
+                        {this.props.cart.map(row => (
+                          <Table
+                            key={row.id}
+                            tableData={[
+                              [
+                                <span>
+                                  <a
+                                    href="#jacket"
+                                    className={classes.tdNameAnchor}
+                                  />
+                                  <br />
+
+                                  {row.product_short_attr}
+                                  <small className={classes.tdNameSmall} />
+                                </span>,
+                                // "Red",
+                                "M",
+                                <span>
+                                  <small className={classes.tdNumberSmall}>
+                                    $
+                                  </small>{" "}
+                                  {row.product_price}
+                                </span>,
+                                <span>1{` `}</span>,
+                                <span>
+                                  <small className={classes.tdNumberSmall}>
+                                    $
+                                  </small>{" "}
+                                  200
+                                </span>
+                              ]
+                            ]}
+                            tableShopping
+                            customHeadCellClasses={[
+                              classes.textCenter,
+                              classes.description,
+                              classes.description,
+                              classes.textRight,
+                              classes.textRight,
+                              classes.textRight
+                            ]}
+                            customHeadClassesForCells={[0, 2, 3, 4, 5, 6]}
+                            customCellClasses={[
+                              classes.tdName,
+                              classes.customFont,
+                              classes.customFont,
+                              classes.tdNumber,
+                              classes.tdNumber +
+                                " " +
+                                classes.tdNumberAndButtonGroup,
+                              classes.tdNumber + " " + classes.textCenter
+                            ]}
+                            customClassesForCells={[1, 2, 3, 4, 5, 6]}
+                          />
+                        ))}
+                        <span>
+                          <small>$</small>300{" "}
+                        </span>
+                        <div>
+                          <Button color="info" round onClick={this.handleBack}>
+                            Go back to cart <KeyboardArrowLeft />
+                          </Button>
+                        </div>
+                      </CardBody>
+                    </Card>
+                  </GridItem>
+                </GridContainer>
+              </ValidatorForm>
             </div>
           </div>
         </div>

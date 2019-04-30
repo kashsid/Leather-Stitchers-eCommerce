@@ -185,7 +185,7 @@ class ShoppingCartPage extends React.Component {
                           {row.sizeSelect}
                         </span>,
                         <span>
-                          <small className={classes.tdNumberSmall} />{" "}
+                          <small className={classes.tdNumberSmall} />$
                           {row.product_price}
                         </span>,
                         <span>
@@ -275,7 +275,7 @@ class ShoppingCartPage extends React.Component {
                 <div align="right">
                   <span>
                     <large className={classes.tdNumberLarge}>
-                      {"Total amount :$100 "}
+                      Total Amount: ${this.props.updateTotal}
                     </large>
                   </span>
                 </div>

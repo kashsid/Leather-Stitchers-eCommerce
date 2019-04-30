@@ -1,100 +1,85 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+
+// @material-ui/core components
+import withStyles from "@material-ui/core/styles/withStyles";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import Icon from "@material-ui/core/Icon";
+import PinDrop from "@material-ui/icons/PinDrop";
+import Table from "components/Table/Table.jsx";
+import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowRight";
+
+// @material-ui/icons
+import Timeline from "@material-ui/icons/Timeline";
+import Code from "@material-ui/icons/Code";
+import Group from "@material-ui/icons/Group";
+import Face from "@material-ui/icons/Face";
+import Email from "@material-ui/icons/Email";
+import Check from "@material-ui/icons/Check";
+import Favorite from "@material-ui/icons/Favorite";
 import PaypalExpressBtn from "react-paypal-express-checkout";
-import SimpleReactValidator from "simple-react-validator";
 
-//import Breadcrumb from "../common/breadcrumb";
-//import { removeFromWishlist } from "../../actions";
-//import { getCartTotal } from "../../services";
+// core components
+import Header from "components/Header/Header.jsx";
+import HeaderLinks from "components/Header/HeaderLinks.jsx";
+import Footer from "components/Footer/Footer.jsx";
+import GridContainer from "components/Grid/GridContainer.jsx";
+import GridItem from "components/Grid/GridItem.jsx";
+import Button from "components/CustomButtons/Button.jsx";
+import Card from "components/Card/Card.jsx";
+import CardBody from "components/Card/CardBody.jsx";
+import InfoArea from "components/InfoArea/InfoArea.jsx";
+import CustomInput from "components/CustomInput/CustomInput.jsx";
 
-class Payment extends Component {
+import signupPageStyle from "assets/jss/material-kit-pro-react/views/signupPageStyle.jsx";
+
+import image from "assets/img/bg7.jpg";
+
+class Payment extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      payment: "stripe",
-      first_name: "",
-      last_name: "",
-      phone: "",
-      email: "",
-      country: "",
-      address: "",
-      city: "",
-      state: "",
-      pincode: "",
-      create_account: ""
+      checked: [1]
     };
-    this.validator = new SimpleReactValidator();
+    this.handleToggle = this.handleToggle.bind(this);
   }
 
-  setStateFromInput = event => {
-    var obj = {};
-    obj[event.target.name] = event.target.value;
-    this.setState(obj);
-  };
+  
+  handleToggle(value) {
+    const { checked } = this.state;
+    const currentIndex = checked.indexOf(value);
+    const newChecked = [...checked];
 
-  setStateFromCheckbox = event => {
-    var obj = {};
-    obj[event.target.name] = event.target.checked;
-    this.setState(obj);
-
-    if (!this.validator.fieldValid(event.target.name)) {
-      this.validator.showMessages();
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
     }
-  };
 
-  checkhandle(value) {
     this.setState({
-      payment: value
+      checked: newChecked
     });
   }
-
-  StripeClick = () => {
-    if (this.validator.allValid()) {
-      alert("You submitted the form and stuff!");
-
-      var handler = window.StripeCheckout.configure({
-        key: "pk_test_glxk17KhP7poKIawsaSgKtsL",
-        locale: "auto",
-        token: (token: any) => {
-          console.log(token);
-          this.props.history.push({
-            pathname: "/order-success",
-            state: {
-              payment: token,
-              items: this.props.cartItems,
-              orderTotal: this.props.total,
-              symbol: this.props.symbol
-            }
-          });
-        }
-      });
-      handler.open({
-        name: "Multikart",
-        description: "Online Fashion Store",
-        amount: this.amount * 100
-      });
-    } else {
-      this.validator.showMessages();
-      // rerender to show messages for the first time
-      this.forceUpdate();
-    }
-  };
-
+  componentDidMount() {
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
+  }
   render() {
-    const { cartItems, symbol, total } = this.props;
-
-    // Paypal Integration
+    const { classes, ...rest } = this.props;
+   // const { classes } = this.props;
     const onSuccess = payment => {
       console.log("The payment was succeeded!", payment);
       this.props.history.push({
         pathname: "/order-success",
         state: {
           payment: payment,
-          items: cartItems,
-          orderTotal: total,
-          symbol: symbol
+          // items: cartItems,
+          orderTotal: 500
+          //symbol: symbol
         }
       });
     };
@@ -106,381 +91,382 @@ class Payment extends Component {
     const onError = err => {
       console.log("Error!", err);
     };
-
     const client = {
       sandbox:
         "AZ4S98zFa01vym7NVeo_qthZyOnBhtNvQDsjhaZSMH-2_Y9IAJFbSD3HPueErYqN8Sa8WYRbjP7wWtd_",
       production:
         "AZ4S98zFa01vym7NVeo_qthZyOnBhtNvQDsjhaZSMH-2_Y9IAJFbSD3HPueErYqN8Sa8WYRbjP7wWtd_"
     };
-
     return (
       <div>
-        {/* <Breadcrumb title={"Checkout"} /> */}
+        <Header
+          absolute
+          color="transparent"
+          brand="Material Kit PRO React"
+          links={<HeaderLinks dropdownHoverColor="rose" />}
+          {...rest}
+        />
+        <div
+          className={classes.pageHeader}
+          style={{
+            backgroundImage: "url(" + image + ")",
+            backgroundSize: "cover",
+            backgroundPosition: "top center"
+          }}
+        >
+          <div className={classes.container}>
+            <GridContainer justify="center">
+              <GridItem xs={12} sm={10} md={10}>
+                <Card className={classes.cardSignup}>
+                  <h2 className={classes.cardTitle}>Payment</h2>
+                  <CardBody>
+                    <GridContainer justify="center">
+                      {/* <GridItem xs={12} sm={5} md={5}>
+                      
+                        <InfoArea
+                          className={classes.info}
+                          title="Your Cart"
+                          icon={PinDrop}
+                          iconColor="primary"
+                        />
+                        <Card plain>
+                          <CardBody plain>
+                            <h3 className={classes.cardTitle}>
+                              Shopping Cart
+                            </h3>
+                            {this.props.cart.map(row => (
+                              <Table
+                                key={row.id}
+                                tableData={[
+                                  [
+                                    <span>
+                                      <a
+                                        href="#jacket"
+                                        className={classes.tdNameAnchor}
+                                      />
+                                      <br />
 
-        <section className="section-b-space">
-          <div className="container padding-cls">
-            <div className="checkout-page">
-              <div className="checkout-form">
-                <form>
-                  <div className="checkout row">
-                    <div className="col-lg-6 col-sm-12 col-xs-12">
-                      <div className="checkout-title">
-                        <h3>Billing Details</h3>
-                      </div>
-                      <div className="row check-out">
-                        <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                          <div className="field-label">First Name</div>
-                          <input
-                            type="text"
-                            name="first_name"
-                            value={this.state.first_name}
-                            onChange={this.setStateFromInput}
-                          />
-                          {this.validator.message(
-                            "first_name",
-                            this.state.first_name,
-                            "required|alpha"
-                          )}
-                        </div>
-                        <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                          <div className="field-label">Last Name</div>
-                          <input
-                            type="text"
-                            name="last_name"
-                            value={this.state.last_name}
-                            onChange={this.setStateFromInput}
-                          />
-                          {this.validator.message(
-                            "last_name",
-                            this.state.last_name,
-                            "required|alpha"
-                          )}
-                        </div>
-                        <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                          <div className="field-label">Phone</div>
-                          <input
-                            type="text"
-                            name="phone"
-                            value={this.state.phone}
-                            onChange={this.setStateFromInput}
-                          />
-                          {this.validator.message(
-                            "phone",
-                            this.state.phone,
-                            "required|phone"
-                          )}
-                        </div>
-                        <div className="form-group col-md-6 col-sm-6 col-xs-12">
-                          <div className="field-label">Email Address</div>
-                          <input
-                            type="text"
-                            name="email"
-                            value={this.state.email}
-                            onChange={this.setStateFromInput}
-                          />
-                          {this.validator.message(
-                            "email",
-                            this.state.email,
-                            "required|email"
-                          )}
-                        </div>
-                        <div className="form-group col-md-12 col-sm-12 col-xs-12">
-                          <div className="field-label">Country</div>
-                          <select
-                            name="country"
-                            value={this.state.country}
-                            onChange={this.setStateFromInput}
-                          >
-                            <option>India</option>
-                            <option>South Africa</option>
-                            <option>United State</option>
-                            <option>Australia</option>
-                          </select>
-                          {this.validator.message(
-                            "country",
-                            this.state.country,
-                            "required"
-                          )}
-                        </div>
-                        <div className="form-group col-md-12 col-sm-12 col-xs-12">
-                          <div className="field-label">Address</div>
-                          <input
-                            type="text"
-                            name="address"
-                            value={this.state.address}
-                            onChange={this.setStateFromInput}
-                            placeholder="Street address"
-                          />
-                          {this.validator.message(
-                            "address",
-                            this.state.address,
-                            "required|min:20|max:120"
-                          )}
-                        </div>
-                        <div className="form-group col-md-12 col-sm-12 col-xs-12">
-                          <div className="field-label">Town/City</div>
-                          <input
-                            type="text"
-                            name="city"
-                            value={this.state.city}
-                            onChange={this.setStateFromInput}
-                          />
-                          {this.validator.message(
-                            "city",
-                            this.state.city,
-                            "required|alpha"
-                          )}
-                        </div>
-                        <div className="form-group col-md-12 col-sm-6 col-xs-12">
-                          <div className="field-label">State / County</div>
-                          <input
-                            type="text"
-                            name="state"
-                            value={this.state.state}
-                            onChange={this.setStateFromInput}
-                          />
-                          {this.validator.message(
-                            "state",
-                            this.state.state,
-                            "required|alpha"
-                          )}
-                        </div>
-                        <div className="form-group col-md-12 col-sm-6 col-xs-12">
-                          <div className="field-label">Postal Code</div>
-                          <input
-                            type="text"
-                            name="pincode"
-                            value={this.state.spincode}
-                            onChange={this.setStateFromInput}
-                          />
-                          {this.validator.message(
-                            "pincode",
-                            this.state.pincode,
-                            "required|integer"
-                          )}
-                        </div>
-                        <div className="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                          <input
-                            type="checkbox"
-                            name="create_account"
-                            id="account-option"
-                            checked={this.state.create_account}
-                            onChange={this.setStateFromCheckbox}
-                          />
-                          &ensp;{" "}
-                          <label htmlFor="account-option">
-                            Create An Account?
-                          </label>
-                          {this.validator.message(
-                            "checkbox",
-                            this.state.create_account,
-                            "create_account"
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-lg-6 col-sm-12 col-xs-12">
-                      <div className="checkout-details">
-                        <div className="order-box">
-                          <div className="title-box">
+                                      {row.product_short_attr}
+                                      <small
+                                        className={classes.tdNameSmall}
+                                      />
+                                    </span>,
+                                    // "Red",
+                                    "M",
+                                    <span>
+                                      <small
+                                        className={classes.tdNumberSmall}
+                                      >
+                                        $
+                                      </small>{" "}
+                                      {row.product_price}
+                                    </span>,
+                                    <span>1{` `}</span>,
+                                    <span>
+                                      <small
+                                        className={classes.tdNumberSmall}
+                                      >
+                                        $
+                                      </small>{" "}
+                                      200
+                                    </span>
+                                  ]
+                                ]}
+                                tableShopping
+                                customHeadCellClasses={[
+                                  classes.textCenter,
+                                  classes.description,
+                                  classes.description,
+                                  classes.textRight,
+                                  classes.textRight,
+                                  classes.textRight
+                                ]}
+                                customHeadClassesForCells={[
+                                  0,
+                                  2,
+                                  3,
+                                  4,
+                                  5,
+                                  6
+                                ]}
+                                customCellClasses={[
+                                  classes.tdName,
+                                  classes.customFont,
+                                  classes.customFont,
+                                  classes.tdNumber,
+                                  classes.tdNumber +
+                                    " " +
+                                    classes.tdNumberAndButtonGroup,
+                                  classes.tdNumber +
+                                    " " +
+                                    classes.textCenter
+                                ]}
+                                customClassesForCells={[1, 2, 3, 4, 5, 6]}
+                              />
+                            ))}
+                            <span>
+                              <small>$</small>300{" "}
+                            </span>
                             <div>
-                              Product <span> Total</span>
+                              <Button
+                                color="info"
+                                round
+                                onClick={this.handleBack}
+                              >
+                                Go back to cart <KeyboardArrowLeft />
+                              </Button>
                             </div>
-                          </div>
-                          <ul className="qty">
-                            {/* {cartItems.map((item, index) => {
-                              return (
-                                <li key={index}>
-                                  {item.name} × {item.qty}{" "}
-                                  <span>
-                                    {symbol} {item.sum}
-                                  </span>
-                                </li>
-                              );
-                            })} */}
-                          </ul>
-                          <ul className="sub-total">
-                            <li>
-                              Subtotal{" "}
-                              <span className="count">
-                                {symbol}
-                                {total}
-                              </span>
-                            </li>
-                            <li>
-                              Shipping{" "}
-                              <div className="shipping">
-                                <div className="shopping-option">
-                                  <input
-                                    type="checkbox"
-                                    name="free-shipping"
-                                    id="free-shipping"
+                          </CardBody>
+                        </Card>
+                      </GridItem> */}
+                      <GridItem xs={12} sm={5} md={5}>
+                        <div className={classes.textCenter}>
+                          <Button justIcon round color="twitter">
+                            <i
+                              className={
+                                classes.socials + " fab fa-twitter"
+                              }
+                            />
+                          </Button>
+                          {` `}
+                          <Button
+                            justIcon
+                            round
+                            color="instagram"
+                            href="https://www.instagram.com/fjackets/?hl=en"
+                          >
+                            <i
+                              className={
+                                classes.socials + " fab fa-instagram"
+                              }
+                            />
+                          </Button>
+                          {` `}
+                          <Button
+                            justIcon
+                            round
+                            color="facebook"
+                            href="https://www.facebook.com/Thefilmjackets/"
+                          >
+                            <i
+                              className={
+                                classes.socials + " fab fa-facebook-f"
+                              }
+                            />
+                          </Button>
+                          {` `}
+                          <h4 className={classes.socialTitle}>
+                            Follow us on social media
+                          </h4>
+                        </div>
+                        <form className={classes.form}>
+                          <FormControlLabel
+                            classes={{
+                              label: classes.label
+                            }}
+                            control={
+                              <Checkbox
+                                tabIndex={-1}
+                                onClick={() => this.handleToggle(1)}
+                                checkedIcon={
+                                  <Check className={classes.checkedIcon} />
+                                }
+                                icon={
+                                  <Check
+                                    className={classes.uncheckedIcon}
                                   />
-                                  <label htmlFor="free-shipping">
-                                    Free Shipping
-                                  </label>
-                                </div>
-                                <div className="shopping-option">
-                                  <input
-                                    type="checkbox"
-                                    name="local-pickup"
-                                    id="local-pickup"
-                                  />
-                                  <label htmlFor="local-pickup">
-                                    Local Pickup
-                                  </label>
-                                </div>
-                              </div>
-                            </li>
-                          </ul>
-
-                          <ul className="total">
-                            <li>
-                              Total{" "}
-                              <span className="count">
-                                {symbol}
-                                {total}
+                                }
+                                classes={{
+                                  checked: classes.checked,
+                                  root: classes.checkRoot
+                                }}
+                                checked={
+                                  this.state.checked.indexOf(1) !== -1
+                                    ? true
+                                    : false
+                                }
+                              />
+                            }
+                            label={
+                              <span>
+                                I agree to the{" "}
+                                <a href="#pablo">terms and conditions</a>.
                               </span>
-                            </li>
-                          </ul>
-                        </div>
-
-                        <div className="payment-box">
-                          <div className="upper-box">
-                            <div className="payment-options">
-                              <ul>
-                                <li>
-                                  <div className="radio-option stripe">
-                                    <input
-                                      type="radio"
-                                      name="payment-group"
-                                      id="payment-2"
-                                      defaultChecked={true}
-                                      onClick={() => this.checkhandle("stripe")}
-                                    />
-                                    <label htmlFor="payment-2">Stripe</label>
-                                  </div>
-                                </li>
-                                <li>
-                                  <div className="radio-option paypal">
-                                    <input
-                                      type="radio"
-                                      name="payment-group"
-                                      id="payment-1"
-                                      onClick={() => this.checkhandle("paypal")}
-                                    />
-                                    <label htmlFor="payment-1">
-                                      PayPal
-                                      <span className="image">
-                                        <img
-                                          src={`${
-                                            process.env.PUBLIC_URL
-                                          }/assets/images/paypal.png`}
-                                          alt=""
-                                        />
-                                      </span>
-                                    </label>
-                                  </div>
-                                </li>
-                              </ul>
-                            </div>
+                            }
+                          />
+                          <div className={classes.textCenter}>
+                            <Button round color="primary">
+                              Get started
+                            </Button>
+                            <PaypalExpressBtn
+                              env={"sandbox"}
+                              client={client}
+                              currency={"USD"}
+                              total={"500"}
+                              onError={onError}
+                              onSuccess={onSuccess}
+                              onCancel={onCancel}
+                            />
                           </div>
-                          {total !== 0 ? (
-                            <div className="text-right">
-                              {this.state.payment === "stripe" ? (
-                                <button
-                                  type="button"
-                                  className="btn-solid btn"
-                                  onClick={() => this.StripeClick()}
-                                >
-                                  Place Order
-                                </button>
-                              ) : (
-                                <PaypalExpressBtn
-                                  env={"sandbox"}
-                                  client={client}
-                                  currency={"USD"}
-                                  total={total}
-                                  onError={onError}
-                                  onSuccess={onSuccess}
-                                  onCancel={onCancel}
-                                />
-                              )}
+                        </form>
+                      </GridItem>
+                      <GridItem xs={12} sm={5} md={5}>
+                        <InfoArea
+                          className={classes.info}
+                          title="Your Cart"
+                          icon={PinDrop}
+                          iconColor="primary"
+                        />
+                        <Card plain>
+                          <CardBody plain>
+                            {/* <h3 className={classes.cardTitle}>
+                              Shopping Cart
+                            </h3> */}
+                            {this.props.cart.map(row => (
+                              <Table
+                                key={row.id}
+                                tableData={[
+                                  [
+                                    <span>
+                                      <a
+                                        href="#jacket"
+                                        className={classes.tdNameAnchor}
+                                      />
+                                      <br />
+
+                                      {row.product_short_attr}
+                                      <small
+                                        className={classes.tdNameSmall}
+                                      />
+                                    </span>,
+                                    // "Red",
+                                    "M",
+                                    <span>
+                                      <small
+                                        className={classes.tdNumberSmall}
+                                      >
+                                        $
+                                      </small>{" "}
+                                      {row.product_price}
+                                    </span>,
+                                    <span>1{` `}</span>,
+                                    <span>
+                                      <small
+                                        className={classes.tdNumberSmall}
+                                      >
+                                        $
+                                      </small>{" "}
+                                      200
+                                    </span>
+                                  ]
+                                ]}
+                                tableShopping
+                                customHeadCellClasses={[
+                                  classes.textCenter,
+                                  classes.description,
+                                  classes.description,
+                                  classes.textRight,
+                                  classes.textRight,
+                                  classes.textRight
+                                ]}
+                                customHeadClassesForCells={[
+                                  0,
+                                  2,
+                                  3,
+                                  4,
+                                  5,
+                                  6
+                                ]}
+                                customCellClasses={[
+                                  classes.tdName,
+                                  classes.customFont,
+                                  classes.customFont,
+                                  classes.tdNumber,
+                                  classes.tdNumber +
+                                    " " +
+                                    classes.tdNumberAndButtonGroup,
+                                  classes.tdNumber +
+                                    " " +
+                                    classes.textCenter
+                                ]}
+                                customClassesForCells={[1, 2, 3, 4, 5, 6]}
+                              />
+                            ))}
+                            <span>
+                              <small>$</small>300{" "}
+                            </span>
+                            <div>
+                              <Button
+                                color="info"
+                                round
+                                onClick={this.handleBack}
+                              >
+                                Go back to cart <KeyboardArrowLeft />
+                              </Button>
                             </div>
-                          ) : (
-                            ""
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="row section-t-space">
-                    <div className="col-lg-6">
-                      <div className="stripe-section">
-                        <h5>stripe js example</h5>
-                        <div>
-                          <h5 className="checkout_class">dummy test</h5>
-                          <table>
-                            <tbody>
-                              <tr>
-                                <td>cart number</td>
-                                <td>4242424242424242</td>
-                              </tr>
-                              <tr>
-                                <td>mm/yy</td>
-                                <td>2/2020</td>
-                              </tr>
-                              <tr>
-                                <td>cvc</td>
-                                <td>2222</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-lg-6 m-sm-t-2">
-                      <div className="stripe-section">
-                        <h5>paypal example</h5>
-                        <div>
-                          <h5 className="checkout_class">dummy test</h5>
-                          <table>
-                            <tbody>
-                              <tr>
-                                <td>cart number</td>
-                                <td>4152521541244</td>
-                              </tr>
-                              <tr>
-                                <td>mm/yy</td>
-                                <td>11/18</td>
-                              </tr>
-                              <tr>
-                                <td>cvc</td>
-                                <td>521</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
+                          </CardBody>
+                        </Card>
+                      </GridItem>
+                    </GridContainer>
+                  </CardBody>
+                </Card>
+              </GridItem>
+            </GridContainer>
           </div>
-        </section>
+          <Footer
+            content={
+              <div>
+                <div className={classes.left}>
+                  <List className={classes.list}>
+                    <ListItem className={classes.inlineBlock}>
+                      <a
+                        href="https://www.creative-tim.com/"
+                        className={classes.block}
+                      >
+                        Creative Tim
+                      </a>
+                    </ListItem>
+                    <ListItem className={classes.inlineBlock}>
+                      <a
+                        href="https://www.creative-tim.com/presentation"
+                        className={classes.block}
+                      >
+                        About us
+                      </a>
+                    </ListItem>
+                    <ListItem className={classes.inlineBlock}>
+                      <a
+                        href="//blog.creative-tim.com/"
+                        className={classes.block}
+                      >
+                        Blog
+                      </a>
+                    </ListItem>
+                    <ListItem className={classes.inlineBlock}>
+                      <a
+                        href="https://www.creative-tim.com/license"
+                        className={classes.block}
+                      >
+                        Licenses
+                      </a>
+                    </ListItem>
+                  </List>
+                </div>
+                <div className={classes.right}>
+                  &copy; {1900 + new Date().getYear()} , made with{" "}
+                  <Favorite className={classes.icon} /> by{" "}
+                  <a href="https://www.creative-tim.com">Creative Tim</a>{" "}
+                  for a better web.
+                </div>
+              </div>
+            }
+          />
+        </div>
       </div>
     );
   }
 }
-const mapStateToProps = state => ({
-  //cartItems: state.cartList.cart,
-  //symbol: state.data.symbol
-  // total: getCartTotal(state.cartList.cart)
-});
-
-export default connect(
-  mapStateToProps
-  // { removeFromWishlist }
-)(Payment);
+const mapReduxStateToProps = reduxState => {
+  return reduxState;
+};
+export default withStyles(signupPageStyle)(connect(mapReduxStateToProps)(Payment));

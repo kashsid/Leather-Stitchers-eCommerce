@@ -6,7 +6,7 @@ import productsSaga from './productsSaga';
 import ordersSaga from "./ordersSaga";
 import collectionsSaga from "./collectionsSaga";
 import selectedProductSaga from "./eCommerceSaga";
-
+//import shoppingCartSaga from "./shoppingCartSaga"
 
 
 // rootSaga is the primary saga.
@@ -25,6 +25,7 @@ export default function* rootSaga() {
     ordersSaga(),
     collectionsSaga(),
     selectedProductSaga(),
+    //shoppingCartSaga(),
     
   ]);
 }

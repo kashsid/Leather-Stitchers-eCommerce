@@ -9,7 +9,8 @@ import collections from "./collectionsReducer";
 import selectedProd from "./eCommerceReducer";
 import prodImage from "./productImageReducer";
 import cart from "./cartReducer";
-
+import updateTotal from "./updateTotal";
+import Customer from "./customerReducer";
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -27,7 +28,9 @@ const rootReducer = combineReducers({
   confirmation,
   selectedProd,
   prodImage,
-  cart
+  cart,
+  updateTotal,
+  Customer
 });
 
 export default rootReducer;

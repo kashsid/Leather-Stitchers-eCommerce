@@ -142,7 +142,7 @@ class SectionProducts extends React.Component {
             </CardBody>
             <CardFooter plain className={classes.justifyContentBetween}>
               <div className={classes.priceContainer}>
-                <span className={classes.price}>
+                <span className={classes.price}>$
                   {this.props.products.product_price}
                 </span>
               </div>

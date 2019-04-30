@@ -186,7 +186,7 @@ class ProductPage extends Component {
                     product => product.product_short_attr
                   )}
                   {/* {this.props.eCommerce}</h2> */}
-                  <h3 className={classes.mainPrice}>
+                  <h3 className={classes.mainPrice}>$
                     {this.props.selectedProd.map(
                       product => product.product_price
                     )}
