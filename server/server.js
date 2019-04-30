@@ -14,6 +14,9 @@ const ordersRouter = require("./routes/orders.router");
 const collectionsRouter = require("./routes/collections.router");
 const ecommerceRouter = require ("./routes/eCommerce.router")
 const imagesRouter = require("./routes/images.router");
+//const ordersRouter = require("./routes/orders.router");
+const orderRouter = require("./routes/order.router");
+
 
 //const collectionRouter = require("./routes/collection.router");
 
@@ -37,6 +40,7 @@ app.use("/collections", collectionsRouter);
 app.use("/product", ecommerceRouter);
 app.use("/images", imagesRouter);
 app.use("/cart",ecommerceRouter);
+app.use("/order", orderRouter);
 
 
 //app.use("/collections", collectionRouter);

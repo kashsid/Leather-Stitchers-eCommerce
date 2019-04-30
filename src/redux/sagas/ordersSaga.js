@@ -11,8 +11,20 @@ function* fetchOrders() {
   }
 }
 
+function* postOrder(action) {
+  try {
+    yield axios.post("/orders", action.payload);
+   console.log('this is Post order', action.payload);
+   
+  } catch (err) {
+   
+    console.log(`couldn't add order`, err);
+  }
+}
+
 function* ordersSaga() {
   yield takeEvery("FETCH_ORDERS", fetchOrders);
+  yield takeEvery("POST_ORDER", postOrder);
   
 }
 

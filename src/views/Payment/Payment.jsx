@@ -42,13 +42,63 @@ import image from "assets/img/bg7.jpg";
 class Payment extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      checked: [1]
-    };
+    // this.state = {
+    //   checked: [1]
+    // };
     this.handleToggle = this.handleToggle.bind(this);
   }
+  //customer = this.props.Customer;
+  total = this.props.updateTotal;
+  today = new Date();
+  shipping = "1";
+  tax = 10;
 
-  
+
+  state = {
+    checkout: {
+      //customer_email:this.props.customer_email,
+      customer_email: this.props.Customer.email,
+      customer_first_name: this.props.Customer.firstname,
+      customer_last_name: this.props.Customer.lastname,
+      customer_street_address: this.props.Customer.street,
+      customer_city: this.props.Customer.city,
+      customer_state: this.props.Customer.state,
+      customer_zip: this.props.Customer.zip,
+      customer : this.props.Customer,
+  total : this.props.updateTotal,
+  cart:this.props.cart,
+  today : new Date(),
+  shipping : "1",
+  tax : 10
+    }
+  };
+  sendOrder=()=> {
+    console.log("in send order",this.props.cart);
+    const action = {
+      type: "POST_ORDER",
+      payload: this.state
+     
+      
+    };
+    this.props.dispatch(action);
+  }
+  // updateOrder = event => {
+  //   console.log("in update pizza");
+  //   axios({
+  //     method: "POST",
+  //     url: "/order",
+  //     data: this.state.checkout
+  //   })
+  //     .then(response => {
+  //       const action = { type: "EMPTY_CART" };
+  //       this.props.dispatch(action);
+  //       this.props.history.push("/");
+  //     })
+  //     .catch(error => {
+  //       console.log("ERROR in POST", error);
+  //       alert(`Sorry! Unable to add pizza! Try again later.`);
+  //     });
+  // };
   handleToggle(value) {
     const { checked } = this.state;
     const currentIndex = checked.indexOf(value);
@@ -70,7 +120,9 @@ class Payment extends React.Component {
   }
   render() {
     const { classes, ...rest } = this.props;
-   // const { classes } = this.props;
+    console.log("state now ", this.state);
+    
+    // const { classes } = this.props;
     const onSuccess = payment => {
       console.log("The payment was succeeded!", payment);
       this.props.history.push({
@@ -97,12 +149,13 @@ class Payment extends React.Component {
       production:
         "AZ4S98zFa01vym7NVeo_qthZyOnBhtNvQDsjhaZSMH-2_Y9IAJFbSD3HPueErYqN8Sa8WYRbjP7wWtd_"
     };
+
     return (
       <div>
         <Header
           absolute
           color="transparent"
-          brand="Material Kit PRO React"
+          brand="Leather Stitchers"
           links={<HeaderLinks dropdownHoverColor="rose" />}
           {...rest}
         />
@@ -223,9 +276,7 @@ class Payment extends React.Component {
                         <div className={classes.textCenter}>
                           <Button justIcon round color="twitter">
                             <i
-                              className={
-                                classes.socials + " fab fa-twitter"
-                              }
+                              className={classes.socials + " fab fa-twitter"}
                             />
                           </Button>
                           {` `}
@@ -236,9 +287,7 @@ class Payment extends React.Component {
                             href="https://www.instagram.com/fjackets/?hl=en"
                           >
                             <i
-                              className={
-                                classes.socials + " fab fa-instagram"
-                              }
+                              className={classes.socials + " fab fa-instagram"}
                             />
                           </Button>
                           {` `}
@@ -249,9 +298,7 @@ class Payment extends React.Component {
                             href="https://www.facebook.com/Thefilmjackets/"
                           >
                             <i
-                              className={
-                                classes.socials + " fab fa-facebook-f"
-                              }
+                              className={classes.socials + " fab fa-facebook-f"}
                             />
                           </Button>
                           {` `}
@@ -272,19 +319,17 @@ class Payment extends React.Component {
                                   <Check className={classes.checkedIcon} />
                                 }
                                 icon={
-                                  <Check
-                                    className={classes.uncheckedIcon}
-                                  />
+                                  <Check className={classes.uncheckedIcon} />
                                 }
                                 classes={{
                                   checked: classes.checked,
                                   root: classes.checkRoot
                                 }}
-                                checked={
-                                  this.state.checked.indexOf(1) !== -1
-                                    ? true
-                                    : false
-                                }
+                                // checked={
+                                //   this.state.checked.indexOf(1) !== -1
+                                //     ? true
+                                //     : false
+                                // }
                               />
                             }
                             label={
@@ -295,18 +340,19 @@ class Payment extends React.Component {
                             }
                           />
                           <div className={classes.textCenter}>
-                            <Button round color="primary">
+                            <Button round color="primary"
+                            onClick ={this.sendOrder}>
                               Get started
                             </Button>
-                            <PaypalExpressBtn
+                            {/* <PaypalExpressBtn
                               env={"sandbox"}
                               client={client}
                               currency={"USD"}
-                              total={"500"}
+                              total={"1"}
                               onError={onError}
                               onSuccess={onSuccess}
                               onCancel={onCancel}
-                            />
+                            /> */}
                           </div>
                         </form>
                       </GridItem>
@@ -335,25 +381,19 @@ class Payment extends React.Component {
                                       <br />
 
                                       {row.product_short_attr}
-                                      <small
-                                        className={classes.tdNameSmall}
-                                      />
+                                      <small className={classes.tdNameSmall} />
                                     </span>,
                                     // "Red",
                                     "M",
                                     <span>
-                                      <small
-                                        className={classes.tdNumberSmall}
-                                      >
+                                      <small className={classes.tdNumberSmall}>
                                         $
                                       </small>{" "}
                                       {row.product_price}
                                     </span>,
                                     <span>1{` `}</span>,
                                     <span>
-                                      <small
-                                        className={classes.tdNumberSmall}
-                                      >
+                                      <small className={classes.tdNumberSmall}>
                                         $
                                       </small>{" "}
                                       200
@@ -369,14 +409,7 @@ class Payment extends React.Component {
                                   classes.textRight,
                                   classes.textRight
                                 ]}
-                                customHeadClassesForCells={[
-                                  0,
-                                  2,
-                                  3,
-                                  4,
-                                  5,
-                                  6
-                                ]}
+                                customHeadClassesForCells={[0, 2, 3, 4, 5, 6]}
                                 customCellClasses={[
                                   classes.tdName,
                                   classes.customFont,
@@ -385,9 +418,7 @@ class Payment extends React.Component {
                                   classes.tdNumber +
                                     " " +
                                     classes.tdNumberAndButtonGroup,
-                                  classes.tdNumber +
-                                    " " +
-                                    classes.textCenter
+                                  classes.tdNumber + " " + classes.textCenter
                                 ]}
                                 customClassesForCells={[1, 2, 3, 4, 5, 6]}
                               />
@@ -420,34 +451,18 @@ class Payment extends React.Component {
                   <List className={classes.list}>
                     <ListItem className={classes.inlineBlock}>
                       <a
-                        href="https://www.creative-tim.com/"
+                        href="https://www.thefilmjackets.com/"
                         className={classes.block}
                       >
-                        Creative Tim
+                        Leather Stitchers
                       </a>
                     </ListItem>
                     <ListItem className={classes.inlineBlock}>
                       <a
-                        href="https://www.creative-tim.com/presentation"
+                        href="https://www.thefilmjackets.com//collections/biker-collection"
                         className={classes.block}
                       >
                         About us
-                      </a>
-                    </ListItem>
-                    <ListItem className={classes.inlineBlock}>
-                      <a
-                        href="//blog.creative-tim.com/"
-                        className={classes.block}
-                      >
-                        Blog
-                      </a>
-                    </ListItem>
-                    <ListItem className={classes.inlineBlock}>
-                      <a
-                        href="https://www.creative-tim.com/license"
-                        className={classes.block}
-                      >
-                        Licenses
                       </a>
                     </ListItem>
                   </List>
@@ -455,8 +470,8 @@ class Payment extends React.Component {
                 <div className={classes.right}>
                   &copy; {1900 + new Date().getYear()} , made with{" "}
                   <Favorite className={classes.icon} /> by{" "}
-                  <a href="https://www.creative-tim.com">Creative Tim</a>{" "}
-                  for a better web.
+                  <a href="https://www.thefilmjackets.com">Kash</a> for a full
+                  stack project.
                 </div>
               </div>
             }

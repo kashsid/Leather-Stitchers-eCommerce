@@ -45,7 +45,7 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  console.log("project POST route was hit", req.body);
+  console.log("product POST route was hit", req.body);
   pool
     .query(
       `INSERT INTO "products" (product_description, product_price, product_short_attr

@@ -97,32 +97,32 @@ class ContactUsPage extends React.Component {
   };
   render() {
     const { classes } = this.props;
-    const onSuccess = payment => {
-      console.log("The payment was succeeded!", payment);
-      this.props.history.push({
-        pathname: "/order-success",
-        state: {
-          payment: payment,
-          // items: cartItems,
-          orderTotal: 500
-          //symbol: symbol
-        }
-      });
-    };
+    // const onSuccess = payment => {
+    //   console.log("The payment was succeeded!", payment);
+    //   this.props.history.push({
+    //     pathname: "/order-success",
+    //     state: {
+    //       payment: payment,
+    //       // items: cartItems,
+    //       orderTotal: 500
+    //       //symbol: symbol
+    //     }
+    //   });
+    // };
 
-    const onCancel = data => {
-      console.log("The payment was cancelled!", data);
-    };
+    // const onCancel = data => {
+    //   console.log("The payment was cancelled!", data);
+    // };
 
-    const onError = err => {
-      console.log("Error!", err);
-    };
-    const client = {
-      //sandbox:
-      // "AZ4S98zFa01vym7NVeo_qthZyOnBhtNvQDsjhaZSMH-2_Y9IAJFbSD3HPueErYqN8Sa8WYRbjP7wWtd_",
-      // production:
-      // "AZ4S98zFa01vym7NVeo_qthZyOnBhtNvQDsjhaZSMH-2_Y9IAJFbSD3HPueErYqN8Sa8WYRbjP7wWtd_"
-    };
+    // const onError = err => {
+    //   console.log("Error!", err);
+    // };
+    // const client = {
+    //   sandbox:
+    //   "AZ4S98zFa01vym7NVeo_qthZyOnBhtNvQDsjhaZSMH-2_Y9IAJFbSD3HPueErYqN8Sa8WYRbjP7wWtd_",
+    //   production:
+    //   "AZ4S98zFa01vym7NVeo_qthZyOnBhtNvQDsjhaZSMH-2_Y9IAJFbSD3HPueErYqN8Sa8WYRbjP7wWtd_"
+    // };
     return (
       <div>
         <Header
@@ -276,15 +276,15 @@ class ContactUsPage extends React.Component {
                         label="My shipping address is same as billing address."
                       />
 
-                      <PaypalExpressBtn
+                      {/* <PaypalExpressBtn
                         env={"sandbox"}
                         client={client}
                         currency={"USD"}
-                        total={"500"}
+                        total={"1"}
                         onError={onError}
                         onSuccess={onSuccess}
                         onCancel={onCancel}
-                      />
+                      /> */}
                     </form>
                   </GridItem>
                   <GridItem md={6} sm={4} className={classes.mlAuto}>
