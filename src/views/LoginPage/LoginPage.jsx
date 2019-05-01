@@ -4,6 +4,9 @@ import { connect } from "react-redux";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+
+import classNames from "classnames";
 
 import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
@@ -20,7 +23,7 @@ import Button from "components/CustomButtons/Button.jsx";
 import Card from "components/Card/Card.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+//import { TextValidator } from "react-material-ui-form-validator";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 
 import loginPageStyle from "assets/jss/material-kit-pro-react/views/loginPageStyle.jsx";
@@ -91,19 +94,24 @@ class LoginPage extends Component {
             backgroundPosition: "top center"
           }}
         >
-          <div className={classes.container}>
-            <GridContainer justify="center">
-              <GridItem xs={10} sm={10} md={6}>
-                <Card>
-                  <form className={classes.form}>
-                    <CardHeader
-                      color="primary"
-                      signup
-                      className={classes.cardHeader}
-                    >
-                      <h4 className={classes.cardTitle}>Login</h4>
-                      <div className={classes.socialLine}>
-                        {/* <Button
+          {/* <ValidatorForm
+            ref="form"
+            onSubmit={this.handleSubmit}
+            onError={errors => console.log(errors)}
+          > */}
+            <div className={classes.container}>
+              <GridContainer justify="center">
+                <GridItem xs={12} sm={12} md={10}>
+                  <Card>
+                    <form className={classes.form}>
+                      <CardHeader
+                        color="primary"
+                        signup
+                        className={classes.cardHeader}
+                      >
+                        <h4 className={classes.cardTitle}>Login</h4>
+                        <div className={classes.socialLine}>
+                          {/* <Button
                           justIcon
                           color="transparent"
                           className={classes.iconButtons}
@@ -111,7 +119,7 @@ class LoginPage extends Component {
                         >
                           <i className="fab fa-twitter" />
                         </Button> */}
-                        {/* <Button
+                          {/* <Button
                           justIcon
                           color="transparent"
                           className={classes.iconButtons}
@@ -119,7 +127,7 @@ class LoginPage extends Component {
                         >
                           <i className="fab fa-facebook" />
                         </Button> */}
-                        {/* <Button
+                          {/* <Button
                           justIcon
                           color="transparent"
                           className={classes.iconButtons}
@@ -127,15 +135,17 @@ class LoginPage extends Component {
                         >
                           <i className="fab fa-google-plus-g" />
                         </Button> */}
-                      </div>
-                    </CardHeader>
-                    <p
-                      className={`${classes.description} ${classes.textCenter}`}
-                    >
-                      Enter your user name and password.
-                    </p>
-                    <CardBody signup>
-                      {/* <CustomInput
+                        </div>
+                      </CardHeader>
+                      <p
+                        className={`${classes.description} ${
+                          classes.textCenter
+                        }`}
+                      >
+                        Enter your user name and password.
+                      </p>
+                      <CardBody signup>
+                        {/* <CustomInput
                         id="first"
                         formControlProps={{
                           fullWidth: true
@@ -150,15 +160,44 @@ class LoginPage extends Component {
                           )
                         }}
                       /> */}
-                      {/* <input
+                        {/* <input
                         type="text"
                         name="username"
                         value={this.state.username}
                         onChange={this.handleInputChangeFor("username")}
                       /> */}
-                      <TextField
+                        {/* <TextValidator
+                          id="username"
+                          label="* User Name"
+                          fullWidth
+                          className={classNames(classes.textField)}
+                          onChange={this.handleInputChangeFor("username")}
+                          name="username"
+                          type="text"
+                          margin="normal"
+                          value={this.state.username}
+                          validators={["required"]}
+                          errorMessages={["this field was required"]}
+                          //variant="outlined"
+                        /> */}
+
+                        {/* <TextValidator
+                          id="password"
+                          label="* password"
+                          fullWidth
+                          className={classNames(classes.textField)}
+                          onChange={this.handleInputChangeFor("password")}
+                          name="password"
+                          type="password"
+                          margin="normal"
+                          value={this.state.password}
+                          validators={["required"]}
+                          errorMessages={["this field was required"]}
+                          //variant="outlined"
+                        /> */}
+                        {/* <TextField
                         id="username"
-                       Value={this.state.username}
+                        Value={this.state.username}
                         onChange={this.handleInputChangeFor("username")}
                         formControlProps={{
                           fullWidth: true
@@ -174,43 +213,44 @@ class LoginPage extends Component {
                             </InputAdornment>
                           )
                         }}
-                      />
-                      {/* {JSON.stringify(CustomInput.name.value)} */}
-                      <TextField
-                        id="password"
-                        value={this.state.password}
-                        onChange={this.handleInputChangeFor("password")}
-                        formControlProps={{
-                          fullWidth: true
-                        }}
-                        inputProps={{
-                          placeholder: "Password",
-                          type: "password",
-                          startAdornment: (
-                            <InputAdornment position="start">
-                              <Icon className={classes.inputIconsColor}>
-                                lock_utline
-                              </Icon>
-                            </InputAdornment>
-                          )
-                        }}
-                      />
-                    </CardBody>
-                    <div className={classes.textCenter}>
-                      <Button
-                        simple
-                        color="primary"
-                        size="lg"
-                        onClick={this.login}
-                      >
-                        Login
-                      </Button>
-                    </div>
-                  </form>
-                </Card>
-              </GridItem>
-            </GridContainer>
-          </div>
+                      /> */}
+                        {/* {JSON.stringify(CustomInput.name.value)} */}
+                        {/* <TextField
+                          id="password"
+                          value={this.state.password}
+                          onChange={this.handleInputChangeFor("password")}
+                          formControlProps={{
+                            fullWidth: true
+                          }}
+                          inputProps={{
+                            placeholder: "Password",
+                            type: "password",
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <Icon className={classes.inputIconsColor}>
+                                  lock_utline
+                                </Icon>
+                              </InputAdornment>
+                            )
+                          }}
+                        /> */}
+                      </CardBody>
+                      <div className={classes.textCenter}>
+                        <Button
+                          simple
+                          color="primary"
+                          size="lg"
+                          onClick={this.login}
+                        >
+                          Login
+                        </Button>
+                      </div>
+                    </form>
+                  </Card>
+                </GridItem>
+              </GridContainer>
+            </div>
+          {/* </ValidatorForm> */}
 
           {/* <Footer
             className={classes.footer}

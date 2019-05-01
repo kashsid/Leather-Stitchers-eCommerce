@@ -11,8 +11,8 @@ import Tooltip from "@material-ui/core/Tooltip";
 // @material-ui/icons
 import Favorite from "@material-ui/icons/Favorite";
 import Close from "@material-ui/icons/Close";
-import Remove from "@material-ui/icons/Remove";
-import Add from "@material-ui/icons/Add";
+// import Remove from "@material-ui/icons/Remove";
+// import Add from "@material-ui/icons/Add";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 // core components
 import Header from "components/Header/Header.jsx";
@@ -28,9 +28,9 @@ import CardBody from "components/Card/CardBody.jsx";
 
 import shoppingCartStyle from "assets/jss/material-kit-pro-react/views/shoppingCartStyle.jsx";
 
-import product1 from "assets/img/product1.jpg";
-import product2 from "assets/img/product2.jpg";
-import product3 from "assets/img/product3.jpg";
+// import product1 from "assets/img/product1.jpg";
+// import product2 from "assets/img/product2.jpg";
+// import product3 from "assets/img/product3.jpg";
 
 class ShoppingCartPage extends React.Component {
   componentDidMount() {
@@ -40,9 +40,12 @@ class ShoppingCartPage extends React.Component {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
   }
-  removeProduct = (id) => {
-    console.log('yeah in remove prod',id);
-    const action = { type: "REMOVE_CART", payload: id};
+  removeProduct = (id,price) => {
+    console.log("yeah in remove prod", id,price);
+    const action = {
+      type: "REMOVE_CART",
+      payload: { id: id, price: price }
+    };
     this.props.dispatch(action);
     
       this.props.history.push("/shopping-cart");
@@ -96,68 +99,7 @@ class ShoppingCartPage extends React.Component {
                 {this.props.cart.map(row => (
                   <Table
                     key={row.id}
-                    // tableHead={[
-                    //   "",
-                    //   "PRODUCT",
-                    //   "SIZE",
-                    //   "PRICE",
-                    //   "QTY",
-                    //   "AMOUNT",
-                    //   ""
-                    // ]}
-                    //  tableData={[
-                    //   [
-                    //     <div className={classes.imgContainer}>
-                    //       <img src={product1} alt="..." className={classes.img} />
-                    //     </div>,
-                    //     <span>
-                    //       <a href="#jacket" className={classes.tdNameAnchor} />
-                    //       <br />
-                    //       <small className={classes.tdNameSmall}>
-                    //       {/* {this.props.cart.product_short_attr} */}
-                    //         {JSON.stringify(this.props.cart.product_short_attr)}
-                    //       </small>
-                    //     </span>,
-                    //     // "Red",
-                    //     "M",
-                    //     <span>
-                    //       <small className={classes.tdNumberSmall}>$</small> 549
-                    //     </span>,
-                    //     <span>
-                    //       1{` `}
-                    //       <div className={classes.buttonGroup}>
-                    //         <Button
-                    //           color="info"
-                    //           size="sm"
-                    //           round
-                    //           className={classes.firstButton}
-                    //         >
-                    //           <Remove />
-                    //         </Button>
-                    //         <Button
-                    //           color="info"
-                    //           size="sm"
-                    //           round
-                    //           className={classes.lastButton}
-                    //         >
-                    //           <Add />
-                    //         </Button>
-                    //       </div>
-                    //     </span>,
-                    //     <span>
-                    //       <small className={classes.tdNumberSmall}>$</small> 200
-                    //     </span>,
-                    //     <Tooltip
-                    //       id="close1"
-                    //       title="Remove item"
-                    //       placement="left"
-                    //       classes={{ tooltip: classes.tooltip }}
-                    //     >
-                    //       <Button link className={classes.actionButton}>
-                    //         <Close />
-                    //       </Button>
-                    //     </Tooltip>
-                    //   ],
+                    
 
                     tableData={[
                       [
@@ -190,24 +132,7 @@ class ShoppingCartPage extends React.Component {
                         </span>,
                         <span>
                           1{` `}
-                          {/* <div className={classes.buttonGroup}>
-                            <Button
-                              color="info"
-                              size="sm"
-                              round
-                              className={classes.firstButton}
-                            >
-                              <Remove />
-                            </Button>
-                            <Button
-                              color="info"
-                              size="sm"
-                              round
-                              className={classes.lastButton}
-                            >
-                              <Add />
-                            </Button>
-                          </div> */}
+                          
                         </span>,
                         <span>
                           <small className={classes.tdNumberSmall}>$</small>{" "}
@@ -223,7 +148,7 @@ class ShoppingCartPage extends React.Component {
                             link
                             className={classes.actionButton}
                             onClick={() =>
-                              this.removeProduct(row.product_id)
+                              this.removeProduct(row.product_id,row.product_price)
                             }
                           >
                             <Close />
@@ -231,23 +156,7 @@ class ShoppingCartPage extends React.Component {
                         </Tooltip>
                       ]
 
-                      // {
-                      //   purchase: true,
-                      //   colspan: "3",
-                      //   amount: (
-                      //     <span>
-                      //       <small>$</small>2,346
-                      //     </span>
-                      //   ),
-                      //   col: {
-                      //     colspan: 3,
-                      //     text: (
-                      //       <Button color="info" round>
-                      //         Complete Purchase <KeyboardArrowRight />
-                      //       </Button>
-                      //     )
-                      //   }
-                      // }
+                    
                     ]}
                     tableShopping
                     customHeadCellClasses={[

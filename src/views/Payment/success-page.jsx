@@ -1,144 +1,131 @@
-import React, {Component} from 'react';
+import React from "react";
+// @material-ui/core components
+import withStyles from "@material-ui/core/styles/withStyles";
+import Slide from "@material-ui/core/Slide";
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+// @material-ui/icons
+import Close from "@material-ui/icons/Close";
+// core components
+import Button from "components/CustomButtons/Button.jsx";
 
+import javascriptStyles from "assets/jss/material-kit-pro-react/views/componentsSections/javascriptStyles.jsx";
 
-class orderSuccess extends Component {
-
-    constructor (props) {
-        super (props)
-
-    }
-
-    render (){
-
-        const {payment, items, symbol, orderTotal} = this.props.location.state;
-        var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        var current = new Date();
-        var next5days = new Date(Date.now() + 5 * 86400000);
-        let CheckDate = current.toLocaleDateString("en-US", options).toString()
-        let deliveryDate = next5days.toLocaleDateString("en-US", options).toString()
-
-        return (
-            (payment)?
-            <div>
-                <section className="section-b-space light-layout">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-md-12">
-                                <div className="success-text">
-                                    <i className="fa fa-check-circle" aria-hidden="true"></i>
-                                    <h2>thank you</h2>
-                                    <p>Payment Is Has Been Received Order Placed Successfully</p>
-                                    <p>Transaction ID: {(payment.paymentID)?payment.paymentID:payment.id}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section className="section-b-space">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-6">
-                                <div className="product-order">
-                                    <h3>your order details</h3>
-                                    {items.map((item, index) => {
-                                    return <div className="row product-order-detail" key={index}>
-                                                <div className="col-3">
-                                                    <img src={`${item.variants[0].images}`} alt="" className="img-fluid" />
-                                                </div>
-                                                <div className="col-3 order_detail">
-                                                    <div>
-                                                        <h4>product name</h4>
-                                                        <h5>{item.name}</h5>
-                                                    </div>
-                                                </div>
-                                                <div className="col-3 order_detail">
-                                                    <div>
-                                                        <h4>quantity</h4>
-                                                        <h5>{item.qty}</h5>
-                                                    </div>
-                                                </div>
-                                                <div className="col-3 order_detail">
-                                                    <div>
-                                                        <h4>price</h4>
-                                                        <h5>{symbol}{item.sum}</h5>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                    })}
-                                    <div className="total-sec">
-                                        <ul>
-                                            <li>subtotal <span>{symbol}{orderTotal}</span></li>
-                                            <li>shipping <span>$0</span></li>
-                                            <li>tax(GST) <span>$0</span></li>
-                                        </ul>
-                                    </div>
-                                    <div className="final-total">
-                                        <h3>total <span>{symbol}{orderTotal}</span></h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-lg-6">
-                                <div className="row order-success-sec">
-                                    <div className="col-sm-6">
-                                        <h4>summery</h4>
-                                        <ul className="order-detail">
-                                            {(payment.paymentID)?
-                                                <div>
-                                            <li>payer ID: {payment.payerID}</li>
-                                            <li>payment ID: {payment.paymentID}</li>
-                                            <li>payment Token: {payment.paymentToken}</li></div>
-                                                :
-                                            <li>Order ID: {payment.id}</li> }
-
-                                            <li>Order Date: {CheckDate}</li>
-                                            <li>Order Total: {symbol}{orderTotal}</li>
-                                        </ul>
-                                    </div>
-                                    <div className="col-sm-6">
-                                        <h4>shipping address</h4>
-                                        <ul className="order-detail">
-                                            <li>gerg harvell</li>
-                                            <li>568, suite ave.</li>
-                                            <li>Austrlia, 235153</li>
-                                            <li>Contact No. 987456321</li>
-                                        </ul>
-                                    </div>
-
-                                    <div className="col-sm-12 payment-mode">
-                                        <h4>payment method</h4>
-                                        <p>Pay on Delivery (Cash/Card). Cash on delivery (COD) available. Card/Net
-                                            banking acceptance subject to device availability.</p>
-                                    </div>
-                                    <div className="col-md-12">
-                                        <div className="delivery-sec">
-                                            <h3>expected date of delivery</h3>
-                                            <h2>{deliveryDate}</h2>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </section>
-            </div>
-            :
-            <section className="p-0">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-sm-12">
-                            <div className="error-section">
-                                <h1>404</h1>
-                                <h2>page not found</h2>
-                                <a href="index.html" className="btn btn-solid">back to home</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        )
-    }
+function Transition(props) {
+  return <Slide direction="down" {...props} />;
 }
 
-export default orderSuccess
+class OrderSuccess extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      smallModal: false,
+      largeModal: false
+    };
+  }
+  handleClickOpen(modal) {
+    var x = [];
+    x[modal] = true;
+    this.setState(x);
+  }
+  handleClose(modal) {
+    var x = [];
+    x[modal] = false;
+    this.setState(x);
+  }
+  render() {
+    const { classes } = this.props;
+    return (
+      <div>
+        <Button
+          color="primary"
+          onClick={() => this.handleClickOpen("largeModal")}
+        >
+          Large Modal
+        </Button>
+        <Dialog
+          classes={{
+            root: classes.modalRoot,
+            paper: classes.modal + " " + classes.modalLarge
+          }}
+          open={this.state.largeModal}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={() => this.handleClose("largeModal")}
+          aria-labelledby="large-modal-slide-title"
+          aria-describedby="large-modal-slide-description"
+        >
+          <DialogTitle
+            id="large-modal-slide-title"
+            disableTypography
+            className={classes.modalHeader}
+          >
+            <Button
+              simple
+              className={classes.modalCloseButton}
+              key="close"
+              aria-label="Close"
+              onClick={() => this.handleClose("largeModal")}
+            >
+              {" "}
+              <Close className={classes.modalClose} />
+            </Button>
+            <h4 className={classes.modalTitle}>Large modal</h4>
+          </DialogTitle>
+          <DialogContent
+            id="large-modal-slide-description"
+            className={classes.modalBody}
+          >
+            <p>...</p>
+          </DialogContent>
+        </Dialog>
+
+        <Button
+          color="primary"
+          onClick={() => this.handleClickOpen("smallModal")}
+        >
+          Small Modal
+        </Button>
+        <Dialog
+          classes={{
+            root: classes.modalRoot,
+            paper: classes.modal + " " + classes.modalSmall
+          }}
+          open={this.state.smallModal}
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={() => this.handleClose("smallModal")}
+          aria-labelledby="small-modal-slide-title"
+          aria-describedby="small-modal-slide-description"
+        >
+          <DialogTitle
+            id="small-modal-slide-title"
+            disableTypography
+            className={classes.modalHeader}
+          >
+            <Button
+              simple
+              className={classes.modalCloseButton}
+              key="close"
+              aria-label="Close"
+              onClick={() => this.handleClose("smallModal")}
+            >
+              {" "}
+              <Close className={classes.modalClose} />
+            </Button>
+            <h4 className={classes.modalTitle}>Small modal</h4>
+          </DialogTitle>
+          <DialogContent
+            id="small-modal-slide-description"
+            className={classes.modalBody + " " + classes.modalSmallBody}
+          >
+            <p>...</p>
+          </DialogContent>
+        </Dialog>
+      </div>
+    );
+  }
+}
+
+export default withStyles(javascriptStyles)(OrderSuccess);

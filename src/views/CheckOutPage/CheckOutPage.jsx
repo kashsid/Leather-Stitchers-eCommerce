@@ -145,8 +145,9 @@ class ContactUsPage extends React.Component {
                 <GridContainer>
                   <GridItem md={5} sm={1}>
                     <p>
-                      You can contact us with anything related to our Products.
-                      We'll get in touch with you as soon as possible.
+                      You can contact us with anything related to our
+                      Products. We'll get in touch with you as soon as
+                      possible.
                       <br />
                       <br />
                     </p>
@@ -260,7 +261,11 @@ class ContactUsPage extends React.Component {
                       />
 
                       <div className={classes.textCenter}>
-                        <Button color="primary" round onClick={this.handleNext}>
+                        <Button
+                          color="primary"
+                          round
+                          onClick={this.handleNext}
+                        >
                           Procced to Payment
                         </Button>
                       </div>
@@ -327,7 +332,7 @@ class ContactUsPage extends React.Component {
                                   <small className={classes.tdNumberSmall}>
                                     $
                                   </small>{" "}
-                                  200
+                                  {row.product_price}
                                 </span>
                               ]
                             ]}
@@ -354,11 +359,22 @@ class ContactUsPage extends React.Component {
                             customClassesForCells={[1, 2, 3, 4, 5, 6]}
                           />
                         ))}
-                        <span>
+                        <div align="right">
+                          <span>
+                            <large className={classes.tdNumberLarge}>
+                              Total Amount: ${this.props.updateTotal}
+                            </large>
+                          </span>
+                        </div>
+                        {/* <span>
                           <small>$</small>300{" "}
-                        </span>
+                        </span> */}
                         <div>
-                          <Button color="info" round onClick={this.handleBack}>
+                          <Button
+                            color="info"
+                            round
+                            onClick={this.handleBack}
+                          >
                             Go back to cart <KeyboardArrowLeft />
                           </Button>
                         </div>

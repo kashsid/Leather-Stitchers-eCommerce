@@ -34,6 +34,7 @@ import Card from "components/Card/Card.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import InfoArea from "components/InfoArea/InfoArea.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
+import OrderSuccess from "./success-page"
 
 import signupPageStyle from "assets/jss/material-kit-pro-react/views/signupPageStyle.jsx";
 
@@ -81,6 +82,7 @@ class Payment extends React.Component {
       
     };
     this.props.dispatch(action);
+    
   }
   // updateOrder = event => {
   //   console.log("in update pizza");
@@ -138,6 +140,7 @@ class Payment extends React.Component {
 
     const onCancel = data => {
       console.log("The payment was cancelled!", data);
+      this.props.history.push("/order-success");
     };
 
     const onError = err => {
@@ -344,7 +347,7 @@ class Payment extends React.Component {
                             onClick ={this.sendOrder}>
                               Get started
                             </Button>
-                            {/* <PaypalExpressBtn
+                            <PaypalExpressBtn
                               env={"sandbox"}
                               client={client}
                               currency={"USD"}
@@ -352,7 +355,7 @@ class Payment extends React.Component {
                               onError={onError}
                               onSuccess={onSuccess}
                               onCancel={onCancel}
-                            /> */}
+                            />
                           </div>
                         </form>
                       </GridItem>
