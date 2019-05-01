@@ -32,6 +32,10 @@ import ListItem from "@material-ui/core/ListItem";
 // @material-ui/icons
 import Favorite from "@material-ui/icons/Favorite";
 import PinDrop from "@material-ui/icons/PinDrop";
+import ShoppingCart from "@material-ui/icons/ShoppingCart";
+import AddShoppingCart from "@material-ui/icons/AddShoppingCart";
+
+
 import Phone from "@material-ui/icons/Phone";
 import BusinessCenter from "@material-ui/icons/BusinessCenter";
 // core components
@@ -298,7 +302,7 @@ class ContactUsPage extends React.Component {
                     <InfoArea
                       className={classes.info}
                       title="Your Cart"
-                      icon={PinDrop}
+                      icon={AddShoppingCart}
                       iconColor="primary"
                     />
                     <Card plain>

@@ -2,6 +2,10 @@ import React, { Component } from "react";
 //import { connect } from "react-redux";
 
 import { withStyles } from "@material-ui/core/styles";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import Footer from "components/Footer/Footer.jsx";
+import Favorite from "@material-ui/icons/Favorite";
 //import GridContainer from "components/Grid/GridContainer.jsx";
 //import GridItem from "components/Grid/GridItem.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
@@ -43,11 +47,10 @@ export class Admin extends Component {
           image={require("assets/img/bg10.jpg")}
           filter="dark"
           small
-        >
-          
-        </Parallax>
+        />
 
         <SectionPills />
+        
       </>
     );
   }

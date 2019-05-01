@@ -15,6 +15,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 // @material-ui/icons
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
+import AddShoppingCart from "@material-ui/icons/AddShoppingCart";
 import LocalShipping from "@material-ui/icons/LocalShipping";
 import VerifiedUser from "@material-ui/icons/VerifiedUser";
 import Favorite from "@material-ui/icons/Favorite";
@@ -146,8 +147,9 @@ class ProductPage extends Component {
                   color="white"
                   className={classes.floatRight}
                 >
+                 
                   <ShoppingCart />
-                  {this.props.cart.length} ITEMS
+                  {this.props.cart.length} ITEMS}
                 </Button>
               </GridItem>
             </GridContainer>
@@ -186,7 +188,8 @@ class ProductPage extends Component {
                     product => product.product_short_attr
                   )}
                   {/* {this.props.eCommerce}</h2> */}
-                  <h3 className={classes.mainPrice}>$
+                  <h3 className={classes.mainPrice}>
+                    $
                     {this.props.selectedProd.map(
                       product => product.product_price
                     )}

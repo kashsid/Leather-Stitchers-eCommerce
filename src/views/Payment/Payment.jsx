@@ -33,6 +33,7 @@ import Button from "components/CustomButtons/Button.jsx";
 import Card from "components/Card/Card.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import InfoArea from "components/InfoArea/InfoArea.jsx";
+import ShoppingCart from "@material-ui/icons/ShoppingCart";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 import OrderSuccess from "./success-page"
 
@@ -140,6 +141,7 @@ class Payment extends React.Component {
 
     const onCancel = data => {
       console.log("The payment was cancelled!", data);
+      this.sendOrder();
       this.props.history.push("/order-success");
     };
 
@@ -348,6 +350,7 @@ class Payment extends React.Component {
                               Get started
                             </Button>
                             <PaypalExpressBtn
+                              // onClick={this.sendOrder}
                               env={"sandbox"}
                               client={client}
                               currency={"USD"}
@@ -363,7 +366,7 @@ class Payment extends React.Component {
                         <InfoArea
                           className={classes.info}
                           title="Your Cart"
-                          icon={PinDrop}
+                          icon={ShoppingCart}
                           iconColor="primary"
                         />
                         <Card plain>
@@ -426,9 +429,9 @@ class Payment extends React.Component {
                                 customClassesForCells={[1, 2, 3, 4, 5, 6]}
                               />
                             ))}
-                            <span>
+                            {/* <span>
                               <small>$</small>300{" "}
-                            </span>
+                            </span> */}
                             <div>
                               <Button
                                 color="info"

@@ -99,19 +99,19 @@ class LoginPage extends Component {
             onSubmit={this.handleSubmit}
             onError={errors => console.log(errors)}
           > */}
-            <div className={classes.container}>
-              <GridContainer justify="center">
-                <GridItem xs={12} sm={12} md={10}>
-                  <Card>
-                    <form className={classes.form}>
-                      <CardHeader
-                        color="primary"
-                        signup
-                        className={classes.cardHeader}
-                      >
-                        <h4 className={classes.cardTitle}>Login</h4>
-                        <div className={classes.socialLine}>
-                          {/* <Button
+          <div className={classes.container}>
+            <GridContainer justify="center">
+              <GridItem xs={6} sm={8} md={4}>
+                <Card>
+                  <ValidatorForm className={classes.form}>
+                    <CardHeader
+                      color="primary"
+                      signup
+                      className={classes.cardHeader}
+                    >
+                      <h4 className={classes.cardTitle}>Login</h4>
+                      <div className={classes.socialLine}>
+                        {/* <Button
                           justIcon
                           color="transparent"
                           className={classes.iconButtons}
@@ -119,7 +119,7 @@ class LoginPage extends Component {
                         >
                           <i className="fab fa-twitter" />
                         </Button> */}
-                          {/* <Button
+                        {/* <Button
                           justIcon
                           color="transparent"
                           className={classes.iconButtons}
@@ -127,7 +127,7 @@ class LoginPage extends Component {
                         >
                           <i className="fab fa-facebook" />
                         </Button> */}
-                          {/* <Button
+                        {/* <Button
                           justIcon
                           color="transparent"
                           className={classes.iconButtons}
@@ -135,17 +135,17 @@ class LoginPage extends Component {
                         >
                           <i className="fab fa-google-plus-g" />
                         </Button> */}
-                        </div>
-                      </CardHeader>
-                      <p
-                        className={`${classes.description} ${
-                          classes.textCenter
-                        }`}
-                      >
-                        Enter your user name and password.
-                      </p>
-                      <CardBody signup>
-                        {/* <CustomInput
+                      </div>
+                    </CardHeader>
+                    <p
+                      className={`${classes.description} ${
+                        classes.textCenter
+                      }`}
+                    >
+                      Enter your user name and password.
+                    </p>
+                    <CardBody signup>
+                      {/* <CustomInput
                         id="first"
                         formControlProps={{
                           fullWidth: true
@@ -160,13 +160,13 @@ class LoginPage extends Component {
                           )
                         }}
                       /> */}
-                        {/* <input
+                      {/* <input
                         type="text"
                         name="username"
                         value={this.state.username}
                         onChange={this.handleInputChangeFor("username")}
                       /> */}
-                        {/* <TextValidator
+                      <TextValidator
                           id="username"
                           label="* User Name"
                           fullWidth
@@ -179,9 +179,9 @@ class LoginPage extends Component {
                           validators={["required"]}
                           errorMessages={["this field was required"]}
                           //variant="outlined"
-                        /> */}
+                        />
 
-                        {/* <TextValidator
+                      <TextValidator
                           id="password"
                           label="* password"
                           fullWidth
@@ -194,8 +194,8 @@ class LoginPage extends Component {
                           validators={["required"]}
                           errorMessages={["this field was required"]}
                           //variant="outlined"
-                        /> */}
-                        {/* <TextField
+                        />
+                      {/* <TextField
                         id="username"
                         Value={this.state.username}
                         onChange={this.handleInputChangeFor("username")}
@@ -214,8 +214,8 @@ class LoginPage extends Component {
                           )
                         }}
                       /> */}
-                        {/* {JSON.stringify(CustomInput.name.value)} */}
-                        {/* <TextField
+                      {/* {JSON.stringify(CustomInput.name.value)} */}
+                      {/* <TextField
                           id="password"
                           value={this.state.password}
                           onChange={this.handleInputChangeFor("password")}
@@ -234,22 +234,22 @@ class LoginPage extends Component {
                             )
                           }}
                         /> */}
-                      </CardBody>
-                      <div className={classes.textCenter}>
-                        <Button
-                          simple
-                          color="primary"
-                          size="lg"
-                          onClick={this.login}
-                        >
-                          Login
-                        </Button>
-                      </div>
-                    </form>
-                  </Card>
-                </GridItem>
-              </GridContainer>
-            </div>
+                    </CardBody>
+                    <div className={classes.textCenter}>
+                      <Button
+                        simple
+                        color="primary"
+                        size="lg"
+                        onClick={this.login}
+                      >
+                        Login
+                      </Button>
+                    </div>
+                  </ValidatorForm>
+                </Card>
+              </GridItem>
+            </GridContainer>
+          </div>
           {/* </ValidatorForm> */}
 
           {/* <Footer

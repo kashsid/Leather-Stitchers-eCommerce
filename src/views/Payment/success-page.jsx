@@ -1,16 +1,36 @@
 import React from "react";
+import { connect } from "react-redux";
+
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import Slide from "@material-ui/core/Slide";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
+import DialogActions from "@material-ui/core/DialogActions";
+import PinDrop from "@material-ui/icons/PinDrop";
+import Table from "components/Table/Table.jsx";
+import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowRight";
+import GridItem from "components/Grid/GridItem.jsx";
+import Button from "components/CustomButtons/Button.jsx";
+import Card from "components/Card/Card.jsx";
+import CardBody from "components/Card/CardBody.jsx";
+import InfoArea from "components/InfoArea/InfoArea.jsx";
 // @material-ui/icons
 import Close from "@material-ui/icons/Close";
 // core components
-import Button from "components/CustomButtons/Button.jsx";
 
-import javascriptStyles from "assets/jss/material-kit-pro-react/views/componentsSections/javascriptStyles.jsx";
+import modalStyle from "assets/jss/material-kit-pro-react/modalStyle.jsx";
+
+const style = theme => ({
+  ...modalStyle(theme),
+  modalRootExample: {
+    "& > div:first-child": {
+      display: "none"
+    },
+    backgroundColor: "rgba(0, 0, 0, 0.5)"
+  }
+});
 
 function Transition(props) {
   return <Slide direction="down" {...props} />;
@@ -20,8 +40,7 @@ class OrderSuccess extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      smallModal: false,
-      largeModal: false
+      scrollingModal: false
     };
   }
   handleClickOpen(modal) {
@@ -40,24 +59,25 @@ class OrderSuccess extends React.Component {
       <div>
         <Button
           color="primary"
-          onClick={() => this.handleClickOpen("largeModal")}
+          onClick={() => this.handleClickOpen("scrollingModal")}
         >
-          Large Modal
+          Launch Demo Modal
         </Button>
         <Dialog
+          onClick={() => this.handleClose("scrollingModal")}
           classes={{
-            root: classes.modalRoot,
-            paper: classes.modal + " " + classes.modalLarge
+            root: `${classes.modalRoot} ${classes.modalRootExample}`,
+            paper: classes.modal
           }}
-          open={this.state.largeModal}
+          open={this.state.scrollingModal}
           TransitionComponent={Transition}
           keepMounted
-          onClose={() => this.handleClose("largeModal")}
-          aria-labelledby="large-modal-slide-title"
-          aria-describedby="large-modal-slide-description"
+          onClose={() => this.handleClose("scrollingModal")}
+          aria-labelledby="classic-modal-slide-title"
+          aria-describedby="classic-modal-slide-description"
         >
           <DialogTitle
-            id="large-modal-slide-title"
+            id="classic-modal-slide-title"
             disableTypography
             className={classes.modalHeader}
           >
@@ -66,66 +86,119 @@ class OrderSuccess extends React.Component {
               className={classes.modalCloseButton}
               key="close"
               aria-label="Close"
-              onClick={() => this.handleClose("largeModal")}
+              onClick={() => this.handleClose("scrollingModal")}
             >
               {" "}
               <Close className={classes.modalClose} />
             </Button>
-            <h4 className={classes.modalTitle}>Large modal</h4>
+            <h4 className={classes.modalTitle}>Modal title</h4>
           </DialogTitle>
           <DialogContent
-            id="large-modal-slide-description"
+            id="classic-modal-slide-description"
             className={classes.modalBody}
           >
-            <p>...</p>
-          </DialogContent>
-        </Dialog>
+            <p>
+              Cras mattis consectetur purus sit amet fermentum. Cras justo
+              odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
+              risus, porta ac consectetur ac, vestibulum at eros.
+            </p>
+            <GridItem xs={12} sm={5} md={5}>
+              <InfoArea
+                className={classes.info}
+                title="Your Cart"
+                icon={PinDrop}
+                iconColor="primary"
+              />
+              <Card plain>
+                <CardBody plain>
+                  {/* <h3 className={classes.cardTitle}>
+                              Shopping Cart
+                            </h3> */}
+                  {this.props.cart.map(row => (
+                    <Table
+                      key={row.id}
+                      tableData={[
+                        [
+                          <span>
+                            <a
+                              href="#jacket"
+                              className={classes.tdNameAnchor}
+                            />
+                            <br />
 
-        <Button
-          color="primary"
-          onClick={() => this.handleClickOpen("smallModal")}
-        >
-          Small Modal
-        </Button>
-        <Dialog
-          classes={{
-            root: classes.modalRoot,
-            paper: classes.modal + " " + classes.modalSmall
-          }}
-          open={this.state.smallModal}
-          TransitionComponent={Transition}
-          keepMounted
-          onClose={() => this.handleClose("smallModal")}
-          aria-labelledby="small-modal-slide-title"
-          aria-describedby="small-modal-slide-description"
-        >
-          <DialogTitle
-            id="small-modal-slide-title"
-            disableTypography
-            className={classes.modalHeader}
-          >
-            <Button
-              simple
-              className={classes.modalCloseButton}
-              key="close"
-              aria-label="Close"
-              onClick={() => this.handleClose("smallModal")}
-            >
-              {" "}
-              <Close className={classes.modalClose} />
-            </Button>
-            <h4 className={classes.modalTitle}>Small modal</h4>
-          </DialogTitle>
-          <DialogContent
-            id="small-modal-slide-description"
-            className={classes.modalBody + " " + classes.modalSmallBody}
-          >
-            <p>...</p>
+                            {row.product_short_attr}
+                            <small className={classes.tdNameSmall} />
+                          </span>,
+                          // "Red",
+                          "M",
+                          <span>
+                            <small className={classes.tdNumberSmall}>
+                              $
+                            </small>{" "}
+                            {row.product_price}
+                          </span>,
+                          <span>1{` `}</span>,
+                          <span>
+                            <small className={classes.tdNumberSmall}>
+                              $
+                            </small>{" "}
+                            200
+                          </span>
+                        ]
+                      ]}
+                      tableShopping
+                      customHeadCellClasses={[
+                        classes.textCenter,
+                        classes.description,
+                        classes.description,
+                        classes.textRight,
+                        classes.textRight,
+                        classes.textRight
+                      ]}
+                      customHeadClassesForCells={[0, 2, 3, 4, 5, 6]}
+                      customCellClasses={[
+                        classes.tdName,
+                        classes.customFont,
+                        classes.customFont,
+                        classes.tdNumber,
+                        classes.tdNumber +
+                          " " +
+                          classes.tdNumberAndButtonGroup,
+                        classes.tdNumber + " " + classes.textCenter
+                      ]}
+                      customClassesForCells={[1, 2, 3, 4, 5, 6]}
+                    />
+                  ))}
+                  {/* <span>
+                              <small>$</small>300{" "}
+                            </span> */}
+                  <div>
+                    <Button color="info" round onClick={this.handleBack}>
+                      Go back to cart <KeyboardArrowLeft />
+                    </Button>
+                  </div>
+                </CardBody>
+              </Card>
+            </GridItem>
           </DialogContent>
+          <DialogActions className={classes.modalFooter}>
+            <Button
+              onClick={() => this.handleClose("scrollingModal")}
+              color="secondary"
+            >
+              Close
+            </Button>
+            <Button color="primary">Save changes</Button>
+          </DialogActions>
         </Dialog>
       </div>
     );
   }
 }
 
-export default withStyles(javascriptStyles)(OrderSuccess);
+const mapReduxStateToProps = reduxState => {
+  return reduxState;
+};
+export default withStyles(modalStyle)(
+  connect(mapReduxStateToProps)(OrderSuccess)
+);
