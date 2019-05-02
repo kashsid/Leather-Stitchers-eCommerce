@@ -50,7 +50,7 @@ class Components extends React.Component {
         <Header
           absolute
           color="transparent"
-          brand="Material Kit PRO React"
+          brand="Leather Stitchers"
           links={<HeaderLinks dropdownHoverColor="dark" />}
           {...rest}
         />

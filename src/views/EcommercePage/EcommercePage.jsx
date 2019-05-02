@@ -64,7 +64,7 @@ class EcommercePage extends React.Component {
           color="transparent"
           changeColorOnScroll={{
             height: 300,
-            color: "info"
+            color: "primary"
           }}
         />
         <Parallax

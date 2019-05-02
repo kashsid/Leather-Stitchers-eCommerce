@@ -19,7 +19,7 @@ import Style from "@material-ui/icons/Style";
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
 import ViewDay from "@material-ui/icons/ViewDay";
 import Dns from "@material-ui/icons/Dns";
-import Build from "@material-ui/icons/Build";
+import Public from "@material-ui/icons/Public";
 import ListIcon from "@material-ui/icons/List";
 import People from "@material-ui/icons/People";
 import Assignment from "@material-ui/icons/Assignment";
@@ -141,11 +141,11 @@ function HeaderLinks({ ...props }) {
               <Dns className={classes.dropdownIcons} /> About Us
             </Link>,
             <Link
-              to="/error-page"
+              to="/customer-care"
               className={classes.dropdownLink}
               onClick={e => smoothScroll(e, "features")}
             >
-              <Build className={classes.dropdownIcons} /> Customer Care
+              <Public className={classes.dropdownIcons} /> Mission
             </Link>,
             <Link
               to="/error-page"
@@ -192,7 +192,7 @@ function HeaderLinks({ ...props }) {
           ]}
         />
       </ListItem>
-      <ListItem className={classes.listItem}>
+      {/* <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
           navDropdown
@@ -246,7 +246,7 @@ function HeaderLinks({ ...props }) {
             // </Link>
           ]}
         />
-      </ListItem>
+      </ListItem> */}
       <ListItem className={classes.listItem}>
         <Button
           href="/home"
@@ -264,7 +264,7 @@ function HeaderLinks({ ...props }) {
 }
 
 HeaderLinks.defaultProps = {
-  hoverColor: "primary"
+  hoverColor: "dark"
 };
 
 HeaderLinks.propTypes = {

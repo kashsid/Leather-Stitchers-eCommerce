@@ -18,7 +18,7 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 //import ContactUsPage from "views/ContactUsPage/ContactUsPage.jsx";
 import EcommercePage from "views/EcommercePage/EcommercePage.jsx";
 import LandingPage from "views/LandingPage/LandingPage.jsx";
-//import LoginPage from "views/LoginPage/LoginPage"
+import CustomerCare from "views/CustomerCare/CustomerCare";
  import ProductPage from "views/ProductPage/ProductPage.jsx";
   import ErrorPage from "views/ErrorPage/ErrorPage.jsx";
 import CheckOutPage from "views/CheckOutPage/CheckOutPage.jsx"
@@ -61,7 +61,7 @@ class App extends Component {
             {/* <Route exact path="/" component={ContactUsPage} /> */}
             <Route exact path="/catalog" component={EcommercePage} />
             <Route exact path="/landing-page" component={LandingPage} />
-            <Route path="/error-page" component={ErrorPage} />
+            <Route exact path="/error-page" component={ErrorPage} />
             {/* <Route path="/" component={LoginPage} /> */}
             {/* <Route path="/pricing" component={PricingPage} />
       <Route path="/profile-page" component={ProfilePage} /> */}
@@ -72,11 +72,12 @@ class App extends Component {
             <Route path="/payment" component={Payment} />
             <Route exact path="/products" component={AdminDashboard} />
             <Route exact path="/order-success" component={OrderSuccess} />
+            <Route exact path="/customer-care" component={CustomerCare} />
 
             {/* <Route path="/signup-page" component={SignupPage} />
       <Route path="/error-page" component={ErrorPage} />
       <Route path="/" component={PresentationPage} /> */}
-            <Route render={ErrorPage} />
+            {/* <Route render={ErrorPage} /> */}
           </Switch>
         </>
       </Router>

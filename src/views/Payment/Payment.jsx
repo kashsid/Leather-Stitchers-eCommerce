@@ -179,104 +179,7 @@ class Payment extends React.Component {
                   <h2 className={classes.cardTitle}>Payment</h2>
                   <CardBody>
                     <GridContainer justify="center">
-                      {/* <GridItem xs={12} sm={5} md={5}>
-                      
-                        <InfoArea
-                          className={classes.info}
-                          title="Your Cart"
-                          icon={PinDrop}
-                          iconColor="primary"
-                        />
-                        <Card plain>
-                          <CardBody plain>
-                            <h3 className={classes.cardTitle}>
-                              Shopping Cart
-                            </h3>
-                            {this.props.cart.map(row => (
-                              <Table
-                                key={row.id}
-                                tableData={[
-                                  [
-                                    <span>
-                                      <a
-                                        href="#jacket"
-                                        className={classes.tdNameAnchor}
-                                      />
-                                      <br />
-
-                                      {row.product_short_attr}
-                                      <small
-                                        className={classes.tdNameSmall}
-                                      />
-                                    </span>,
-                                    // "Red",
-                                    "M",
-                                    <span>
-                                      <small
-                                        className={classes.tdNumberSmall}
-                                      >
-                                        $
-                                      </small>{" "}
-                                      {row.product_price}
-                                    </span>,
-                                    <span>1{` `}</span>,
-                                    <span>
-                                      <small
-                                        className={classes.tdNumberSmall}
-                                      >
-                                        $
-                                      </small>{" "}
-                                      200
-                                    </span>
-                                  ]
-                                ]}
-                                tableShopping
-                                customHeadCellClasses={[
-                                  classes.textCenter,
-                                  classes.description,
-                                  classes.description,
-                                  classes.textRight,
-                                  classes.textRight,
-                                  classes.textRight
-                                ]}
-                                customHeadClassesForCells={[
-                                  0,
-                                  2,
-                                  3,
-                                  4,
-                                  5,
-                                  6
-                                ]}
-                                customCellClasses={[
-                                  classes.tdName,
-                                  classes.customFont,
-                                  classes.customFont,
-                                  classes.tdNumber,
-                                  classes.tdNumber +
-                                    " " +
-                                    classes.tdNumberAndButtonGroup,
-                                  classes.tdNumber +
-                                    " " +
-                                    classes.textCenter
-                                ]}
-                                customClassesForCells={[1, 2, 3, 4, 5, 6]}
-                              />
-                            ))}
-                            <span>
-                              <small>$</small>300{" "}
-                            </span>
-                            <div>
-                              <Button
-                                color="info"
-                                round
-                                onClick={this.handleBack}
-                              >
-                                Go back to cart <KeyboardArrowLeft />
-                              </Button>
-                            </div>
-                          </CardBody>
-                        </Card>
-                      </GridItem> */}
+                     
                       <GridItem xs={12} sm={5} md={5}>
                         <div className={classes.textCenter}>
                           <Button justIcon round color="twitter">
@@ -398,12 +301,7 @@ class Payment extends React.Component {
                                       {row.product_price}
                                     </span>,
                                     <span>1{` `}</span>,
-                                    <span>
-                                      <small className={classes.tdNumberSmall}>
-                                        $
-                                      </small>{" "}
-                                      200
-                                    </span>
+                                    
                                   ]
                                 ]}
                                 tableShopping
@@ -429,6 +327,13 @@ class Payment extends React.Component {
                                 customClassesForCells={[1, 2, 3, 4, 5, 6]}
                               />
                             ))}
+                            <div align="right">
+                          <span>
+                            <h4 className={classes.tdNumberLarge}>
+                              Total Amount: ${this.props.updateTotal}
+                            </h4>
+                          </span>
+                        </div>
                             {/* <span>
                               <small>$</small>300{" "}
                             </span> */}

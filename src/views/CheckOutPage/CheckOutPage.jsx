@@ -365,9 +365,9 @@ class ContactUsPage extends React.Component {
                         ))}
                         <div align="right">
                           <span>
-                            <large className={classes.tdNumberLarge}>
+                            <h4 className={classes.tdNumberLarge}>
                               Total Amount: ${this.props.updateTotal}
-                            </large>
+                            </h4>
                           </span>
                         </div>
                         {/* <span>
