@@ -249,13 +249,13 @@ class Payment extends React.Component {
                             }
                           />
                           <div className={classes.textCenter}>
-                            <Button
+                            {/* <Button
                               round
                               color="primary"
                               onClick={this.sendOrder}
                             >
                               Get started
-                            </Button>
+                            </Button> */}
                             <PaypalExpressBtn
                               // onClick={this.sendOrder}
                               env={"sandbox"}
@@ -265,6 +265,7 @@ class Payment extends React.Component {
                               onError={onError}
                               onSuccess={onSuccess}
                               onCancel={onCancel}
+                              
                             />
                           </div>
                         </form>

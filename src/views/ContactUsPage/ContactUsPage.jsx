@@ -104,7 +104,13 @@ const CustomSkinMap = withScriptjs(
   ))
 );
 
+
+
 class ContactUsPage extends React.Component {
+
+  componentWillMount() {
+    const GM_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+}
   componentDidMount() {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
@@ -121,7 +127,7 @@ class ContactUsPage extends React.Component {
         />
         <div className={classes.bigMap}>
           <CustomSkinMap
-            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcFABIrjnfHXRvl55FpD2g5GmwCnKGuvU"
+            googleMapURL="https://maps.googleapis.com/maps/api/js?key=${GM_API_KEY}"
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={
               <div
