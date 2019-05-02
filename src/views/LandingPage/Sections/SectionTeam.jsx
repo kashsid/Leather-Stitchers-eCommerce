@@ -215,6 +215,7 @@ class SectionTeam extends React.Component {
               </Card>
             </GridItem>
           </GridContainer>
+          
         </div>
       </div>
     );

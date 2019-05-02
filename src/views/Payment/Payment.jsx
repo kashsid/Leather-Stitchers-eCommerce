@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 // @material-ui/core components
+import moment from "moment";
 import withStyles from "@material-ui/core/styles/withStyles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -41,6 +42,8 @@ import signupPageStyle from "assets/jss/material-kit-pro-react/views/signupPageS
 
 import image from "assets/img/bg7.jpg";
 
+ let today = new Date();
+
 class Payment extends React.Component {
   constructor(props) {
     super(props);
@@ -49,12 +52,13 @@ class Payment extends React.Component {
     // };
     this.handleToggle = this.handleToggle.bind(this);
   }
+
   //customer = this.props.Customer;
   total = this.props.updateTotal;
   today = new Date();
+  today = moment(today).format("MMM DD, YYYY");
   shipping = "1";
   tax = 10;
-
 
   state = {
     checkout: {
@@ -66,25 +70,23 @@ class Payment extends React.Component {
       customer_city: this.props.Customer.city,
       customer_state: this.props.Customer.state,
       customer_zip: this.props.Customer.zip,
-      customer : this.props.Customer,
-  total : this.props.updateTotal,
-  cart:this.props.cart,
-  today : new Date(),
-  shipping : "1",
-  tax : 10
+      customer: this.props.Customer,
+      total: this.props.updateTotal,
+      cart: this.props.cart,
+      //today: new Date(),
+      today : moment(today).format("MMM DD, YYYY"),
+      shipping: "1",
+      tax: 10
     }
   };
-  sendOrder=()=> {
-    console.log("in send order",this.props.cart);
+  sendOrder = () => {
+    console.log("in send order", this.props.cart);
     const action = {
       type: "POST_ORDER",
       payload: this.state
-     
-      
     };
     this.props.dispatch(action);
-    
-  }
+  };
   // updateOrder = event => {
   //   console.log("in update pizza");
   //   axios({
@@ -124,7 +126,7 @@ class Payment extends React.Component {
   render() {
     const { classes, ...rest } = this.props;
     console.log("state now ", this.state);
-    
+
     // const { classes } = this.props;
     const onSuccess = payment => {
       console.log("The payment was succeeded!", payment);
@@ -179,7 +181,6 @@ class Payment extends React.Component {
                   <h2 className={classes.cardTitle}>Payment</h2>
                   <CardBody>
                     <GridContainer justify="center">
-                     
                       <GridItem xs={12} sm={5} md={5}>
                         <div className={classes.textCenter}>
                           <Button justIcon round color="twitter">
@@ -248,8 +249,11 @@ class Payment extends React.Component {
                             }
                           />
                           <div className={classes.textCenter}>
-                            <Button round color="primary"
-                            onClick ={this.sendOrder}>
+                            <Button
+                              round
+                              color="primary"
+                              onClick={this.sendOrder}
+                            >
                               Get started
                             </Button>
                             <PaypalExpressBtn
@@ -300,8 +304,7 @@ class Payment extends React.Component {
                                       </small>{" "}
                                       {row.product_price}
                                     </span>,
-                                    <span>1{` `}</span>,
-                                    
+                                    <span>1{` `}</span>
                                   ]
                                 ]}
                                 tableShopping
@@ -328,12 +331,12 @@ class Payment extends React.Component {
                               />
                             ))}
                             <div align="right">
-                          <span>
-                            <h4 className={classes.tdNumberLarge}>
-                              Total Amount: ${this.props.updateTotal}
-                            </h4>
-                          </span>
-                        </div>
+                              <span>
+                                <h4 className={classes.tdNumberLarge}>
+                                  Total Amount: ${this.props.updateTotal}
+                                </h4>
+                              </span>
+                            </div>
                             {/* <span>
                               <small>$</small>300{" "}
                             </span> */}

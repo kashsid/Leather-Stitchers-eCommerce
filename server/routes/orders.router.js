@@ -114,10 +114,10 @@ console.log("Products total value", req.body.checkout.cart);
       customerId,
       10,
       1,
-      req.body.checkout.Today,
+      req.body.checkout.today,
       req.body.checkout.total
     ]);
-    console.log("order insert result", orderInsertResults);
+    console.log("order insert result", req.body.checkout.today);
     const orderId = orderInsertResults.rows[0].order_id;
 
    await Promise.all(req.body.checkout.cart.map(product => {

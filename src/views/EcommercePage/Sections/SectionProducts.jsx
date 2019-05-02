@@ -19,10 +19,10 @@ import Favorite from "@material-ui/icons/Favorite";
 // import Check from "@material-ui/icons/Check";
 // core components
 //import Accordion from "components/Accordion/Accordion.jsx";
-import GridContainer from "components/Grid/GridContainer.jsx";
+//import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import Card from "components/Card/Card.jsx";
-import Grid from "@material-ui/core/Grid";
+//import Grid from "@material-ui/core/Grid";
 
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
@@ -30,20 +30,10 @@ import CardFooter from "components/Card/CardFooter.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 //import Clearfix from "components/Clearfix/Clearfix.jsx";
 
-import suit1 from "assets/img/examples/Movie_collection_1.jpg";
-// import suit2 from "assets/img/examples/suit-2.jpg";
-// import suit3 from "assets/img/examples/suit-3.jpg";
-// import suit4 from "assets/img/examples/suit-4.jpg";
-// import suit5 from "assets/img/examples/suit-5.jpg";
-// import suit6 from "assets/img/examples/suit-6.jpg";
-// import color1 from "assets/img/examples/color1.jpg";
-// import color3 from "assets/img/examples/color3.jpg";
-// import color2 from "assets/img/examples/color2.jpg";
-// import dg3 from "assets/img/dg3.jpg";
-// import dg1 from "assets/img/dg1.jpg";
+
 
 import styles from "assets/jss/material-kit-pro-react/views/ecommerceSections/productsStyle.jsx";
-//import styles from "assets/jss/material-kit-pro-react/views/ecommerceSections/latestOffersStyle.jsx";
+
 const state = {
   selectedId: ""
 };
@@ -61,11 +51,7 @@ class SectionProducts extends React.Component {
     };
   }
 
-  componentDidMount() {
-    //const action = { type: "FETCH_PRODUCTS" };
-    //this.props.dispatch(action);
-    
-  }
+  
   handleImageClick = id => () => {
     console.log("image clicked for id", id);
     this.setState({
@@ -100,29 +86,19 @@ class SectionProducts extends React.Component {
 
     return (
       <>
-        {/* <div className={classes.section}>
-       <div className={classes.container}> */}
+        
 
         <GridItem
           md={4}
           sm={4}
-          // className={classes.section}
-          // className={classes.container}
+          
         >
           <Card plain product>
             <CardHeader image plain>
-              {/* <img
-                src={suit1}
-                onClick={this.handleImageClick(
-                  this.props.products.product_id
-                )}
-              /> */}
+              
               <Link
                 className={classes.link}
-                // onClick=
-                // {this.handleImageClick(
-                //   this.props.products.product_id
-                // )}
+               
                 to={"/product/" + this.props.products.product_id}
               >
                 {/* <img src={suit1} alt=".." /> */}
@@ -164,11 +140,7 @@ class SectionProducts extends React.Component {
             </CardFooter>
           </Card>
         </GridItem>
-        {/* </Grid> */}
-        {/* </GridItem>
-          </Grid> */}
-        {/* </div>
-      </div> */}
+        
       </>
     );
   }
@@ -176,7 +148,6 @@ class SectionProducts extends React.Component {
 const mapReduxStateToProps = reduxState => ({
   reduxState
 });
-//export default withStyles(styles)(SectionProducts);
 export default withStyles(styles)(
   connect(mapReduxStateToProps)(SectionProducts)
 );

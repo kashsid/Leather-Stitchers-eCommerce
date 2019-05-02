@@ -15,7 +15,7 @@ import { connect } from "react-redux";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 
-//import ContactUsPage from "views/ContactUsPage/ContactUsPage.jsx";
+import ContactUsPage from "views/ContactUsPage/ContactUsPage.jsx";
 import EcommercePage from "views/EcommercePage/EcommercePage.jsx";
 import LandingPage from "views/LandingPage/LandingPage.jsx";
 import CustomerCare from "views/CustomerCare/CustomerCare";
@@ -58,7 +58,7 @@ class App extends Component {
       <Route path="/blog-post" component={BlogPostPage} />
       <Route path="/blog-posts" component={BlogPostsPage} />
       <Route path="/components" component={ComponentsPage} /> */}
-            {/* <Route exact path="/" component={ContactUsPage} /> */}
+            <Route exact path="/contact-us" component={ContactUsPage} />
             <Route exact path="/catalog" component={EcommercePage} />
             <Route exact path="/landing-page" component={LandingPage} />
             <Route exact path="/error-page" component={ErrorPage} />

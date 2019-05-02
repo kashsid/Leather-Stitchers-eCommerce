@@ -111,8 +111,7 @@ function HeaderLinks({ ...props }) {
               Movie Jackets Collection
             </Link>,
             <a
-              // href="https://demos.creative-tim.com/material-kit-pro-react/#/documentation/tutorial"
-              // target="_blank"
+             
               className={classes.dropdownLink}
             >
               <Icon className={classes.dropdownIcons}>content_paste</Icon>
@@ -183,7 +182,7 @@ function HeaderLinks({ ...props }) {
               <Chat className={classes.dropdownIcons} /> Testimonials
             </Link>,
             <Link
-              to="/contacts"
+              to="/contact-us"
               className={classes.dropdownLink}
               onClick={e => smoothScroll(e, "contacts")}
             >

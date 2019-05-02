@@ -29,7 +29,80 @@ import Footer from "components/Footer/Footer.jsx";
 
 import contactUsStyle from "assets/jss/material-kit-pro-react/views/contactUsStyle.jsx";
 
-
+const CustomSkinMap = withScriptjs(
+  withGoogleMap(props => (
+    <GoogleMap
+      defaultZoom={14}
+      defaultCenter={{ lat: 44.6875948, lng: -93.2469801 }}
+      defaultOptions={{
+        scrollwheel: true,
+        zoomControl: true,
+        styles: [
+          {
+            featureType: "water",
+            stylers: [
+              { saturation: 43 },
+              { lightness: -11 },
+              { hue: "#0088ff" }
+            ]
+          },
+          {
+            featureType: "road",
+            elementType: "geometry.fill",
+            stylers: [
+              { hue: "#ff0000" },
+              { saturation: -100 },
+              { lightness: 99 }
+            ]
+          },
+          {
+            featureType: "road",
+            elementType: "geometry.stroke",
+            stylers: [{ color: "#808080" }, { lightness: 54 }]
+          },
+          {
+            featureType: "landscape.man_made",
+            elementType: "geometry.fill",
+            stylers: [{ color: "#ece2d9" }]
+          },
+          {
+            featureType: "poi.park",
+            elementType: "geometry.fill",
+            stylers: [{ color: "#ccdca1" }]
+          },
+          {
+            featureType: "road",
+            elementType: "labels.text.fill",
+            stylers: [{ color: "#767676" }]
+          },
+          {
+            featureType: "road",
+            elementType: "labels.text.stroke",
+            stylers: [{ color: "#ffffff" }]
+          },
+          { featureType: "poi", stylers: [{ visibility: "off" }] },
+          {
+            featureType: "landscape.natural",
+            elementType: "geometry.fill",
+            stylers: [{ visibility: "on" }, { color: "#b8cb93" }]
+          },
+          { featureType: "poi.park", stylers: [{ visibility: "on" }] },
+          {
+            featureType: "poi.sports_complex",
+            stylers: [{ visibility: "on" }]
+          },
+          { featureType: "poi.medical", stylers: [{ visibility: "on" }] },
+          {
+            featureType: "poi.business",
+            stylers: [{ visibility: "simplified" }]
+          }
+        ]
+      }}
+    >
+      <Marker position={{ lat: 44.6875948, lng: -93.2469801 }} />
+    </GoogleMap>
+  ))
+);
 
 class ContactUsPage extends React.Component {
   componentDidMount() {
@@ -47,7 +120,20 @@ class ContactUsPage extends React.Component {
           color="dark"
         />
         <div className={classes.bigMap}>
-          
+          <CustomSkinMap
+            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcFABIrjnfHXRvl55FpD2g5GmwCnKGuvU"
+            loadingElement={<div style={{ height: `100%` }} />}
+            containerElement={
+              <div
+                style={{
+                  height: `100%`,
+                  borderRadius: "6px",
+                  overflow: "hidden"
+                }}
+              />
+            }
+            mapElement={<div style={{ height: `100%` }} />}
+          />
         </div>
         <div className={classNames(classes.main, classes.mainRaised)}>
           <div className={classes.contactContent}>
@@ -56,8 +142,9 @@ class ContactUsPage extends React.Component {
               <GridContainer>
                 <GridItem md={6} sm={6}>
                   <p>
-                    You can contact us with anything related to our Products.
-                    We'll get in touch with you as soon as possible.
+                    You can contact us with anything related to our
+                    Products. We'll get in touch with you as soon as
+                    possible.
                     <br />
                     <br />
                   </p>
@@ -107,8 +194,8 @@ class ContactUsPage extends React.Component {
                     title="Find us at the office"
                     description={
                       <p>
-                        17967 Hydra CT, <br /> Lakeville MN 55044,{" "}
-                        <br /> USA
+                        17967 Hydra CT, <br /> Lakeville MN 55044, <br />{" "}
+                        USA
                       </p>
                     }
                     icon={PinDrop}
@@ -119,8 +206,8 @@ class ContactUsPage extends React.Component {
                     title="Give us a ring"
                     description={
                       <p>
-                        Michael Jordan <br /> +1 555-555-5555 <br /> Mon - Fri,
-                        8:00-22:00
+                        Michael Jordan <br /> +1 555-555-5555 <br /> Mon -
+                        Fri, 8:00-22:00
                       </p>
                     }
                     icon={Phone}
