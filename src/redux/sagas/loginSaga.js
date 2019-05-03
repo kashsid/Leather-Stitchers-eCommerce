@@ -49,6 +49,8 @@ function* logoutUser(action) {
     // allow the server session to recognize the user
     // when the server recognizes the user session
     // it will end the session
+    console.log('in logout user');
+    
     yield axios.post('api/user/logout', config);
 
     // now that the session has ended on the server

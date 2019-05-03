@@ -4,22 +4,22 @@ import { connect } from "react-redux";
 // @material-ui/core components
 import moment from "moment";
 import withStyles from "@material-ui/core/styles/withStyles";
-import InputAdornment from "@material-ui/core/InputAdornment";
+//import InputAdornment from "@material-ui/core/InputAdornment";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import Icon from "@material-ui/core/Icon";
-import PinDrop from "@material-ui/icons/PinDrop";
+//import Icon from "@material-ui/core/Icon";
+//import PinDrop from "@material-ui/icons/PinDrop";
 import Table from "components/Table/Table.jsx";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowRight";
 
 // @material-ui/icons
-import Timeline from "@material-ui/icons/Timeline";
-import Code from "@material-ui/icons/Code";
-import Group from "@material-ui/icons/Group";
-import Face from "@material-ui/icons/Face";
-import Email from "@material-ui/icons/Email";
+// import Timeline from "@material-ui/icons/Timeline";
+// import Code from "@material-ui/icons/Code";
+// import Group from "@material-ui/icons/Group";
+// import Face from "@material-ui/icons/Face";
+// import Email from "@material-ui/icons/Email";
 import Check from "@material-ui/icons/Check";
 import Favorite from "@material-ui/icons/Favorite";
 import PaypalExpressBtn from "react-paypal-express-checkout";
@@ -35,14 +35,14 @@ import Card from "components/Card/Card.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import InfoArea from "components/InfoArea/InfoArea.jsx";
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
-import CustomInput from "components/CustomInput/CustomInput.jsx";
-import OrderSuccess from "./success-page"
+// import CustomInput from "components/CustomInput/CustomInput.jsx";
+// import OrderSuccess from "./success-page";
 
 import signupPageStyle from "assets/jss/material-kit-pro-react/views/signupPageStyle.jsx";
 
 import image from "assets/img/bg7.jpg";
 
- let today = new Date();
+let today = new Date();
 
 class Payment extends React.Component {
   constructor(props) {
@@ -61,6 +61,8 @@ class Payment extends React.Component {
   tax = 10;
 
   state = {
+    checked: [0],
+
     checkout: {
       //customer_email:this.props.customer_email,
       customer_email: this.props.Customer.email,
@@ -74,7 +76,7 @@ class Payment extends React.Component {
       total: this.props.updateTotal,
       cart: this.props.cart,
       //today: new Date(),
-      today : moment(today).format("MMM DD, YYYY"),
+      today: moment(today).format("MMM DD, YYYY"),
       shipping: "1",
       tax: 10
     }
@@ -87,23 +89,7 @@ class Payment extends React.Component {
     };
     this.props.dispatch(action);
   };
-  // updateOrder = event => {
-  //   console.log("in update pizza");
-  //   axios({
-  //     method: "POST",
-  //     url: "/order",
-  //     data: this.state.checkout
-  //   })
-  //     .then(response => {
-  //       const action = { type: "EMPTY_CART" };
-  //       this.props.dispatch(action);
-  //       this.props.history.push("/");
-  //     })
-  //     .catch(error => {
-  //       console.log("ERROR in POST", error);
-  //       alert(`Sorry! Unable to add pizza! Try again later.`);
-  //     });
-  // };
+
   handleToggle(value) {
     const { checked } = this.state;
     const currentIndex = checked.indexOf(value);
@@ -119,6 +105,9 @@ class Payment extends React.Component {
       checked: newChecked
     });
   }
+  handleBack = () => {
+    this.props.history.push("/shopping-cart");
+  };
   componentDidMount() {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
@@ -234,11 +223,11 @@ class Payment extends React.Component {
                                   checked: classes.checked,
                                   root: classes.checkRoot
                                 }}
-                                // checked={
-                                //   this.state.checked.indexOf(1) !== -1
-                                //     ? true
-                                //     : false
-                                // }
+                                checked={
+                                  this.state.checked.indexOf(1) !== -1
+                                    ? true
+                                    : false
+                                }
                               />
                             }
                             label={
@@ -249,13 +238,6 @@ class Payment extends React.Component {
                             }
                           />
                           <div className={classes.textCenter}>
-                            {/* <Button
-                              round
-                              color="primary"
-                              onClick={this.sendOrder}
-                            >
-                              Get started
-                            </Button> */}
                             <PaypalExpressBtn
                               // onClick={this.sendOrder}
                               env={"sandbox"}
@@ -265,7 +247,6 @@ class Payment extends React.Component {
                               onError={onError}
                               onSuccess={onSuccess}
                               onCancel={onCancel}
-                              
                             />
                           </div>
                         </form>
@@ -273,15 +254,12 @@ class Payment extends React.Component {
                       <GridItem xs={12} sm={5} md={5}>
                         <InfoArea
                           className={classes.info}
-                          title="Your Cart"
+                          title="Your Shopping Cart"
                           icon={ShoppingCart}
                           iconColor="primary"
                         />
                         <Card plain>
                           <CardBody plain>
-                            {/* <h3 className={classes.cardTitle}>
-                              Shopping Cart
-                            </h3> */}
                             {this.props.cart.map(row => (
                               <Table
                                 key={row.id}
@@ -399,4 +377,6 @@ class Payment extends React.Component {
 const mapReduxStateToProps = reduxState => {
   return reduxState;
 };
-export default withStyles(signupPageStyle)(connect(mapReduxStateToProps)(Payment));
+export default withStyles(signupPageStyle)(
+  connect(mapReduxStateToProps)(Payment)
+);

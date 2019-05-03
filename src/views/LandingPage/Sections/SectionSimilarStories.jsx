@@ -13,6 +13,7 @@ import CardBody from "components/Card/CardBody.jsx";
 import Info from "components/Typography/Info.jsx";
 import Success from "components/Typography/Success.jsx";
 import Danger from "components/Typography/Danger.jsx";
+import { Link } from "react-router-dom";
 
 import blog6 from "assets/img/examples/blog6.jpg";
 import blog8 from "assets/img/examples/blog8.jpg";
@@ -35,7 +36,7 @@ function SectionSimilarStories({ ...props }) {
               <GridItem xs={12} sm={4} md={4}>
                 <Card blog>
                   <CardHeader image>
-                    <a href="#kash">
+                    <a href="/catalog">
                       <img src={blog6} alt="..." />
                     </a>
                     <div
@@ -51,15 +52,15 @@ function SectionSimilarStories({ ...props }) {
                       <h6>Biker Jackets</h6>
                     </Info>
                     <h4 className={classes.cardTitle}>
-                      <a href="#pablo">
+                      <Link to="/catalog">
                         Get ready and hit the road this summer with Cafe Racer
                         Leather Jacket
-                      </a>
+                      </Link>
                     </h4>
                     <p className={classes.description}>
-                      Like so many organizations these days, Autodesk is a
-                      company in transition. It was until recently a
-                      traditional boxed software company selling licenses.
+                      Like so many organizations these days, Leather Stitchers
+                      is a company in transition. It was until recently a
+                      traditional....
                       <a href="#pablo"> Read More </a>
                     </p>
                   </CardBody>
@@ -90,9 +91,9 @@ function SectionSimilarStories({ ...props }) {
                       </a>
                     </h4>
                     <p className={classes.description}>
-                      Like so many organizations these days, Autodesk is a
-                      company in transition. It was until recently a
-                      traditional boxed software company selling licenses.
+                      Like so many organizations these days, Leather Stitchers
+                      is a company in transition. It was until recently a
+                      traditional....
                       <a href="#pablo"> Read More </a>
                     </p>
                   </CardBody>
@@ -124,9 +125,9 @@ function SectionSimilarStories({ ...props }) {
                       </a>
                     </h4>
                     <p className={classes.description}>
-                      Like so many organizations these days, Autodesk is a
-                      company in transition. It was until recently a
-                      traditional boxed software company selling licenses.
+                      Like so many organizations these days, Leather Stitchers
+                      is a company in transition. It was until recently a
+                      traditional....
                       <a href="#pablo"> Read More </a>
                     </p>
                   </CardBody>

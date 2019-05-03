@@ -13,7 +13,7 @@ import ListItem from "@material-ui/core/ListItem";
 import Icon from "@material-ui/core/Icon";
 
 // @material-ui/icons
-import Apps from "@material-ui/icons/Apps";
+//import Apps from "@material-ui/icons/Apps";
 import Style from "@material-ui/icons/Style";
 
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
@@ -26,20 +26,10 @@ import Assignment from "@material-ui/icons/Assignment";
 import MonetizationOn from "@material-ui/icons/MonetizationOn";
 import Chat from "@material-ui/icons/Chat";
 import Call from "@material-ui/icons/Call";
-import ViewCarousel from "@material-ui/icons/ViewCarousel";
-import AccountBalance from "@material-ui/icons/AccountBalance";
-import ArtTrack from "@material-ui/icons/ArtTrack";
-import ViewQuilt from "@material-ui/icons/ViewQuilt";
-import LocationOn from "@material-ui/icons/LocationOn";
-import Fingerprint from "@material-ui/icons/Fingerprint";
-import AttachMoney from "@material-ui/icons/AttachMoney";
-import Store from "@material-ui/icons/Store";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import PersonAdd from "@material-ui/icons/PersonAdd";
+
 import Layers from "@material-ui/icons/Layers";
-import ShoppingBasket from "@material-ui/icons/ShoppingBasket";
 import LineStyle from "@material-ui/icons/LineStyle";
-import Error from "@material-ui/icons/Error";
+//import Error from "@material-ui/icons/Error";
 
 // core components
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.jsx";
@@ -85,7 +75,7 @@ function HeaderLinks({ ...props }) {
     };
     animateScroll();
   };
-  var onClickSections = {};
+ // var onClickSections = {};
 
   const { classes, dropdownHoverColor } = props;
   return (
@@ -191,69 +181,16 @@ function HeaderLinks({ ...props }) {
           ]}
         />
       </ListItem>
-      {/* <ListItem className={classes.listItem}>
-        <CustomDropdown
-          noLiPadding
-          navDropdown
-          hoverColor={dropdownHoverColor}
-          buttonText=""
-          buttonProps={{
-            className: classes.navLink,
-            color: "transparent"
-          }}
-          buttonIcon={ViewCarousel}
-          dropdownList={[
-            <Link to="/about-us" className={classes.dropdownLink}>
-              <AccountBalance className={classes.dropdownIcons} /> About Us
-            </Link>,
-            <Link to="/blog-post" className={classes.dropdownLink}>
-              <ArtTrack className={classes.dropdownIcons} /> Blog Post
-            </Link>,
-            <Link to="/blog-posts" className={classes.dropdownLink}>
-              <ViewQuilt className={classes.dropdownIcons} /> Blog Posts
-            </Link>,
-            <Link to="/contact-us" className={classes.dropdownLink}>
-              <LocationOn className={classes.dropdownIcons} /> Contact Us
-            </Link>,
-            <Link to="/landing-page" className={classes.dropdownLink}>
-              <ViewDay className={classes.dropdownIcons} /> Landing Page
-            </Link>,
-            <Link to="/" className={classes.dropdownLink}>
-              <Fingerprint className={classes.dropdownIcons} /> Login Page
-            </Link>,
-            // <Link to="/pricing" className={classes.dropdownLink}>
-            //   <AttachMoney className={classes.dropdownIcons} /> Pricing Page
-            // </Link>,
-            // <Link to="/shopping-cart-page" className={classes.dropdownLink}>
-            //   <ShoppingBasket className={classes.dropdownIcons} /> Shopping
-            //   Cart
-            // </Link>,
-            // <Link to="/ecommerce-page" className={classes.dropdownLink}>
-            //   <Store className={classes.dropdownIcons} /> Ecommerce Page
-            // </Link>,
-            // <Link to="/product-page" className={classes.dropdownLink}>
-            //   <ShoppingCart className={classes.dropdownIcons} /> Product Page
-            // </Link>,
-            // <Link to="/profile-page" className={classes.dropdownLink}>
-            //   <AccountCircle className={classes.dropdownIcons} /> Profile Page
-            // </Link>,
-            // <Link to="/signup-page" className={classes.dropdownLink}>
-            //   <PersonAdd className={classes.dropdownIcons} /> Signup Page
-            // </Link>,
-            // <Link to="/error-page" className={classes.dropdownLink}>
-            //   <Error className={classes.dropdownIcons} /> Error Page
-            // </Link>
-          ]}
-        />
-      </ListItem> */}
+      
       <ListItem className={classes.listItem}>
         <Button
-          href="/home"
+           href="/"
           color={window.innerWidth < 960 ? "info" : "white"}
-          target="_blank"
+          //target="_blank"
           className={classes.navButton}
           round
-          //onClick={() => props.dispatch({ type: "LOGOUT" })}
+          onClick={() => props.dispatch({ type: "LOGOUT" })}
+          //onClick={this.LogOutButton}
         >
           <ShoppingCart className={classes.icons} /> Log Out
         </Button>
@@ -277,5 +214,7 @@ HeaderLinks.propTypes = {
     "rose"
   ])
 };
-
-export default withStyles(headerLinksStyle)(HeaderLinks);
+const mapStateToProps = reduxState => {
+  return reduxState;
+};
+export default withStyles(headerLinksStyle)(connect(mapStateToProps)(HeaderLinks))
