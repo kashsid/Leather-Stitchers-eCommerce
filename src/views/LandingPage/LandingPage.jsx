@@ -38,15 +38,17 @@ class LandingPage extends React.Component {
         <Header
           color="transparent"
           brand="Leather Stitchers"
-          links={<HeaderLinks dropdownHoverColor="info" />}
+          links={<HeaderLinks dropdownHoverColor="primary" />}
           fixed
           changeColorOnScroll={{
             height: 300,
-            color: "info"
+            color: "primary"
           }}
           {...rest}
         />
-        <Parallax image={require("assets/img/bg8.jpg")} filter="dark">
+        <Parallax image={require("assets/img/bg8.jpg")} 
+        //filter="dark"
+        >
           <div className={classes.container}>
           
             <GridContainer>

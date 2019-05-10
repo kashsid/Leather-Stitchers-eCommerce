@@ -35,22 +35,21 @@ export class Admin extends Component {
       <>
         <Header
           brand="Leather Stitchers---ADMIN PORTAL"
-          links={<HeaderLinks dropdownHoverColor="info" />}
+          links={<HeaderLinks dropdownHoverColor="primary" />}
           fixed
           color="transparent"
           changeColorOnScroll={{
             height: 700,
-            color: "info"
+            color: "primary"
           }}
         />
         <Parallax
           image={require("assets/img/bg10.jpg")}
-          filter="dark"
+          //filter="dark"
           small
         />
 
         <SectionPills />
-        
       </>
     );
   }

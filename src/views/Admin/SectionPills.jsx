@@ -17,6 +17,7 @@ import AdminOrders from "../AdminOrders/AdminOrders";
 import AdminCollections from "../AdminCollections/AdminCollections";
 import AddProduct from "../AddProduct/AddProduct";
 import MediaCapture from "./MediaCapture"
+import Stretch from "./stretch"
 
 
 
@@ -50,7 +51,7 @@ function SectionPills({ ...props }) {
                 },
                 {
                   tabButton: "Business",
-                  tabContent: <MediaCapture />
+                  tabContent: <Stretch />
                 }
               ]}
             />

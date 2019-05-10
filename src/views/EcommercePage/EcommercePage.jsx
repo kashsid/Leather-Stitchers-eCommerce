@@ -69,7 +69,7 @@ class EcommercePage extends React.Component {
         />
         <Parallax
           image={require("assets/img/examples/clark-street-merc.jpg")}
-          filter="dark"
+          //filter="dark"
           small
         >
           <div className={classes.container}>

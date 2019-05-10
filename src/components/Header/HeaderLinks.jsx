@@ -100,13 +100,10 @@ function HeaderLinks({ ...props }) {
               <Layers className={classes.dropdownIcons} />
               Movie Jackets Collection
             </Link>,
-            <a
-             
-              className={classes.dropdownLink}
-            >
-              <Icon className={classes.dropdownIcons}>content_paste</Icon>
+            <Link to="/catalog" className={classes.dropdownLink}>
+              <Layers className={classes.dropdownIcons} />
               Fashion Jackets Collection
-            </a>
+            </Link>
           ]}
         />
       </ListItem>
@@ -181,10 +178,10 @@ function HeaderLinks({ ...props }) {
           ]}
         />
       </ListItem>
-      
+
       <ListItem className={classes.listItem}>
         <Button
-           href="/"
+          href="/"
           color={window.innerWidth < 960 ? "info" : "white"}
           //target="_blank"
           className={classes.navButton}

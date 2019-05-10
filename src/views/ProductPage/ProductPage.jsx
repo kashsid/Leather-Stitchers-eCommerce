@@ -136,7 +136,7 @@ class ProductPage extends Component {
 
         <Parallax
           image={require("assets/img/bg6.jpg")}
-          filter="primary"
+          //filter="primary"
           className={classes.pageHeader}
         >
           <div className={classes.container}>

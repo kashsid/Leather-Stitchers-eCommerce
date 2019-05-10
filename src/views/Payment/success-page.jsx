@@ -145,7 +145,7 @@ class OrderSuccess extends React.Component {
                       <GridItem xs={12} sm={8} md={8}>
                         <InfoArea
                           className={classes.info}
-                          title="Your Cart"
+                          title="Your Order"
                           icon={ShoppingCart}
                           iconColor="primary"
                         />

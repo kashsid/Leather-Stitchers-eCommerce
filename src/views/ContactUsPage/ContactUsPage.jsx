@@ -127,7 +127,7 @@ class ContactUsPage extends React.Component {
         />
         <div className={classes.bigMap}>
           <CustomSkinMap
-            googleMapURL="https://maps.googleapis.com/maps/api/js?key=${GM_API_KEY}"
+            googleMapURL="https://maps.googleapis.com/maps/api/js?key=API_KEY"
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={
               <div
